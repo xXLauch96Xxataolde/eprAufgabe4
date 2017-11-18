@@ -15,8 +15,25 @@ import tkinter.ttk as ttk
 import time
 
 
-def test():
+def ele_up(step, elevator_bar):
+    for i in range(20):
+        time.sleep(0.1)
+        elevator_bar.step(step)
+        elevator_bar.update()
 
+
+def lvl(level):
+    dict = {0: "Keller",
+            1 : "1",
+            2 : "2",
+            3 : "3",
+            4 : "4",
+            }
+    print("Elevator Level:", dict.get(level))
+
+
+def test():
+    level = 0
     root = Tkinter.Tk()
     
     ft = ttk.Frame()
@@ -25,17 +42,24 @@ def test():
     ft.pack(expand=True, fill=Tkinter.BOTH, side=Tkinter.TOP)
     fb.pack(expand=True, fill=Tkinter.BOTH, side=Tkinter.TOP)
     
-    elevator_bar = ttk.Progressbar(fb, orient='vertical', mode='indeterminate')
+    elevator_bar = ttk.Progressbar(fb, orient='vertical', mode='indeterminate', value=100)
    
     elevator_bar.pack(expand=True, fill=Tkinter.BOTH, side=Tkinter.LEFT)
 
-    elevator_bar.start(50)
-    time.sleep(2)
-    elevator_bar.step(40)
-    time.sleep(2)
-    elevator_bar.step(10)
-    time.sleep(2)
-    elevator_bar.step(10)
+    elevator_bar.update()
+    
+    while(True):
+        #elevator_bar.step(0)
+        #elevator_bar.update()
+        inp = input()
+        if(inp == "up"):
+            ele_up(1, elevator_bar)
+            level += 1
+            lvl(level)
+        elif(inp == "down"):
+            ele_up(-1, elevator_bar)
+            level -= 1
+            lvl(level)
 
     root.mainloop()
 

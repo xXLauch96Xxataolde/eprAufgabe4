@@ -13,7 +13,7 @@ __email__ = "uni.goethe.horde@gmail.com"
 
   
 def main():
-    print('''bla bla bla bla bla bla bla bla''')
+    #print('''bla bla bla bla bla bla bla bla''')
     
     test_module.test()
 
