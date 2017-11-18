@@ -1,6 +1,7 @@
-"""The XXX Function
+"""The Test Function
 
 This function is for testing purposes 
+important video: https://www.youtube.com/watch?v=h3Yrhv33Zb8
 """
 
 import time
