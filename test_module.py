@@ -15,7 +15,7 @@ import tkinter.ttk as ttk
 import time
 
 
-def ele_up(step, elevator_bar):
+def ele_move(step, elevator_bar):
     for i in range(20):
         time.sleep(0.1)
         elevator_bar.step(step)
@@ -53,11 +53,11 @@ def test():
         #elevator_bar.update()
         inp = input()
         if(inp == "up"):
-            ele_up(1, elevator_bar)
+            ele_move(1, elevator_bar)
             level += 1
             lvl(level)
         elif(inp == "down"):
-            ele_up(-1, elevator_bar)
+            ele_move(-1, elevator_bar)
             level -= 1
             lvl(level)
 
