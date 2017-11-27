@@ -5,6 +5,7 @@ This module is meant for coordination purposes of the whole program.
 
 import time
 import elevator_problem.gui_levitation as gui_levitation
+import re
 from elevator_problem.elevator import Elevator
 
 __author__ = "123456: Ada Lovelace, 654321: Alan Turing"
@@ -22,12 +23,10 @@ def input_reader():
     
     requests = []  # this should store all inputs. 
     requests = inp.split(" ")
-    if (len(requests) != 0):
-        print("ERROR")
-
     for i in requests:
-        a = list(i)
-        print(a)   
+        if (re.search([ak][0-5]), i):
+            print("yes")
+    
     return inp
 
 def main_function():

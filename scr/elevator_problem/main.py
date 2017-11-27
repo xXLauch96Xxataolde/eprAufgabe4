@@ -14,7 +14,6 @@ __email__ = "uni.goethe.horde@gmail.com"
 
   
 def main():
-    #print('''bla bla bla bla bla bla bla bla''')
     #gui_levitation.test()
     main_controller.main_function()  # maybe rename these modules
     
