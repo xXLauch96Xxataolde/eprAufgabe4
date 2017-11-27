@@ -23,8 +23,10 @@ def input_reader():
     requests = []  # this should store all inputs. 
     requests.append(inp.split(" "))
     for i in requests:  # here the length of the input parts is tested
+        len
         if (len(i) != 2):
             print("ERROR")  # here an ERROR Code should be returned
+        print(list(i))
         
     return inp
 
@@ -37,12 +39,6 @@ def main_function():
     
     
     inp = input_reader()
-    
-    while(True):
-        print("Tic:", tic)
-        for i in range(inp):
-            time.sleep(1)
-            elevator_a.set_level(elevator_a.get_level() + 1)
-            elevator_a.elevator_printer()
-        tic += 1 
+
+        
     

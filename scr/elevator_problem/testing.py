@@ -19,6 +19,8 @@ def testing():
     
     print(liste)
     print(len(liste))
-
+    
+    del(liste[3])
+    print(liste)
 if __name__ == '__main__':
     testing()
