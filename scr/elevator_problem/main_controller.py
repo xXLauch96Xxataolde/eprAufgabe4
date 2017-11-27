@@ -18,6 +18,10 @@ def main_function():
     elevator_a.elevator_printer()
     elevator_b.elevator_printer()
     
-    elevator_a.set_level(3)
-    elevator_a.elevator_printer()
+    
+    inp = input("Where the fuck do you want to travel?")
+
+    for i in range(inp):
+        elevator_a.set_level(elevator_a.get_level()+1)  # i is teh greatest (faggot)
+        elevator_a.elevator_printer()
     
