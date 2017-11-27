@@ -21,13 +21,13 @@ def input_reader():
     inp = input("Where the fuck do you want to travel?")
     
     requests = []  # this should store all inputs. 
-    requests.append(inp.split(" "))
-    for i in requests:  # here the length of the input parts is tested
-        len
-        if (len(i) != 2):
-            print("ERROR")  # here an ERROR Code should be returned
-        print(list(i))
-        
+    requests = inp.split(" ")
+    if (len(requests) != 0):
+        print("ERROR")
+
+    for i in requests:
+        a = list(i)
+        print(a)   
     return inp
 
 def main_function():
