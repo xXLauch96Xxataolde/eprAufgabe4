@@ -52,6 +52,9 @@ class Elevator (object):
 
     def del_direction(self):
         del self.__direction
+        
+    def elevator_printer(self):
+        print("Elevator:", self.name, "at level:", self.level, "going:", self.direction)
 
     name = property(get_name, set_name, del_name, "name's docstring")
     level = property(get_level, set_level, del_level, "level's docstring")
