@@ -18,12 +18,24 @@ def prio_list():
     """Maybe we can implement a priolist here"""
 
 def input_reader():
-    """This retarded piece of retardness should interpret, check and parse an input"""
-    inp = input("Where the fuck do you want to travel?")
+    """This should interpret, check and parse an input"""
+    inp = input("Where do you want to travel?")
     
-    requests = []  # this should store all inputs. 
+    requests = []  # this should store all inputs.
+    valid_inputs = [] 
     requests = inp.split(" ")
+    pattern_elevator = "[AB][KE1-4]"
+    pattern_floor = "[KE1234][hr]"
     
+    #  A3 AK AZ A78 A778 V5 B4 b2 A5 A4 Ae AK BE Be bE K1 kh 3R Kh 4h 6H k6 h$ for convenience 
+    
+    for entry in requests:        
+        result_elevator = re.match(pattern_elevator, entry)
+        result_floor = re.match(pattern_floor, entry)
+        if result_elevator or result_floor:
+            valid_inputs.append(entry)
+    
+    print(valid_inputs)
     return inp
 
 def main_function():
@@ -35,5 +47,4 @@ def main_function():
     
     
     inp = input_reader()
-
         
