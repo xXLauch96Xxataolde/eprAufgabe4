@@ -6,7 +6,9 @@ This module is meant for coordination purposes of the whole program.
 import time
 import elevator_problem.gui_levitation as gui_levitation
 import re
+import elevator_problem.robert_module as robert_module
 from elevator_problem.elevator import Elevator
+from elevator_problem import robert_module
 
 __author__ = "123456: Ada Lovelace, 654321: Alan Turing"
 __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni" 
@@ -39,11 +41,12 @@ def input_reader():
     return inp
 
 def main_function():
+    robert_module.main()
     tic = 0
     elevator_a = Elevator("A", 0, "up")
     elevator_b = Elevator("B", 0, "up")
-    elevator_a.elevator_printer()
-    elevator_b.elevator_printer()
+    #  elevator_a.elevator_printer()
+    #  elevator_b.elevator_printer()
     
     
     inp = input_reader()
