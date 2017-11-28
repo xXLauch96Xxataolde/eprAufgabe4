@@ -13,7 +13,6 @@ __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
 __credits__ = "" 
 __email__ = "uni.goethe.horde@gmail.com" 
 
-specific_
 
 def prio_list():
     """Maybe we can implement a priolist here"""
@@ -24,9 +23,6 @@ def input_reader():
     
     requests = []  # this should store all inputs. 
     requests = inp.split(" ")
-    for i in requests:
-        if (re.search([ak][0-5]), i):
-            print("yes")
     
     return inp
 
