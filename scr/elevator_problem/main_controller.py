@@ -13,6 +13,7 @@ __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
 __credits__ = "" 
 __email__ = "uni.goethe.horde@gmail.com" 
 
+specific_
 
 def prio_list():
     """Maybe we can implement a priolist here"""
@@ -40,4 +41,3 @@ def main_function():
     inp = input_reader()
 
         
-    
