@@ -20,10 +20,17 @@ def prio_list():
     """Maybe we can implement a priolist here"""
 
 def input_reader():
-    """This should interpret, check and parse an input"""
+    """This should interpret, check and parse an input.
+    
+    requests is an empty list for storing the split parts of the input string
+    pattern_elevator and pattern_floor are the pattern for the regex. The 
+    regex searches for matching patterns in a given string. if such a matching 
+    string is found, a valid result object (search: matching object) is 
+    constructed and the valid input is stored in a valid_inputs list
+    """
     inp = input("Where do you want to travel?")
     
-    requests = []  # this should store all inputs.
+    requests = []
     valid_inputs = [] 
     requests = inp.split(" ")
     pattern_elevator = "[AB][KE1-4]"

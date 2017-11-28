@@ -5,9 +5,13 @@ live here
 
 import elevator_problem.main_controller as main_controller
 from elevator_problem.elevator import Elevator
+import random
     
 def dispatcher(my_list):
     #  dasdasd
+    set = [1, 2, 3]
+    random.shuffle(set)
+    tics_to_wait = set[0]
     print("hallo")
     
 def main():
