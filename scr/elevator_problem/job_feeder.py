@@ -70,7 +70,7 @@ def spec_job_assigner(elevator, takt, jobs):
 
             if treffer is True and  elevator.spec_list[takt + takt_plus_x] != lev:
                 if elevator.get_direction() == job[0]
-                print("have to insert here", elevator.spec_list, job[counter:])
+                    print("have to insert here", elevator.spec_list, job[counter:])
 
                 elevator.spec_list.insert(takt_plus_x, job[counter:])
 
