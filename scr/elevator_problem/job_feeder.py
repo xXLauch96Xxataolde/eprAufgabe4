@@ -15,6 +15,26 @@ __email__ = "uni.goethe.horde@gmail.com"
 
 job_liste = ['1h', '3r']
 
+def better_floors(a_list):
+    """Better Floors
+    
+    This function translates the K and E floors to -1 and 0 because it is 
+    more sensible to have them named that way
+    """
+    new_list = []
+    for entry in a_list:
+        if (entry[1] == "K"):    
+            a = entry[0] + "-1"
+            new_list.append(a)
+        elif (entry[1] == "E"):
+            entry[1].replace("E","0")
+            a = entry[0] + "0"
+            new_list.append(a)
+        else:
+            new_list.append(entry)
+        
+    #  print("new_list 2", new_list)
+    return(new_list)
 
 def job_builder(elevator, jobs):
     # '''Builds the List for commands inside the elevator if job is assigned to current list'''
