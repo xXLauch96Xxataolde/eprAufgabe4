@@ -35,10 +35,6 @@ def spec_job_assigner(spec_list, job):
     for lev in job:
         for spec_lev in spec_list[takt + takt_plus_x:]:  # [takt:] bedeutet schaue dir alle levels nach dem aktuellen takt an
 
-
-            job_parser
-
-
             if lev == spec_lev:
 
                 print("match")
@@ -65,6 +61,7 @@ direction = ""
 match = False
 new_takt = -1
 def allgemeiner_job_assigner(job_liste, elevator, spec_list):
+'''commands from outside the elevator will be passed to the elevator here'''
     for job in job_liste:
 
         for lev in spec_list[takt:]:
@@ -84,13 +81,13 @@ def allgemeiner_job_assigner(job_liste, elevator, spec_list):
                 if direction == job[1] and match is True:
                     print("WE HAVE A MATCH")
 
+                    spec_list.insert(new_takt, level_stop(job[0]))
+
                 else: continue  #or evtl. break
 
 
 
-2r
-3h
-
-1234
-
-1
+def level_stop():
+    random.seed()
+    list = []
+    list.append  # random amount between 1 and 3
