@@ -48,7 +48,7 @@ def job_builder(elevator, jobs):
     return builded_jobs
 
 
-def spec_job_assigner(elevator, takt, jobs):
+def spec_job_assigner(elevator, tic, jobs):
     '''assigns the converted jobs to specific job list'''
 
     converted_jobs = job_builder(elevator, jobs)
@@ -56,10 +56,10 @@ def spec_job_assigner(elevator, takt, jobs):
     for job in converted_jobs:
 
         counter = 0
-        takt_plus_x = 0;
+        tic_plus_x = 0;
         treffer = False
 
-        if elevator.spec_list[takt] == 10:
+        if elevator.spec_list[tic] == 10:
             elevator.spec_list.extend(job)
 
 
@@ -68,15 +68,15 @@ def spec_job_assigner(elevator, takt, jobs):
 
             counter += 1
 
-            if treffer is True and  elevator.spec_list[takt + takt_plus_x] != lev:
-                if elevator.get_direction() == job[0]
+            if treffer is True and  elevator.spec_list[tic + tic_plus_x] != lev:
+                if elevator.get_direction() == job[0]:
                     print("have to insert here", elevator.spec_list, job[counter:])
 
-                elevator.spec_list.insert(takt_plus_x, job[counter:])
+                elevator.spec_list.insert(tic_plus_x, job[counter:])
 
-            for spec_lev in elevator.spec_list[takt + takt_plus_x:]:  # [takt:] bedeutet schaue dir alle levels nach dem aktuellen takt an
+            for spec_lev in elevator.spec_list[tic + tic_plus_x:]:  # [tic:] bedeutet schaue dir alle levels nach dem aktuellen tic an
 
-                if takt_plus_x == len(elevator.spec_list[takt:]) and treffer is True:
+                if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
                     elevator.spec_list.extend(job[counter:])
                     break
 
@@ -84,7 +84,7 @@ def spec_job_assigner(elevator, takt, jobs):
 
                     print("match")
                     treffer = True
-                    takt_plus_x += 1
+                    tic_plus_x += 1
                     continue
 
                 elif treffer is True:
@@ -94,13 +94,13 @@ def spec_job_assigner(elevator, takt, jobs):
 
                 else: print("first new element")
 
-                takt_plus_x += 1
+                tic_plus_x += 1
 
-            # if takt_plus_x == len(elevator.spec_list[takt:]) and treffer is True:
+            # if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
             #     print("append at last char")
 
         if treffer is True:
-            elevator.spec_list.extend(job[takt_plus_x - 1:])
+            elevator.spec_list.extend(job[tic_plus_x - 1:])
 
 
 
@@ -108,26 +108,26 @@ def spec_job_assigner(elevator, takt, jobs):
 
 
 
-def allgemeiner_job_assigner(elevator, job_liste, takt):
+def allgemeiner_job_assigner(elevator, job_liste, tic):
     '''commands from outside the elevator will be passed to the elevator here'''
-    new_takt = -1
+    new_tic = -1
     match_number = 0
     direction = ""
     match = False
 
     for job in job_liste:
 
-        for lev in elevator.spec_list[takt:]:
-            new_takt += 1
+        for lev in elevator.spec_list[tic:]:
+            new_tic += 1
             if job[0] == lev:
                 print("elevator passes level")
                 match = True
 
             if match is True:
-                if elevator.spec_list[takt + new_takt] > elevator.spec_list[takt + new_takt + 1]:
+                if elevator.spec_list[tic + new_tic] > elevator.spec_list[tic + new_tic + 1]:
                     print("goes down")
                     direction = "r"
-                elif elevator.spec_list[takt + new_takt] < elevator.spec_list[takt + new_takt + 1]:
+                elif elevator.spec_list[tic + new_tic] < elevator.spec_list[tic + new_tic + 1]:
                     print("goes up")
                     direction = "h"
 
@@ -135,8 +135,8 @@ def allgemeiner_job_assigner(elevator, job_liste, takt):
                     print("WE HAVE A MATCH")
                     match_number += 1
 
-                    return new_takt
-                    # elevator.spec_list.insert(new_takt, level_stop(job[0]))
+                    return new_tic
+                    # elevator.spec_list.insert(new_tic, level_stop(job[0]))
 
                 else: continue  # or evtl. break
 
