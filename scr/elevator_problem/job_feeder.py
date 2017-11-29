@@ -108,7 +108,7 @@ def spec_job_assigner(elevator, tic, jobs):
 
 
 
-def allgemeiner_job_assigner(elevator, job_liste, tic):
+def common_job_assigner(elevator, job_liste, tic):
     '''commands from outside the elevator will be passed to the elevator here'''
     new_tic = -1
     match_number = 0
