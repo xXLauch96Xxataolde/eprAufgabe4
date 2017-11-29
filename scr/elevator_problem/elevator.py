@@ -10,13 +10,14 @@ class Elevator (object):
     classdocs
     '''
 
-    def __init__(self, name, level, direction):
+    def __init__(self, name, level, direction, spec_list):
         '''
         Constructor
         '''
         self.name = name
         self.level = level
         self.direction = direction
+        self.spec_list = spec_list
 
     def get_name(self):
         return self.__name

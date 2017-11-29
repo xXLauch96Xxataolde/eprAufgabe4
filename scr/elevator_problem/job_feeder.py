@@ -12,15 +12,19 @@ __credits__ = ""
 __email__ = "uni.goethe.horde@gmail.com"
 
 
+
+
 def job_builder(elevator, destination):
 '''Builds the List for commands inside the elevator if job is assigned to current list'''
     list = []
-    if elevator.level > destination:
-         for lev in range(elevator.level, destination - 1, -1):
+    if elevator.get_level() > destination:
+         for lev in range(elevator.get_level, destination - 1, -1):
              list.append(lev)
-    elif elevator.level < destination:
-        for lev in range(elevator.level, destination + 1):
+    elif elevator.get_level() < destination:
+        for lev in range(elevator.get_level, destination + 1):
             list.append(lev)
+    elif elevator.get_level() == destination:
+        # assign random wait
     return list
 
 
@@ -85,9 +89,13 @@ def allgemeiner_job_assigner(job_liste, elevator, spec_list):
 
                 else: continue  #or evtl. break
 
+
  '''what if posible for both elevators??????'''
 
 def level_stop():
-    random.seed()
+'''1. nimmt stockwerk zwischen -1 und 4 an und gibt liste mit eins bis drei elementen zurück
+   2. K wird als -1 und E als 0 übergeben. Jobs kommen als liste ['0r', 'A-1']
+'''
+    random.int()
     list = []
     list.append  # random amount between 1 and 3
