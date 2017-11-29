@@ -47,6 +47,8 @@ def input_reader():
     print(valid_inputs)
     return inp
 
+
+takt = 0
 def main_function():
     robert_module.main()
     tic = 0
@@ -57,4 +59,4 @@ def main_function():
     
     
     inp = input_reader()
-        
+    takt += 1

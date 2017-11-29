@@ -30,6 +30,8 @@ class Elevator (object):
     def get_direction(self):
         return self.__direction
 
+    def get_spec_list(self):
+        return self.__spec_list
 
     def set_name(self, value):
         self.__name = value
@@ -42,6 +44,9 @@ class Elevator (object):
     def set_direction(self, value):
         self.__direction = value
 
+    def set_spec_list(self, value):
+        self.__spec_list = value
+
 
     def del_name(self):
         del self.__name
@@ -53,11 +58,14 @@ class Elevator (object):
 
     def del_direction(self):
         del self.__direction
+
+    def del_spec_list(self):
+        del self.__spec_list
         
     def elevator_printer(self):
-        print("Elevator:", self.name, "at level:", self.level, "is going:", self.direction)
+        print("Elevator:", self.name, "at level:", self.level, "is going:", self.direction, "current Jobs:", self.spec_list)
 
     name = property(get_name, set_name, del_name, "name's docstring")
     level = property(get_level, set_level, del_level, "level's docstring")
     direction = property(get_direction, set_direction, del_direction, "direction's docstring")
-        
+    spec_list = property(get_spec_list, set_spec_list, del_spec_list, "spec_list's docstring")
