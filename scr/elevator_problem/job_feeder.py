@@ -28,13 +28,18 @@ def job_builder(elevator, jobs):
             destination = job[1]
 
             if elevator.get_level() > destination:
-                 for lev in range(elevator.get_level, destination - 1, -1):
+                list.append("r")
+                for lev in range(elevator.get_level, destination - 1, -1):
                      list.append(lev)
             elif elevator.get_level() < destination:
+                list.append("h")
                 for lev in range(elevator.get_level, destination + 1):
                     list.append(lev)
             elif elevator.get_level() == destination:
+                list.append("same floor")
                 list = [destination]
+
+            list.append(level_stop(destination))
 
             builded_jobs.append(list)
 
@@ -51,24 +56,29 @@ def spec_job_assigner(elevator, takt, jobs):
     for job in converted_jobs:
 
         counter = 0
+        takt_plus_x = 0;
+        treffer = False
 
         if elevator.spec_list[takt] == 10:
             elevator.spec_list.extend(job)
 
-        takt_plus_x = 0;
 
-        for lev in job:
+
+        for lev in job[1:]:
+
             counter += 1
 
-            if match is True and  elevator.spec_list[takt + takt_plus_x] != lev:
+            if treffer is True and  elevator.spec_list[takt + takt_plus_x] != lev:
+                if elevator.get_direction() == job[0]
                 print("have to insert here", elevator.spec_list, job[counter:])
 
                 elevator.spec_list.insert(takt_plus_x, job[counter:])
 
             for spec_lev in elevator.spec_list[takt + takt_plus_x:]:  # [takt:] bedeutet schaue dir alle levels nach dem aktuellen takt an
 
-                if takt_plus_x == len(elevator.spec_list[takt:]):
+                if takt_plus_x == len(elevator.spec_list[takt:]) and treffer is True:
                     elevator.spec_list.extend(job[counter:])
+                    break
 
                 if lev == spec_lev:
 
@@ -86,11 +96,16 @@ def spec_job_assigner(elevator, takt, jobs):
 
                 takt_plus_x += 1
 
-            if takt_plus_x == len(elevator.spec_list[takt:]) and treffer is True:
-                print("append at last char")
+            # if takt_plus_x == len(elevator.spec_list[takt:]) and treffer is True:
+            #     print("append at last char")
 
         if treffer is True:
             elevator.spec_list.extend(job[takt_plus_x - 1:])
+
+
+
+
+
 
 
 def allgemeiner_job_assigner(elevator, job_liste, takt):
@@ -128,14 +143,14 @@ def allgemeiner_job_assigner(elevator, job_liste, takt):
 
 def level_stop(job):
     '''Random Tic Generator
-    
-    Takes a destination and repeats it times the result of the tics the 
+
+    Takes a destination and repeats it times the result of the tics the
     elevator should wait aka the random generator
     '''
-    
+
     waiting_tic = random.randint(1, 3)
     waiting_job_list = []
     for i in range(waiting_tic):
         waiting_job_list.append(job)
-    
+
     return waiting_job_list
