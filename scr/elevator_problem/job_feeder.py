@@ -5,6 +5,8 @@ Created on 27.11.2017
 '''
 
 import time
+import random
+from elevator_problem.elevator import Elevator
 
 __author__ = "123456: Ada Lovelace, 654321: Alan Turing"
 __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
@@ -15,7 +17,7 @@ __email__ = "uni.goethe.horde@gmail.com"
 job_liste = ['1h', '3r']
 
 def job_builder(elevator, jobs):
-#'''Builds the List for commands inside the elevator if job is assigned to current list'''
+    #'''Builds the List for commands inside the elevator if job is assigned to current list'''
 
     builded_jobs = []
 
@@ -45,7 +47,7 @@ def job_builder(elevator, jobs):
 
 
 def spec_job_assigner(elevator, takt, jobs):
-#'''assigns the converted jobs to specific job list'''
+    #'''assigns the converted jobs to specific job list'''
 
     converted_jobs = job_builder(elevator, jobs)
 
@@ -101,7 +103,7 @@ def spec_job_assigner(elevator, takt, jobs):
 
 
 def allgemeiner_job_assigner(elevator, job_liste, takt):
-'''commands from outside the elevator will be passed to the elevator here'''
+    '''commands from outside the elevator will be passed to the elevator here'''
     new_takt = -1
     match_number = 0
     direction = ""
@@ -117,10 +119,10 @@ def allgemeiner_job_assigner(elevator, job_liste, takt):
 
             if match is True:
                 if elevator.spec_list[takt + new_takt] > elevator.spec_list[takt + new_takt + 1]:
-                    print("fährt runter")
+                    print("goes down")
                     direction = "r"
                 elif elevator.spec_list[takt + new_takt] < elevator.spec_list[takt + new_takt + 1]:
-                    print("fährt hoch")
+                    print("goes up")
                     direction = "h"
 
                 if direction == job[1] and match is True:
@@ -135,11 +137,14 @@ def allgemeiner_job_assigner(elevator, job_liste, takt):
 
 
 
-def level_stop():
-'''
-1. nimmt stockwerk zwischen -1 und 4 an und gibt liste mit eins bis drei elementen zurueck
-2. K wird als -1 und E als 0 übergeben. Jobs kommen als liste ['0r', 'A-1']
-'''
-    random.int()
-    list = []
-    list.append  # random amount between 1 and 3
+def level_stop(job):
+    '''Random Tic Generator
+    1. nimmt stockwerk zwischen -1 und 4 an und gibt liste mit eins bis drei elementen zurueck
+    2. K wird als -1 und E als 0 übergeben. Jobs kommen als liste ['0r', 'A-1']
+    '''
+    waiting_tic  = random.randint(1,3)
+    waiting_job_list = []
+    for i in waiting_tic:
+        waiting_job_list.append(job)
+    
+    return waiting_job_list
