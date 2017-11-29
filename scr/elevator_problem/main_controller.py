@@ -60,3 +60,5 @@ def main_function():
     
     inp = input_reader()
     takt += 1
+
+    # nach jedem return bzw. takt sollen die jobs zugeordnet werden!
