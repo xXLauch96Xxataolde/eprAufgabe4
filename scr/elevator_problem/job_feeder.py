@@ -85,7 +85,7 @@ def allgemeiner_job_assigner(job_liste, elevator, spec_list):
 
                 else: continue  #or evtl. break
 
-
+ '''what if posible for both elevators??????'''
 
 def level_stop():
     random.seed()
