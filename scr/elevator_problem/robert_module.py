@@ -8,14 +8,24 @@ from elevator_problem.elevator import Elevator
 import random
     
 def better_floors(a_list):
+    """That is
+    
+    total crap due to the minus 1. it kills us later in the program
+    """
     new_list = []
     for entry in a_list:
         if (entry[1] == "K"):    
-            entry[1].replace("K","-1")
+            a = entry[0] + "-1"
+            new_list.append(a)
         elif (entry[1] == "E"):
             entry[1].replace("E","0")
-        new_list.append(entry)
-    print("new_list 2", new_list)
+            a = entry[0] + "0"
+            new_list.append(a)
+        else:
+            new_list.append(entry)
+        
+    #  print("new_list 2", new_list)
+    return(new_list)
             
 def job_sharer(my_list):
     """ Job Sharer.

@@ -101,7 +101,7 @@ def spec_job_assigner(elevator, takt, jobs):
 
 
 def allgemeiner_job_assigner(elevator, job_liste, takt):
-#'''commands from outside the elevator will be passed to the elevator here'''
+'''commands from outside the elevator will be passed to the elevator here'''
     new_takt = -1
     match_number = 0
     direction = ""
@@ -136,8 +136,9 @@ def allgemeiner_job_assigner(elevator, job_liste, takt):
 
 
 def level_stop():
- '''''1. nimmt stockwerk zwischen -1 und 4 an und gibt liste mit eins bis drei elementen zurück
-   2. K wird als -1 und E als 0 übergeben. Jobs kommen als liste ['0r', 'A-1']
+'''
+1. nimmt stockwerk zwischen -1 und 4 an und gibt liste mit eins bis drei elementen zurueck
+2. K wird als -1 und E als 0 übergeben. Jobs kommen als liste ['0r', 'A-1']
 '''
     random.int()
     list = []
