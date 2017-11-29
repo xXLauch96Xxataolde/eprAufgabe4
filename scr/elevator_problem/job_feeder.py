@@ -13,11 +13,11 @@ __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
 __credits__ = ""
 __email__ = "uni.goethe.horde@gmail.com"
 
-
 job_liste = ['1h', '3r']
 
+
 def job_builder(elevator, jobs):
-    #'''Builds the List for commands inside the elevator if job is assigned to current list'''
+    # '''Builds the List for commands inside the elevator if job is assigned to current list'''
 
     builded_jobs = []
 
@@ -43,11 +43,8 @@ def job_builder(elevator, jobs):
     return builded_jobs
 
 
-
-
-
 def spec_job_assigner(elevator, takt, jobs):
-    #'''assigns the converted jobs to specific job list'''
+    '''assigns the converted jobs to specific job list'''
 
     converted_jobs = job_builder(elevator, jobs)
 
@@ -85,7 +82,6 @@ def spec_job_assigner(elevator, takt, jobs):
 
                     break
 
-
                 else: print("first new element")
 
                 takt_plus_x += 1
@@ -95,11 +91,6 @@ def spec_job_assigner(elevator, takt, jobs):
 
         if treffer is True:
             elevator.spec_list.extend(job[takt_plus_x - 1:])
-
-
-
-
-
 
 
 def allgemeiner_job_assigner(elevator, job_liste, takt):
@@ -132,19 +123,19 @@ def allgemeiner_job_assigner(elevator, job_liste, takt):
                     return new_takt
                     # elevator.spec_list.insert(new_takt, level_stop(job[0]))
 
-                else: continue  #or evtl. break
-
-
+                else: continue  # or evtl. break
 
 
 def level_stop(job):
     '''Random Tic Generator
-    1. nimmt stockwerk zwischen -1 und 4 an und gibt liste mit eins bis drei elementen zurueck
-    2. K wird als -1 und E als 0 übergeben. Jobs kommen als liste ['0r', 'A-1']
+    
+    Takes a destination and repeats it times the result of the tics the 
+    elevator should wait aka the random generator
     '''
-    waiting_tic  = random.randint(1,3)
+    
+    waiting_tic = random.randint(1, 3)
     waiting_job_list = []
-    for i in waiting_tic:
+    for i in range(waiting_tic):
         waiting_job_list.append(job)
     
     return waiting_job_list
