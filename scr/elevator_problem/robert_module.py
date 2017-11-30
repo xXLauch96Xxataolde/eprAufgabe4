@@ -3,8 +3,8 @@
 live here
 """
 
-import elevator_problem.main_controller as main_controller
-from elevator_problem.elevator import Elevator
+import main_controller
+from elevator import Elevator
 import random
     
 def better_floors(a_list):

@@ -6,7 +6,7 @@ Created on 27.11.2017
 
 import time
 import random
-from elevator_problem.elevator import Elevator
+from elevator import Elevator
 
 __author__ = "123456: Ada Lovelace, 654321: Alan Turing"
 __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"

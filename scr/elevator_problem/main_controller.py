@@ -4,11 +4,11 @@ This module is meant for coordination purposes of the whole program.
 """
 
 import time
-import elevator_problem.gui_levitation as gui_levitation
+import gui_levitation
 import re
-import elevator_problem.robert_module as robert_module
-from elevator_problem.elevator import Elevator
-from elevator_problem import robert_module
+import robert_module
+from elevator import Elevator
+import job_feeder
 
 __author__ = "123456: Ada Lovelace, 654321: Alan Turing"
 __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni" 
@@ -48,16 +48,18 @@ def input_reader():
     return inp
 
 
-tic = 0
-def main_function():
 
-    elevator_a = Elevator("A", 0, "up")
-    elevator_b = Elevator("B", 0, "up")
+def main_function():
+    tic = 0
+
+    elevator_a = Elevator("A", 0, "up", [0])
+    elevator_b = Elevator("B", 0, "up", [0])
 
     while True:
         #robert_module.main()
         tic += 1
-        inp = input("Type your command")
+        job_list = job_feeder.better_floors(input_reader())
+        print(job_list)
 
 
         # after every tic or return, we want to assign the jobs!
