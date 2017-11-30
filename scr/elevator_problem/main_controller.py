@@ -48,17 +48,16 @@ def input_reader():
     return inp
 
 
-takt = 0
+tic = 0
 def main_function():
-    robert_module.main()
-    tic = 0
+
     elevator_a = Elevator("A", 0, "up")
     elevator_b = Elevator("B", 0, "up")
-    #  elevator_a.elevator_printer()
-    #  elevator_b.elevator_printer()
-    
-    
-    inp = input_reader()
-    takt += 1
 
-    # after every tic or return, we want to assign the jobs!
+    while True:
+        #robert_module.main()
+        tic += 1
+        inp = input("Type your command")
+
+
+        # after every tic or return, we want to assign the jobs!
