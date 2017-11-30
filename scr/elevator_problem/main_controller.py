@@ -43,7 +43,9 @@ def input_reader():
         result_floor = re.match(pattern_floor, entry)
         if result_elevator or result_floor:
             valid_inputs.append(entry)
-    
+
+    valid_inputs = job_feeder.better_floors(valid_inputs)
+
     print(valid_inputs)
     return inp
 
@@ -58,8 +60,7 @@ def main_function():
     while True:
         #robert_module.main()
         tic += 1
-        job_list = job_feeder.better_floors(input_reader())
-        print(job_list)
+        inp = input_reader()
 
 
         # after every tic or return, we want to assign the jobs!
