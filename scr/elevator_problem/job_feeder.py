@@ -140,6 +140,9 @@ def common_job_assigner(elevator, job_liste, tic):
 
     for job in job_liste:
 
+        if elevator.spec_list[tic] == 10:  # if no jobs left get people from floors
+            elevator.spec_list.extend(job)
+
         for lev in elevator.spec_list[tic:]:
             new_tic += 1
             if job[0] == lev:

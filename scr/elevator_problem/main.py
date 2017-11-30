@@ -4,8 +4,8 @@ This function initializes the start of the program
 """
 
 import time
-# import elevator_problem.gui_levitation as gui_levitation
-from elevator_problem import main_controller
+import gui_levitation as gui_levitation
+import main_controller
 
 __author__ = "123456: Ada Lovelace, 654321: Alan Turing"
 __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
