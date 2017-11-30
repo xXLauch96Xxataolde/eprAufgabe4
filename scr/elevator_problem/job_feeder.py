@@ -17,13 +17,13 @@ job_liste = ['1h', '3r']
 
 def better_floors(a_list):
     """Better Floors
-    
-    This function translates the K and E floors to -1 and 0 because it is 
+
+    This function translates the K and E floors to -1 and 0 because it is
     more sensible to have them named that way
     """
     new_list = []
     for entry in a_list:
-        if (entry[1] == "K"):    
+        if (entry[1] == "K"):
             a = entry[0] + "-1"
             new_list.append(a)
         elif (entry[1] == "E"):
@@ -32,7 +32,7 @@ def better_floors(a_list):
             new_list.append(a)
         else:
             new_list.append(entry)
-        
+
     #  print("new_list 2", new_list)
     return(new_list)
 
@@ -81,46 +81,47 @@ def spec_job_assigner(elevator, tic, jobs):
 
         if elevator.spec_list[tic] == 10:
             elevator.spec_list.extend(job)
+            #converted_jobs.remove(job)
 
+            if elevator.get_direction() == job[0]:  # only append the jobs that are in the same direction
 
+                for lev in job[1:]:
 
-        for lev in job[1:]:
+                    counter += 1
 
-            counter += 1
+                if treffer is True and  elevator.spec_list[tic + tic_plus_x] != lev:
+                    if elevator.get_direction() == job[0]:
+                        print("have to insert here", elevator.spec_list, job[counter:])
 
-            if treffer is True and  elevator.spec_list[tic + tic_plus_x] != lev:
-                if elevator.get_direction() == job[0]:
-                    print("have to insert here", elevator.spec_list, job[counter:])
+                    elevator.spec_list.insert(tic_plus_x, job[counter:])
 
-                elevator.spec_list.insert(tic_plus_x, job[counter:])
+                for spec_lev in elevator.spec_list[tic + tic_plus_x:]:  # [tic:] bedeutet schaue dir alle levels nach dem aktuellen tic an
 
-            for spec_lev in elevator.spec_list[tic + tic_plus_x:]:  # [tic:] bedeutet schaue dir alle levels nach dem aktuellen tic an
+                    if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
+                        elevator.spec_list.extend(job[counter:])
+                        break
 
-                if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
-                    elevator.spec_list.extend(job[counter:])
-                    break
+                    if lev == spec_lev:
 
-                if lev == spec_lev:
+                        print("match")
+                        treffer = True
+                        tic_plus_x += 1
+                        continue
 
-                    print("match")
-                    treffer = True
+                    elif treffer is True:
+                        print("no match anymore check new element")
+
+                        break
+
+                    else: print("first new element")
+
                     tic_plus_x += 1
-                    continue
 
-                elif treffer is True:
-                    print("no match anymore check new element")
+                # if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
+                #     print("append at last char")
 
-                    break
-
-                else: print("first new element")
-
-                tic_plus_x += 1
-
-            # if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
-            #     print("append at last char")
-
-        if treffer is True:
-            elevator.spec_list.extend(job[tic_plus_x - 1:])
+                if treffer is True:
+                    elevator.spec_list.extend(job[tic_plus_x - 1:])
 
 
 
@@ -134,6 +135,8 @@ def common_job_assigner(elevator, job_liste, tic):
     match_number = 0
     direction = ""
     match = False
+
+    # for both elevators ...
 
     for job in job_liste:
 
@@ -160,6 +163,7 @@ def common_job_assigner(elevator, job_liste, tic):
 
                 else: continue  # or evtl. break
 
+    # delete jobs after assigning them!!
 
 def level_stop(job):
     '''Random Tic Generator
