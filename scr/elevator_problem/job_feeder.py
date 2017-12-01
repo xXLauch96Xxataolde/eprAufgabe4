@@ -24,14 +24,14 @@ def better_floors(a_list):
     more sensible to have them named that way
     """
     new_list = []
-    for entry in a_list: 
-        """the conversion from e.g. Kh to -1h"""    
+    for entry in a_list:
+        """the conversion from e.g. Kh to -1h"""
         if (entry[0] == "K"):
-            a = "-1" + entry[1]   
+            a = "-1" + entry[1]
             new_list.append(a)
         elif (entry[0] == "E"):
             a = "0" + entry[1]
-            new_list.append(a)     
+            new_list.append(a)
         elif (entry[1] == "K"):
             a = entry[0] + "-1"
             new_list.append(a)
@@ -40,7 +40,7 @@ def better_floors(a_list):
             new_list.append(a)
         else:
             new_list.append(entry)
-            
+
     print("here", new_list)
     return (new_list)
 
@@ -107,10 +107,9 @@ def spec_job_assigner(elevator, tic, jobs):
                 counter += 1
 
                 if treffer is True and elevator.spec_list[tic + tic_plus_x] != lev:
-                    if elevator.get_direction() == job[0]:
-                        print("have to insert here", elevator.spec_list, job[counter:])
-                        elevator.spec_list.insert(tic_plus_x - 1, job[counter:])
-                        break
+                    for level in job[counter:]:
+                        elevator.spec_list.insert(tic + tic_plus_x - 1, level)
+                    break
 
                 for spec_lev in elevator.spec_list[
                                 tic + tic_plus_x:]:  # [tic:] bedeutet schaue dir alle levels nach dem aktuellen tic an
@@ -120,9 +119,7 @@ def spec_job_assigner(elevator, tic, jobs):
                         elevator.spec_list.extend(job[counter:])
                         break
 
-
                     if lev == spec_lev:
-
                         print("match")
                         treffer = True
                         tic_plus_x += 1
@@ -137,8 +134,8 @@ def spec_job_assigner(elevator, tic, jobs):
 
                     tic_plus_x += 1
 
-            if treffer is True:
-                elevator.spec_list.extend(job[tic_plus_x - 1:])
+            #if treffer is True:
+                #elevator.spec_list.extend(job[tic_plus_x - 1:])
 
         else:
             remaining_jobs.append(job)  # save the remaining jobs
