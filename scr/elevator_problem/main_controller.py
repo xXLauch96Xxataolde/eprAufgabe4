@@ -116,13 +116,19 @@ def main_function():
             if distance_b == "no match":
                 distance_b = 1000
 
-            print(distance_b, distance_a)
-            if distance_a > distance_b:
-                job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
-                print("assigned to b", distance_b)
-            else:
+            if elevator_b.spec_list[tic] != 10 and elevator_a.spec_list[tic] != 10:
+                if distance_a > distance_b:
+                    job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
+                    print("assigned to b", distance_b)
+                else:
+                    job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
+                    print("assigned to a", distance_a)
+
+            elif elevator_a.spec_list[tic] == 10:
                 job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
-                print("assigned to a", distance_a)
+
+            elif elevator_b.spec_list[tic] == 10:
+                job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
 
         # special jobs are assigned here
         print(special_jobs)

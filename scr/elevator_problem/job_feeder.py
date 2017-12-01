@@ -54,7 +54,11 @@ def job_builder(elevator, jobs):
         if elevator.get_name() == job[0]:
 
             list = []
-            destination = int(job[1])
+
+            if len(job) < 3:
+                destination = int(job[1])
+            else:
+                destination = -1
 
             if elevator.get_level() > destination:
                 for lev in range(elevator.get_level(), destination - 1, -1):
@@ -72,7 +76,7 @@ def job_builder(elevator, jobs):
 
             # jobs.remove(job)  # removes the converted jobs
 
-    print(builded_jobs)
+    #print(builded_jobs)
 
     return builded_jobs
 
@@ -184,6 +188,8 @@ def common_job_assigner(elevator, job, tic):
 def assign_common_stop(destination, elevator, match_tic, tic):
     list = []
     destination = int(destination)
+
+    print(elevator.get_level())
     if elevator.get_level() > destination:
         list.append("r")
         for lev in range(elevator.get_level(), destination - 1, -1):
