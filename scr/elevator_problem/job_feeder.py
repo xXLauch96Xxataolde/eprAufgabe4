@@ -48,7 +48,7 @@ def better_floors(a_list):
 def job_builder(elevator, jobs):
     # '''Builds the List for commands inside the elevator if job is assigned to current list'''
 
-    builded_jobs = []
+    built_jobs = []
 
     for job in jobs:
         if elevator.get_name() == job[0]:
@@ -68,13 +68,13 @@ def job_builder(elevator, jobs):
 
             list.extend(level_stop(destination))
 
-            builded_jobs.append(list)
+            built_jobs.append(list)
 
             # jobs.remove(job)  # removes the converted jobs
 
-    print(builded_jobs)
+    print(built_jobs)
 
-    return builded_jobs
+    return built_jobs
 
 
 def spec_job_assigner(elevator, tic, jobs):
