@@ -1,26 +1,5 @@
-'''
-Created on 27.11.2017
+st = "elevator_a"
 
-@author: Robert
-'''
+b = st.split("_")
 
-
-
-def testing():
-    liste = []
-    liste.append("1")
-    liste.append(12)
-    liste.append(67)
-    liste.append(3)
-    
-    print(liste)
-    print(len(liste))
-    liste.insert(2, "here")
-    
-    print(liste)
-    print(len(liste))
-    
-    del(liste[3])
-    print(liste)
-if __name__ == '__main__':
-    testing()
+print(b[1])
