@@ -17,7 +17,7 @@ job_liste = ['1h', '3r']
 
 
 def better_floors(a_list):
-    #print("Teh list", a_list)
+    # print("Teh list", a_list)
     """Better Floors
 
     This function translates the K and E floors to -1 and 0 because it is
@@ -41,7 +41,7 @@ def better_floors(a_list):
         else:
             new_list.append(entry)
 
-    #print("here", new_list)
+    # print("here", new_list)
     return (new_list)
 
 
@@ -76,7 +76,7 @@ def job_builder(elevator, jobs):
 
             # jobs.remove(job)  # removes the converted jobs
 
-    #print(builded_jobs)
+    # print(builded_jobs)
 
     return builded_jobs
 
@@ -85,9 +85,11 @@ def spec_job_assigner(elevator, tic, jobs):
     """assigns the converted jobs to specific job list"""
 
     converted_jobs = job_builder(elevator, jobs)
+    remaining_jobs = []
 
     for job in converted_jobs:
 
+        print(job)
         counter = -1
         tic_plus_x = 0;
         treffer = False
@@ -99,6 +101,8 @@ def spec_job_assigner(elevator, tic, jobs):
 
         elif int(job[1]) < elevator.get_level():
             job_direction = "down"
+
+        print(job_direction, elevator.get_direction())
 
         if elevator.get_direction() == job_direction or elevator.get_direction() == "none":  # only append the jobs that are in the same direction
 
@@ -118,6 +122,8 @@ def spec_job_assigner(elevator, tic, jobs):
                 for spec_lev in elevator.spec_list[
                                 tic + tic_plus_x:]:  # [tic:] bedeutet schaue dir alle levels nach dem aktuellen tic an
 
+                    print(lev, spec_lev)
+
                     if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
                         print("!!!", job[counter:])
                         elevator.spec_list.extend(job[counter:])
@@ -135,11 +141,18 @@ def spec_job_assigner(elevator, tic, jobs):
 
                     tic_plus_x += 1
 
-            #if treffer is True:
-                #elevator.spec_list.extend(job[tic_plus_x - 1:])
+                    # if treffer is True:
+                    # elevator.spec_list.extend(job[tic_plus_x - 1:])
 
         else:
-            remaining_jobs.append(job)  # save the remaining jobs
+            print("Remaining")
+            if job[-1] == -1:
+                rema_job = elevator.name + "K"
+            else:
+                rema_job = elevator.name + str(job[-1])
+            remaining_jobs.append(rema_job)  # save the remaining jobs
+    print(remaining_jobs)
+    return remaining_jobs
 
 
 def common_job_assigner(elevator, job, tic):

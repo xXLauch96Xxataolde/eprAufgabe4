@@ -69,7 +69,10 @@ def main_function():
     elevator_a = Elevator("A", 0, "none", [10])
     elevator_b = Elevator("B", 0, "none", [10])
 
+    remaining_jobs = []
+
     while True:
+
         inp = input_reader()
 
         # sets the new attributes for our elevators
@@ -99,8 +102,18 @@ def main_function():
 
         common_jobs, special_jobs = job_list_builder(inp)
 
+        # special jobs are assigned here
+        print(special_jobs)
+        remaining_spec_jobs_a = job_feeder.spec_job_assigner(elevator_a, tic, special_jobs)
+        remaining_spec_jobs_b = job_feeder.spec_job_assigner(elevator_b, tic, special_jobs)
+
+        #common_jobs.insert(0, remaining_common_jobs_a)
+        special_jobs.insert(0, remaining_spec_jobs_b)
+        special_jobs.insert(0, remaining_spec_jobs_a)
+
         # elevator_a.elevator_printer(tic)
         # elevator_b.elevator_printer(tic)
+
 
         # common jobs are assigned here
         for inp in common_jobs:
@@ -125,16 +138,12 @@ def main_function():
                     print("assigned to a", distance_a)
 
             elif elevator_a.spec_list[tic] == 10 and len(elevator_a.spec_list[tic:]) == 1:
+                print("assssssssssssss to a ")
                 job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
 
             elif elevator_b.spec_list[tic] == 10 and len(elevator_b.spec_list[tic:]) == 1:
+                print("assssssss to b")
                 job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
-
-        # special jobs are assigned here
-        print(special_jobs)
-        job_feeder.spec_job_assigner(elevator_a, tic, special_jobs)
-        job_feeder.spec_job_assigner(elevator_b, tic, special_jobs)
-
 
         elevator_a.elevator_printer(tic)
         elevator_b.elevator_printer(tic)
