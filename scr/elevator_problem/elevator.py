@@ -10,7 +10,7 @@ class Elevator (object):
     classdocs
     '''
 
-    def __init__(self, name, level, direction, spec_list):
+    def __init__(self, name, level, direction, spec_list, ):
         '''
         Constructor
         '''

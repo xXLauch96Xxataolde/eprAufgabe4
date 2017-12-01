@@ -47,39 +47,62 @@ def input_reader():
 
     valid_inputs = job_feeder.better_floors(valid_inputs)
 
-    print(valid_inputs)
+    # print(valid_inputs)
     return valid_inputs
 
 
-def common_job_list_builder(inp):
+def job_list_builder(inp):
     common_list = []
+    special_list = []
     for job in inp:
         if job[0].isdigit():
             print("Found a common job.")
             common_list.append(job)
-    return common_list
+        else:
+            special_list.append(job)
+    return common_list, special_list
 
 
 def main_function():
     tic = 0
 
-    elevator_a = Elevator("A", 0, "up", [10])
-    elevator_b = Elevator("B", 0, "up", [10])
+    elevator_a = Elevator("A", 0, "none", [10])
+    elevator_b = Elevator("B", 0, "none", [10])
 
     while True:
         inp = input_reader()
 
         # sets the new attributes for our elevators
         if elevator_a.spec_list[tic] != 10:
-            elevator_a.set_level(elevator_a.spec_list[tic])  # not elegant
+            elevator_a.set_level(elevator_a.spec_list[tic])
+            try:
+                if elevator_a.spec_list[tic] > elevator_a.spec_list[tic + 1]:
+                    elevator_a.set_direction("down")
+                elif elevator_a.spec_list[tic + 1] > elevator_a.spec_list[tic]:
+                    elevator_a.set_direction("up")
+                else:
+                    elevator_a.set_direction("none")
+            except IndexError:
+                elevator_a.set_direction("none")
+
         if elevator_b.spec_list[tic] != 10:
             elevator_b.set_level(elevator_b.spec_list[tic])
+            try:
+                if elevator_b.get_level() > elevator_b.spec_list[tic + 1]:
+                    elevator_b.set_direction("down")
+                elif elevator_b.spec_list[tic + 1] > elevator_b.get_level():
+                    elevator_b.set_direction("up")
+                else:
+                    elevator_b.set_direction("none")
+            except IndexError:
+                elevator_b.set_direction("none")
 
-        common_jobs = common_job_list_builder(inp)
+        common_jobs, special_jobs = job_list_builder(inp)
 
         # elevator_a.elevator_printer(tic)
         # elevator_b.elevator_printer(tic)
 
+        # common jobs are assigned here
         for inp in common_jobs:
             distance_a = job_feeder.common_job_assigner(elevator_a, inp, tic)
             print("-----")
@@ -100,6 +123,12 @@ def main_function():
             else:
                 job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
                 print("assigned to a", distance_a)
+
+        # special jobs are assigned here
+        print(special_jobs)
+        job_feeder.spec_job_assigner(elevator_a, tic, special_jobs)
+        job_feeder.spec_job_assigner(elevator_b, tic, special_jobs)
+
 
         elevator_a.elevator_printer(tic)
         elevator_b.elevator_printer(tic)
