@@ -1,4 +1,4 @@
-"""The Controler Function
+"""The Controler Function...
 
 This module is meant for coordination purposes of the whole program. 
 """
