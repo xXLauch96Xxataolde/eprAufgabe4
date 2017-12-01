@@ -83,45 +83,45 @@ def spec_job_assigner(elevator, tic, jobs):
             elevator.spec_list.extend(job)
             #converted_jobs.remove(job)
 
-            if elevator.get_direction() == job[0]:  # only append the jobs that are in the same direction
+        if elevator.get_direction() == job[0]:  # only append the jobs that are in the same direction
 
-                for lev in job[1:]:
+            for lev in job[1:]:
 
-                    counter += 1
+                counter += 1
 
-                if treffer is True and  elevator.spec_list[tic + tic_plus_x] != lev:
-                    if elevator.get_direction() == job[0]:
-                        print("have to insert here", elevator.spec_list, job[counter:])
+            if treffer is True and  elevator.spec_list[tic + tic_plus_x] != lev:
+                if elevator.get_direction() == job[0]:
+                    print("have to insert here", elevator.spec_list, job[counter:])
 
                     elevator.spec_list.insert(tic_plus_x, job[counter:])
 
-                for spec_lev in elevator.spec_list[tic + tic_plus_x:]:  # [tic:] bedeutet schaue dir alle levels nach dem aktuellen tic an
+            for spec_lev in elevator.spec_list[tic + tic_plus_x:]:  # [tic:] bedeutet schaue dir alle levels nach dem aktuellen tic an
 
-                    if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
-                        elevator.spec_list.extend(job[counter:])
-                        break
+                if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
+                    elevator.spec_list.extend(job[counter:])
+                    break
 
-                    if lev == spec_lev:
+                if lev == spec_lev:
 
-                        print("match")
-                        treffer = True
-                        tic_plus_x += 1
-                        continue
-
-                    elif treffer is True:
-                        print("no match anymore check new element")
-
-                        break
-
-                    else: print("first new element")
-
+                    print("match")
+                    treffer = True
                     tic_plus_x += 1
+                    continue
+
+                elif treffer is True:
+                    print("no match anymore check new element")
+
+                    break
+
+                else: print("first new element")
+
+                tic_plus_x += 1
 
                 # if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
                 #     print("append at last char")
 
-                if treffer is True:
-                    elevator.spec_list.extend(job[tic_plus_x - 1:])
+            if treffer is True:
+                elevator.spec_list.extend(job[tic_plus_x - 1:])
 
 
 

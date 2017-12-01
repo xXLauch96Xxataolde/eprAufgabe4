@@ -58,9 +58,8 @@ def main_function():
     elevator_b = Elevator("B", 0, "up", [0])
 
     while True:
-        #robert_module.main()
-        tic += 1
         inp = input_reader()
+        tic += 1
 
 
         # after every tic or return, we want to assign the jobs!
