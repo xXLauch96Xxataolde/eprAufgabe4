@@ -72,7 +72,6 @@ def main_function():
     remaining_jobs = []
 
     while True:
-
         inp = input_reader()
 
         # sets the new attributes for our elevators
@@ -81,7 +80,7 @@ def main_function():
             try:
                 if elevator_a.spec_list[tic] > elevator_a.spec_list[tic + 1]:
                     elevator_a.set_direction("down")
-                elif elevator_a.spec_list[tic + 1] > elevator_a.spec_list[tic]:
+                elif elevator_a.spec_list[-1] > elevator_a.spec_list[tic]:
                     elevator_a.set_direction("up")
                 else:
                     elevator_a.set_direction("none")
@@ -93,7 +92,7 @@ def main_function():
             try:
                 if elevator_b.get_level() > elevator_b.spec_list[tic + 1]:
                     elevator_b.set_direction("down")
-                elif elevator_b.spec_list[tic + 1] > elevator_b.get_level():
+                elif elevator_b.spec_list[-1] > elevator_b.get_level():
                     elevator_b.set_direction("up")
                 else:
                     elevator_b.set_direction("none")
@@ -102,18 +101,13 @@ def main_function():
 
         common_jobs, special_jobs = job_list_builder(inp)
 
+        elevator_a.elevator_printer(tic)
+        elevator_b.elevator_printer(tic)
+
         # special jobs are assigned here
         print(special_jobs)
-        remaining_spec_jobs_a = job_feeder.spec_job_assigner(elevator_a, tic, special_jobs)
-        remaining_spec_jobs_b = job_feeder.spec_job_assigner(elevator_b, tic, special_jobs)
-
-        #common_jobs.insert(0, remaining_common_jobs_a)
-        special_jobs.insert(0, remaining_spec_jobs_b)
-        special_jobs.insert(0, remaining_spec_jobs_a)
-
-        # elevator_a.elevator_printer(tic)
-        # elevator_b.elevator_printer(tic)
-
+        job_feeder.spec_job_assigner(elevator_a, tic, special_jobs)
+        job_feeder.spec_job_assigner(elevator_b, tic, special_jobs)
 
         # common jobs are assigned here
         for inp in common_jobs:

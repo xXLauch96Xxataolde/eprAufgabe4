@@ -14,6 +14,7 @@ __credits__ = ""
 __email__ = "uni.goethe.horde@gmail.com"
 
 job_liste = ['1h', '3r']
+remaining_spec_jobs = []
 
 
 def better_floors(a_list):
@@ -51,30 +52,31 @@ def job_builder(elevator, jobs):
     builded_jobs = []
 
     for job in jobs:
-        if elevator.get_name() == job[0]:
+        if len(job) != 0:
+            if elevator.get_name() == job[0]:
 
-            list = []
+                list = []
 
-            if len(job) < 3:
-                destination = int(job[1])
-            else:
-                destination = -1
+                if len(job) < 3:
+                    destination = int(job[1])
+                else:
+                    destination = -1
 
-            if elevator.get_level() > destination:
-                for lev in range(elevator.get_level(), destination - 1, -1):
-                    list.append(lev)
-            elif elevator.get_level() < destination:
-                for lev in range(elevator.get_level(), destination + 1):
-                    list.append(lev)
-            elif elevator.get_level() == destination:
-                list.append("same floor")
-                list = [destination]
+                if elevator.get_level() > destination:
+                    for lev in range(elevator.get_level(), destination - 1, -1):
+                        list.append(lev)
+                elif elevator.get_level() < destination:
+                    for lev in range(elevator.get_level(), destination + 1):
+                        list.append(lev)
+                elif elevator.get_level() == destination:
+                    list.append("same floor")
+                    list = [destination]
 
-            list.extend(level_stop(destination))
+                list.extend(level_stop(destination))
 
-            builded_jobs.append(list)
+                builded_jobs.append(list)
 
-            # jobs.remove(job)  # removes the converted jobs
+                # jobs.remove(job)  # removes the converted jobs
 
     # print(builded_jobs)
 
@@ -83,24 +85,27 @@ def job_builder(elevator, jobs):
 
 def spec_job_assigner(elevator, tic, jobs):
     """assigns the converted jobs to specific job list"""
-
+    jobs.extend(remaining_spec_jobs)
+    print("#####",jobs)
     converted_jobs = job_builder(elevator, jobs)
-    remaining_jobs = []
+
+    print("------", converted_jobs)
 
     for job in converted_jobs:
 
-        print(job)
+        print("!!!!!", job)
         counter = -1
         tic_plus_x = 0;
         treffer = False
 
         job_direction = "none"
 
-        if int(job[1]) > elevator.get_level():
+        if int(job[-1]) > elevator.get_level():
             job_direction = "up"
 
-        elif int(job[1]) < elevator.get_level():
+        elif int(job[-1]) < elevator.get_level():
             job_direction = "down"
+
 
         print(job_direction, elevator.get_direction())
 
@@ -118,6 +123,11 @@ def spec_job_assigner(elevator, tic, jobs):
                     for level in job[counter:]:
                         elevator.spec_list.insert(tic + tic_plus_x - 1, level)
                     break
+
+                if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
+                        print("!!!", job[counter:])
+                        elevator.spec_list.extend(job[counter:])
+                        break
 
                 for spec_lev in elevator.spec_list[
                                 tic + tic_plus_x:]:  # [tic:] bedeutet schaue dir alle levels nach dem aktuellen tic an
@@ -147,12 +157,11 @@ def spec_job_assigner(elevator, tic, jobs):
         else:
             print("Remaining")
             if job[-1] == -1:
-                rema_job = elevator.name + "K"
+                rema_job = elevator.name + "-1"
             else:
                 rema_job = elevator.name + str(job[-1])
-            remaining_jobs.append(rema_job)  # save the remaining jobs
-    print(remaining_jobs)
-    return remaining_jobs
+            remaining_spec_jobs.append(rema_job)  # save the remaining jobs
+    print(remaining_spec_jobs)
 
 
 def common_job_assigner(elevator, job, tic):
