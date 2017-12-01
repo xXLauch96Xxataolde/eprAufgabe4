@@ -215,24 +215,3 @@ def level_stop(job):
         waiting_job_list.append(job)
 
     return waiting_job_list
-
-# def common_job_builder(job, elevator):
-#     created_job = []
-#
-#     destination = job[0]
-#
-#     if elevator.get_level() > destination:
-#         created_job.append("r")
-#         for lev in range(elevator.get_level, destination - 1, -1):
-#             created_job.append(lev)
-#     elif elevator.get_level() < destination:
-#         created_job.append("h")
-#         for lev in range(elevator.get_level, destination + 1):
-#             created_job.append(lev)
-#     elif elevator.get_level() == destination:
-#         list.append("same floor")
-#         created_job = [destination]
-#
-#     created_job.append(level_stop(destination))
-#
-#

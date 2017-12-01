@@ -69,6 +69,7 @@ def main_function():
     while True:
         inp = input_reader()
 
+        # sets the new attributes for our elevators
         if elevator_a.spec_list[tic] != 10:
             elevator_a.set_level(elevator_a.spec_list[tic])  # not elegant
         if elevator_b.spec_list[tic] != 10:
