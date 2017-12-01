@@ -102,7 +102,7 @@ def spec_job_assigner(elevator, tic, jobs):
                 elevator.spec_list.extend(job[1:])
                 # converted_jobs.remove(job)
                 continue
-            print(job)
+
             for lev in job:
                 counter += 1
 
@@ -120,7 +120,7 @@ def spec_job_assigner(elevator, tic, jobs):
                         elevator.spec_list.extend(job[counter:])
                         break
 
-                    print(lev, spec_lev)
+
                     if lev == spec_lev:
 
                         print("match")
