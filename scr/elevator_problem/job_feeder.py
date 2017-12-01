@@ -34,7 +34,6 @@ def better_floors(a_list):
         else:
             new_list.append(entry)
 
-    # print("new_list 2", new_list)
     return (new_list)
 
 
@@ -138,11 +137,11 @@ def common_job_assigner(elevator, job, tic):
 
     # for both elevators ...
 
-    distance = 0
+    infos = ""
 
     if elevator.spec_list[tic] == 10:  # if no jobs left get people from floors
-        distance = elevator.get_level() - int(job[0])
-        return distance + 1
+        infos = abs(elevator.get_level() - int(job[0]))
+        return infos
 
     for lev in elevator.spec_list[tic:]:
         new_tic += 1
@@ -172,7 +171,7 @@ def common_job_assigner(elevator, job, tic):
     # delete jobs after assigning them!!
 
 
-def assign_common_stop(destination, elevator, match_tic):
+def assign_common_stop(destination, elevator, match_tic, tic):
     list = []
     destination = int(destination)
     if elevator.get_level() > destination:
@@ -192,10 +191,15 @@ def assign_common_stop(destination, elevator, match_tic):
         list.insert(-1, level)
 
     print(list)
-    for level in list[2:]:
-        print("----- ", level)
-        print(match_tic)
-        elevator.spec_list.insert(match_tic + 1, level)
+
+    if elevator.spec_list[tic] == 10:
+        print("Starts from start position.")
+        elevator.spec_list.extend(list[2:])
+    else:
+        for level in list[2:]:
+            print("----- ", level)
+            print(match_tic)
+            elevator.spec_list.insert(tic + match_tic, level)
 
 
 def level_stop(job):

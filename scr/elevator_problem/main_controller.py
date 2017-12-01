@@ -61,28 +61,28 @@ def common_job_list_builder(inp):
 
 
 def main_function():
-    tic = -1
+    tic = 0
 
     elevator_a = Elevator("A", 0, "up", [10])
     elevator_b = Elevator("B", 0, "up", [10])
 
     while True:
         inp = input_reader()
-        tic += 1
 
-        #elevator_a.elevator_printer(tic)
-        #elevator_b.elevator_printer(tic)
+        if elevator_a.spec_list[tic] != 10:
+            elevator_a.set_level(elevator_a.spec_list[tic])  # not elegant
+        if elevator_b.spec_list[tic] != 10:
+            elevator_b.set_level(elevator_b.spec_list[tic])
 
         common_jobs = common_job_list_builder(inp)
 
-        elevator_a.elevator_printer(tic)
-        elevator_b.elevator_printer(tic)
+        # elevator_a.elevator_printer(tic)
+        # elevator_b.elevator_printer(tic)
 
         for inp in common_jobs:
             distance_a = job_feeder.common_job_assigner(elevator_a, inp, tic)
             print("-----")
             distance_b = job_feeder.common_job_assigner(elevator_b, inp, tic)
-
 
             if distance_b == "no match" and distance_a == "no match":
                 continue
@@ -93,10 +93,12 @@ def main_function():
                 distance_b = 1000
 
             print(distance_b, distance_a)
-            if abs(distance_a) > abs(distance_b):
-                job_feeder.assign_common_stop(inp[0], elevator_b, distance_b)
+            if distance_a > distance_b:
+                job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
+                print("assigned to b", distance_b)
             else:
-                job_feeder.assign_common_stop(inp[0], elevator_a, distance_a)
+                job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
+                print("assigned to a", distance_a)
 
         elevator_a.elevator_printer(tic)
         elevator_b.elevator_printer(tic)
@@ -105,10 +107,6 @@ def main_function():
             elevator_b.spec_list.extend([10])
         if len(elevator_a.spec_list[tic:]) == 1:
             elevator_a.spec_list.extend([10])
-                # after every tic or return, we want to assign the jobs!
+        # after every tic or return, we want to assign the jobs!
 
-        if elevator_a.spec_list[tic] != 10:
-            elevator_a.set_level(elevator_a.spec_list[tic])  #not elegant
-        if elevator_b.spec_list[tic] != 10:
-            elevator_b.set_level(elevator_b.spec_list[tic])
-
+        tic += 1
