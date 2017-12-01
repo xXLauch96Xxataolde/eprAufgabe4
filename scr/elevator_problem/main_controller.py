@@ -37,7 +37,7 @@ def input_reader():
     pattern_elevator = "[AB][KE1-4]"
     pattern_floor = "[KE1234][hr]"
 
-    #  A3 AK AZ A78 A778 V5 B4 b2 A5 A4 Ae AK BE Be bE K1 kh 3R Kh 4h 6H k6 h$ for convenience 
+    #  A3 AK AZ A78 A778 V5 B4 b2 A5 A4 Ae AK BE Be bE K1 kh 3R Kh 4h 6H k6 h$ for convenience
 
     for entry in requests:
         result_elevator = re.match(pattern_elevator, entry)
@@ -124,10 +124,10 @@ def main_function():
                     job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
                     print("assigned to a", distance_a)
 
-            elif elevator_a.spec_list[tic] == 10:
+            elif elevator_a.spec_list[tic] == 10 and len(elevator_a.spec_list[tic:]) == 1:
                 job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
 
-            elif elevator_b.spec_list[tic] == 10:
+            elif elevator_b.spec_list[tic] == 10 and len(elevator_b.spec_list[tic:]) == 1:
                 job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
 
         # special jobs are assigned here
