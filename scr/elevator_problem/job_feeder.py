@@ -106,7 +106,6 @@ def spec_job_assigner(elevator, tic, jobs):
         elif int(job[-1]) < elevator.get_level():
             job_direction = "down"
 
-
         print(job_direction, elevator.get_direction())
 
         if elevator.get_direction() == job_direction or elevator.get_direction() == "none":  # only append the jobs that are in the same direction
