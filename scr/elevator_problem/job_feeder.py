@@ -1,8 +1,8 @@
-'''
+"""
 Created on 27.11.2017
 
-@author: Niels
-'''
+@author: Niels Heissel
+"""
 
 import time
 import random
