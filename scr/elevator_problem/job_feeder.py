@@ -17,7 +17,7 @@ job_liste = ['1h', '3r']
 
 
 def better_floors(a_list):
-    print("Teh list", a_list)
+    #print("Teh list", a_list)
     """Better Floors
 
     This function translates the K and E floors to -1 and 0 because it is
@@ -41,7 +41,7 @@ def better_floors(a_list):
         else:
             new_list.append(entry)
 
-    print("here", new_list)
+    #print("here", new_list)
     return (new_list)
 
 
@@ -128,9 +128,6 @@ def spec_job_assigner(elevator, tic, jobs):
                     elif treffer is True:
                         print("no match anymore check new element")
                         break
-
-                    else:
-                        print("first new element")
 
                     tic_plus_x += 1
 
