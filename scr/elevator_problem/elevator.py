@@ -62,8 +62,8 @@ class Elevator (object):
     def del_spec_list(self):
         del self.__spec_list
         
-    def elevator_printer(self):
-        print("Elevator:", self.name, "at level:", self.level, "is going:", self.direction, "current Jobs:", self.spec_list)
+    def elevator_printer(self, tic):
+        print("Elevator:", self.name, "at level:", self.level, "is going:", self.direction, "current Jobs:", self.spec_list[tic:])
 
     name = property(get_name, set_name, del_name, "name's docstring")
     level = property(get_level, set_level, del_level, "level's docstring")

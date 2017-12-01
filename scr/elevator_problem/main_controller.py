@@ -11,13 +11,14 @@ from elevator import Elevator
 import job_feeder
 
 __author__ = "123456: Ada Lovelace, 654321: Alan Turing"
-__copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni" 
-__credits__ = "" 
-__email__ = "uni.goethe.horde@gmail.com" 
+__copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
+__credits__ = ""
+__email__ = "uni.goethe.horde@gmail.com"
 
 
 def prio_list():
     """Maybe we can implement a priolist here"""
+
 
 def input_reader():
     """This should interpret, check and parse an input.
@@ -29,16 +30,16 @@ def input_reader():
     constructed and the valid input is stored in a valid_inputs list
     """
     inp = input("Where do you want to travel?")
-    
+
     requests = []
-    valid_inputs = [] 
+    valid_inputs = []
     requests = inp.split(" ")
     pattern_elevator = "[AB][KE1-4]"
     pattern_floor = "[KE1234][hr]"
-    
+
     #  A3 AK AZ A78 A778 V5 B4 b2 A5 A4 Ae AK BE Be bE K1 kh 3R Kh 4h 6H k6 h$ for convenience 
-    
-    for entry in requests:        
+
+    for entry in requests:
         result_elevator = re.match(pattern_elevator, entry)
         result_floor = re.match(pattern_floor, entry)
         if result_elevator or result_floor:
@@ -47,19 +48,67 @@ def input_reader():
     valid_inputs = job_feeder.better_floors(valid_inputs)
 
     print(valid_inputs)
-    return inp
+    return valid_inputs
 
+
+def common_job_list_builder(inp):
+    common_list = []
+    for job in inp:
+        if job[0].isdigit():
+            print("Found a common job.")
+            common_list.append(job)
+    return common_list
 
 
 def main_function():
-    tic = 0
+    tic = -1
 
-    elevator_a = Elevator("A", 0, "up", [0])
-    elevator_b = Elevator("B", 0, "up", [0])
+    elevator_a = Elevator("A", 0, "up", [10])
+    elevator_b = Elevator("B", 0, "up", [10])
 
     while True:
         inp = input_reader()
         tic += 1
 
+        #elevator_a.elevator_printer(tic)
+        #elevator_b.elevator_printer(tic)
 
-        # after every tic or return, we want to assign the jobs!
+        common_jobs = common_job_list_builder(inp)
+
+        elevator_a.elevator_printer(tic)
+        elevator_b.elevator_printer(tic)
+
+        for inp in common_jobs:
+            distance_a = job_feeder.common_job_assigner(elevator_a, inp, tic)
+            print("-----")
+            distance_b = job_feeder.common_job_assigner(elevator_b, inp, tic)
+
+
+            if distance_b == "no match" and distance_a == "no match":
+                continue
+
+            if distance_a == "no match":
+                distance_a = 1000
+            if distance_b == "no match":
+                distance_b = 1000
+
+            print(distance_b, distance_a)
+            if abs(distance_a) > abs(distance_b):
+                job_feeder.assign_common_stop(inp[0], elevator_b, distance_b)
+            else:
+                job_feeder.assign_common_stop(inp[0], elevator_a, distance_a)
+
+        elevator_a.elevator_printer(tic)
+        elevator_b.elevator_printer(tic)
+
+        if len(elevator_b.spec_list[tic:]) == 1:
+            elevator_b.spec_list.extend([10])
+        if len(elevator_a.spec_list[tic:]) == 1:
+            elevator_a.spec_list.extend([10])
+                # after every tic or return, we want to assign the jobs!
+
+        if elevator_a.spec_list[tic] != 10:
+            elevator_a.set_level(elevator_a.spec_list[tic])  #not elegant
+        if elevator_b.spec_list[tic] != 10:
+            elevator_b.set_level(elevator_b.spec_list[tic])
+
