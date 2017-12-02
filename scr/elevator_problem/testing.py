@@ -2,7 +2,9 @@ from tkinter import *
 from tkinter.ttk import *
 from elevator_problem import elevator
 
+
 class TestingGui:
+
     def __init__(self, master):
         self.master = master
         master.title("A simple GUI")
@@ -19,11 +21,14 @@ class TestingGui:
         self.close_button = Button(master, text="Exit", command=master.quit)
         self.close_button.pack()
 
+    def test(self, a):
+        print(a)
+
     def greet(self):
         print("Hallo!")
         self.master.update_idletasks()
         self.elevator_a['value'] += -20 
+        
+        
+        
 
-root = Tk()
-my_gui = TestingGui(root)
-root.mainloop()
