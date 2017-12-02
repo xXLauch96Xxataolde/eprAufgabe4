@@ -24,7 +24,8 @@ def ele_move(step, elevator_bar):
 
 
 def lvl(level):
-    dict = {0: "Keller",
+    dict = {-1: "Basement",
+            0: "Ground Floor",
             1 : "1",
             2 : "2",
             3 : "3",
@@ -33,7 +34,7 @@ def lvl(level):
     print("Elevator Level:", dict.get(level))
 
 
-def test():
+def test1():
     level = 0
     root = Tkinter.Tk()
     
@@ -50,8 +51,8 @@ def test():
     elevator_bar.update()
     
     while(True):
-        #elevator_bar.step(0)
-        #elevator_bar.update()
+        # elevator_bar.step(0)
+        # elevator_bar.update()
         inp = input()
         if(inp == "up"):
             ele_move(1, elevator_bar)

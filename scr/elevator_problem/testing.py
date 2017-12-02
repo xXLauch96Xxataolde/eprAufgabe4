@@ -1,17 +1,36 @@
-import curses
-from curses.textpad import Textbox, rectangle
+from tkinter import *
+from tkinter.ttk import *
+import time
 
-def main(stdscr):
-    stdscr.addstr(0, 0, "Enter IM message: (hit Ctrl-G to send)")
+tk = Tk()
+elevator_a = Progressbar(tk, orient=VERTICAL, length=100, mode='indeterminate')
+elevator_a.pack(side="left", fill="both", expand=False, padx=4, pady=4)
+elevator_b = Progressbar(tk, orient=VERTICAL, length=100, mode='indeterminate')
+elevator_b.pack(side="left", fill='both', expand=False, padx=8, pady=4)
 
-    editwin = curses.newwin(5,30, 2,1)
-    rectangle(stdscr, 1,0, 1+5+1, 1+30+1)
-    stdscr.refresh()
 
-    box = Textbox(editwin)
+def bar():
+    for i in range(5):
+        time.sleep(1)
+        elevator_a_label.configure(text="Elevator A:" + str(i))
+        tk.update_idletasks()
+    tk.update_idletasks()
+    elevator_a['value'] = 20
+    tk.update_idletasks()
+    time.sleep(1)
+    elevator_a['value'] = 50
+    tk.update_idletasks()
+    time.sleep(1)
+    elevator_a['value'] = 80
+    tk.update_idletasks()
+    time.sleep(1)
+    elevator_a['value'] = 100
 
-    # Let the user edit until Ctrl-G is struck.
-    box.edit()
 
-    # Get resulting contents
-    message = box.gather()
+elevator_a_label = Label(tk, text="yddas")
+elevator_a_label.pack()
+image_left = PhotoImage(file='house_left.gif')
+
+Button(tk, text="Start", command=bar).pack(side="bottom", fill='both', expand=False, padx=4, pady=2)
+
+mainloop()

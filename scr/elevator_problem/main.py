@@ -23,7 +23,7 @@ def menue():
     print(".......................................")
 
 def main():
-    # gui_levitation.test()
+    gui_levitation.test1()
     
     while (True):
         menue()
