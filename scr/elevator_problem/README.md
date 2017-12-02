@@ -8,3 +8,6 @@ Uni Goethe Elevator Problem
 (e)Jeder Fahrkorb wechselt die Fahrtrichtung nur dann, wenn er mit der aktuellen Fahrtrichtung keine Anforderung mehr erfullen kann.
 
 It is important to show the job which the elevator executes!!
+
+Testing:
+4h should not work

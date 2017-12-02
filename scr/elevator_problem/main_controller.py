@@ -4,9 +4,7 @@ This module is meant for coordination purposes of the whole program.
 """
 
 import time
-import gui_levitation
 import re
-import robert_module
 from elevator import Elevator
 import job_feeder
 
@@ -47,11 +45,11 @@ def input_reader():
 
     valid_inputs = job_feeder.better_floors(valid_inputs)
 
-    # print(valid_inputs)
     return valid_inputs
 
 
 def elevator_setter(elevator, tic):
+    
     if elevator.spec_list[tic] != 10:
         elevator.set_level(elevator.spec_list[tic])
         try:

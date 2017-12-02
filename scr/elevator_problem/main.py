@@ -4,7 +4,6 @@ This function initializes the start of the program
 """
 
 import time
-import gui_levitation as gui_levitation
 import main_controller
 
 __author__ = "123456: Ada Lovelace, 654321: Alan Turing"
@@ -23,7 +22,6 @@ def menue():
     print(".......................................")
 
 def main():
-    gui_levitation.test1()
     
     while (True):
         menue()
@@ -31,7 +29,7 @@ def main():
         if (inp == "1"):
             main_controller.main_function()  # maybe rename these modules
         elif (inp == "2"):
-            print("Same procedure but imporved")
+            print("Same procedure but improved")
         elif (inp == "3"):
             print("Help File")
         elif (inp == "4"):
