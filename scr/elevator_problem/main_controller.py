@@ -51,6 +51,29 @@ def input_reader():
     return valid_inputs
 
 
+def elevator_setter(elevator, tic):
+    if elevator.spec_list[tic] != 10:
+        elevator.set_level(elevator.spec_list[tic])
+        try:
+            if elevator.get_level() > elevator.spec_list[-1]:
+                elevator.set_direction("down")
+            elif elevator.spec_list[-1] > elevator.get_level():
+                elevator.set_direction("up")
+            else:
+                elevator.set_direction("none")
+        except IndexError:
+            elevator.set_direction("none")
+    elif elevator.spec_list[tic] == 10 and len(elevator.spec_list[tic:]) > 1:
+        if elevator.get_level() > elevator.spec_list[-1]:
+            elevator.set_direction("down")
+        elif elevator.spec_list[-1] > elevator.get_level():
+            elevator.set_direction("up")
+        else:
+            elevator.set_direction("none")
+    else:
+        elevator.set_direction("none")
+
+
 def job_list_builder(inp):
     common_list = []
     special_list = []
@@ -75,29 +98,8 @@ def main_function():
         inp = input_reader()
 
         # sets the new attributes for our elevators
-        if elevator_a.spec_list[tic] != 10:
-            elevator_a.set_level(elevator_a.spec_list[tic])
-            try:
-                if elevator_a.spec_list[tic] > elevator_a.spec_list[tic + 1]:
-                    elevator_a.set_direction("down")
-                elif elevator_a.spec_list[-1] > elevator_a.spec_list[tic]:
-                    elevator_a.set_direction("up")
-                else:
-                    elevator_a.set_direction("none")
-            except IndexError:
-                elevator_a.set_direction("none")
-
-        if elevator_b.spec_list[tic] != 10:
-            elevator_b.set_level(elevator_b.spec_list[tic])
-            try:
-                if elevator_b.get_level() > elevator_b.spec_list[tic + 1]:
-                    elevator_b.set_direction("down")
-                elif elevator_b.spec_list[-1] > elevator_b.get_level():
-                    elevator_b.set_direction("up")
-                else:
-                    elevator_b.set_direction("none")
-            except IndexError:
-                elevator_b.set_direction("none")
+        elevator_setter(elevator_a, tic)
+        elevator_setter(elevator_b, tic)
 
         common_jobs, special_jobs = job_list_builder(inp)
 
@@ -112,8 +114,10 @@ def main_function():
         # common jobs are assigned here
         for inp in common_jobs:
             distance_a = job_feeder.common_job_assigner(elevator_a, inp, tic)
-            print("-----")
+            print("Distance: ", distance_a)
+            print("---!!--")
             distance_b = job_feeder.common_job_assigner(elevator_b, inp, tic)
+            print("Distance: ", distance_b)
 
             if distance_b == "no match" and distance_a == "no match":
                 continue
@@ -123,7 +127,7 @@ def main_function():
             if distance_b == "no match":
                 distance_b = 1000
 
-            if elevator_b.spec_list[tic] != 10 and elevator_a.spec_list[tic] != 10:
+            if len(elevator_b.spec_list[tic:]) > 1 and len(elevator_a.spec_list[tic:]) > 1:
                 if distance_a > distance_b:
                     job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
                     print("assigned to b", distance_b)

@@ -7,6 +7,7 @@ Created on 27.11.2017
 import time
 import random
 import elevator
+import main_controller
 
 __author__ = "123456: Ada Lovelace, 654321: Alan Turing"
 __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
@@ -86,14 +87,16 @@ def job_builder(elevator, jobs):
 def spec_job_assigner(elevator, tic, jobs):
     """assigns the converted jobs to specific job list"""
     jobs.extend(remaining_spec_jobs)
-    print("#####",jobs)
+    print("#####", jobs)
     converted_jobs = job_builder(elevator, jobs)
 
     print("------", converted_jobs)
 
     for job in converted_jobs:
 
-        print("!!!!!", job)
+        main_controller.elevator_setter(elevator, tic)
+        elevator.elevator_printer(tic)
+
         counter = -1
         tic_plus_x = 0;
         treffer = False
@@ -106,32 +109,33 @@ def spec_job_assigner(elevator, tic, jobs):
         elif int(job[-1]) < elevator.get_level():
             job_direction = "down"
 
-        print(job_direction, elevator.get_direction())
-
         if elevator.get_direction() == job_direction or elevator.get_direction() == "none":  # only append the jobs that are in the same direction
 
-            if elevator.spec_list[tic] == 10:
+            if elevator.spec_list[tic] == 10 and len(elevator.spec_list[tic:]) == 1:
                 elevator.spec_list.extend(job[1:])
-                # converted_jobs.remove(job)
                 continue
 
-            for lev in job:
+            for lev in job[1:]:
                 counter += 1
+
+                if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
+                    elevator.spec_list.extend(job[counter:])
+                    break
 
                 if treffer is True and elevator.spec_list[tic + tic_plus_x] != lev:
                     for level in job[counter:]:
                         elevator.spec_list.insert(tic + tic_plus_x - 1, level)
                     break
 
-                if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
-                        print("!!!", job[counter:])
-                        elevator.spec_list.extend(job[counter:])
-                        break
-
                 for spec_lev in elevator.spec_list[
                                 tic + tic_plus_x:]:  # [tic:] bedeutet schaue dir alle levels nach dem aktuellen tic an
 
-                    print(lev, spec_lev)
+
+
+                    if job[-1] == spec_lev:
+                        if job[-1] == elevator.spec_list[tic + tic_plus_x + 1]:
+                            print("Job is already assigned.")
+                            break
 
                     if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
                         print("!!!", job[counter:])
@@ -150,8 +154,14 @@ def spec_job_assigner(elevator, tic, jobs):
 
                     tic_plus_x += 1
 
-                    # if treffer is True:
-                    # elevator.spec_list.extend(job[tic_plus_x - 1:])
+            if job[-1] == spec_lev and job[-1] == elevator.spec_list[tic + tic_plus_x + 1]:
+                break
+
+            if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
+                break
+
+                # if treffer is True:
+                # elevator.spec_list.extend(job[tic_plus_x - 1:])
 
         else:
             print("Remaining")
@@ -165,6 +175,7 @@ def spec_job_assigner(elevator, tic, jobs):
 
 def common_job_assigner(elevator, job, tic):
     '''commands from outside the elevator will be passed to the elevator here'''
+    print("Common Job Assigner", job)
     new_tic = -1
     match_number = 0
     direction = ""
@@ -174,7 +185,7 @@ def common_job_assigner(elevator, job, tic):
 
     infos = ""
 
-    if elevator.spec_list[tic] == 10:  # if no jobs left get people from floors
+    if elevator.spec_list[tic] == 10 and len(elevator.spec_list[tic:]) == 1:  # if no jobs left get people from floors
         infos = abs(elevator.get_level() - int(job[0]))
         return infos
 
@@ -185,7 +196,8 @@ def common_job_assigner(elevator, job, tic):
             match = True
 
         if match is True:
-            if elevator.spec_list[tic + new_tic] > elevator.spec_list[tic + new_tic + 1]:
+            print("Liste von Außen", elevator.spec_list, "Tic:", tic, "New_tic:", new_tic)
+            if elevator.spec_list[tic + new_tic - 1] > elevator.spec_list[tic + new_tic]:
                 print("goes down")
                 direction = "r"
             elif elevator.spec_list[tic + new_tic] < elevator.spec_list[tic + new_tic + 1]:
@@ -201,7 +213,7 @@ def common_job_assigner(elevator, job, tic):
                 # elevator.spec_list.insert(new_tic, level_stop(job[0]))
 
             else:
-                continue  # or evtl. break
+                break  # or evtl. break
     return "no match"
     # delete jobs after assigning them!!
 
@@ -211,6 +223,7 @@ def assign_common_stop(destination, elevator, match_tic, tic):
     destination = int(destination)
 
     print(elevator.get_level())
+
     if elevator.get_level() > destination:
         list.append("r")
         for lev in range(elevator.get_level(), destination - 1, -1):
@@ -229,7 +242,7 @@ def assign_common_stop(destination, elevator, match_tic, tic):
 
     print(list)
 
-    if elevator.spec_list[tic] == 10:
+    if elevator.spec_list[tic] == 10 and len(elevator.spec_list[tic:]) == 1:
         print("Starts from start position.")
         elevator.spec_list.extend(list[2:])
     else:
