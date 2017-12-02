@@ -87,6 +87,11 @@ def job_list_builder(inp):
 
 
 def main_function():
+    """ Main Function()
+    
+    Dear Niels please insert a exit possiblity which leads the user to the
+    main menue built in main.main()
+    """
     tic = 0
 
     elevator_a = Elevator("A", 0, "none", [10])
@@ -95,6 +100,16 @@ def main_function():
     remaining_jobs = []
 
     while True:
+        """
+        Maybe you can here check the input. 
+        inp = input()
+        if (inp = "exit"):
+            break;
+        else:
+            continue with your main function
+        
+        Thx
+        """
         inp = input_reader()
 
         # sets the new attributes for our elevators
