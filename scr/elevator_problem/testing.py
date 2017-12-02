@@ -7,7 +7,7 @@ elevator_a = Progressbar(tk, orient=VERTICAL, length=100, mode='indeterminate')
 elevator_a.pack(side="left", fill="both", expand=False, padx=4, pady=4)
 elevator_b = Progressbar(tk, orient=VERTICAL, length=100, mode='indeterminate')
 elevator_b.pack(side="left", fill='both', expand=False, padx=8, pady=4)
-
+# help
 
 def bar():
     for i in range(5):
