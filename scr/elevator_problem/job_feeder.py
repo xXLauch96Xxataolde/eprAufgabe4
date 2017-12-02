@@ -87,8 +87,11 @@ def job_builder(elevator, jobs):
 def spec_job_assigner(elevator, tic, jobs):
     """assigns the converted jobs to specific job list"""
     jobs.extend(remaining_spec_jobs)
-    print("#####", jobs)
+
+    jobs = list(set(jobs))
+
     converted_jobs = job_builder(elevator, jobs)
+    print(converted_jobs)
 
     print("------", converted_jobs)
 
