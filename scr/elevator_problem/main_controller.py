@@ -7,6 +7,8 @@ import time
 import re
 from elevator import Elevator
 import job_feeder
+from gui_levitation import Controller
+
 
 __author__ = "123456: Ada Lovelace, 654321: Alan Turing"
 __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
@@ -49,7 +51,7 @@ def input_reader():
 
 
 def elevator_setter(elevator, tic):
-
+    
     if elevator.spec_list[tic] != 10:
         elevator.set_level(elevator.spec_list[tic])
         try:
