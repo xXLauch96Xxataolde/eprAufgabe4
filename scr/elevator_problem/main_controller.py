@@ -16,10 +16,6 @@ __email__ = "uni.goethe.horde@gmail.com"
 remaining_common_jobs = []
 
 
-def prio_list():
-    """Maybe we can implement a priolist here"""
-
-
 def input_reader():
     """This should interpret, check and parse an input.
     
@@ -134,7 +130,7 @@ def main_function():
         job_feeder.spec_job_assigner(elevator_b, tic, special_jobs)
 
         print("REMAINING COMMON JOBS", remaining_common_jobs)
-        print("Common",common_jobs)
+        print("Common", common_jobs)
 
         # common jobs are assigned here
         for inp in common_jobs:
