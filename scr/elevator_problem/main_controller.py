@@ -13,6 +13,8 @@ __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
 __credits__ = ""
 __email__ = "uni.goethe.horde@gmail.com"
 
+remaining_common_jobs = []
+
 
 def prio_list():
     """Maybe we can implement a priolist here"""
@@ -45,11 +47,13 @@ def input_reader():
 
     valid_inputs = job_feeder.better_floors(valid_inputs)
 
+    valid_inputs = list(set(valid_inputs))
+
     return valid_inputs
 
 
 def elevator_setter(elevator, tic):
-    
+
     if elevator.spec_list[tic] != 10:
         elevator.set_level(elevator.spec_list[tic])
         try:
@@ -116,6 +120,8 @@ def main_function():
 
         common_jobs, special_jobs = job_list_builder(inp)
 
+        common_jobs.extend(remaining_common_jobs)
+
         elevator_a.elevator_printer(tic)
         elevator_b.elevator_printer(tic)
 
@@ -133,6 +139,7 @@ def main_function():
             print("Distance: ", distance_b)
 
             if distance_b == "no match" and distance_a == "no match":
+                remaining_common_jobs.append(inp)
                 continue
 
             if distance_a == "no match":
@@ -144,25 +151,48 @@ def main_function():
                 if distance_a > distance_b:
                     job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
                     print("assigned to b", distance_b)
+                    try:
+                        remaining_common_jobs.remove(inp)
+                    except ValueError:
+                        continue
                 else:
                     job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
                     print("assigned to a", distance_a)
+                    try:
+                        remaining_common_jobs.remove(inp)
+                    except ValueError:
+                        continue
 
             elif elevator_a.spec_list[tic] == 10 and len(elevator_a.spec_list[tic:]) == 1:
                 print("assssssssssssss to a ")
                 job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
+                try:
+                    remaining_common_jobs.remove(inp)
+                except ValueError:
+                    continue
 
             elif elevator_b.spec_list[tic] == 10 and len(elevator_b.spec_list[tic:]) == 1:
                 print("assssssss to b")
                 job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
+                try:
+                    remaining_common_jobs.remove(inp)
+                except ValueError:
+                    continue
 
         elevator_a.elevator_printer(tic)
         elevator_b.elevator_printer(tic)
 
         if len(elevator_b.spec_list[tic:]) == 1:
             elevator_b.spec_list.extend([10])
+            try:
+                remaining_common_jobs.remove(inp)
+            except ValueError:
+                continue
         if len(elevator_a.spec_list[tic:]) == 1:
             elevator_a.spec_list.extend([10])
-        # after every tic or return, we want to assign the jobs!
+            try:
+                remaining_common_jobs.remove(inp)
+            except ValueError:
+                continue
 
         tic += 1
