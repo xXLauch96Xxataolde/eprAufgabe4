@@ -189,7 +189,10 @@ def common_job_assigner(elevator, job, tic):
     infos = ""
 
     if elevator.spec_list[tic] == 10 and len(elevator.spec_list[tic:]) == 1:  # if no jobs left get people from floors
-        infos = abs(elevator.get_level() - int(job[0]))
+        if len(job) > 2:
+            infos = abs(elevator.get_level() - (-1))
+        else:
+            infos = abs(elevator.get_level() - int(job[0]))
         return infos
 
     for lev in elevator.spec_list[tic:]:
@@ -223,6 +226,7 @@ def common_job_assigner(elevator, job, tic):
 
 def assign_common_stop(destination, elevator, match_tic, tic):
     list = []
+    print("DESINATION:", destination)
     destination = int(destination)
 
     print(elevator.get_level())

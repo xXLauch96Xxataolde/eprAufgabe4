@@ -83,6 +83,9 @@ def job_list_builder(inp):
         if job[0].isdigit():
             print("Found a common job.")
             common_list.append(job)
+        elif job[0] == "-":
+            print("Found a common job.")
+            common_list.append(job)
         else:
             special_list.append(job)
     return common_list, special_list
@@ -130,8 +133,16 @@ def main_function():
         job_feeder.spec_job_assigner(elevator_a, tic, special_jobs)
         job_feeder.spec_job_assigner(elevator_b, tic, special_jobs)
 
+        print("REMAINING COMMON JOBS", remaining_common_jobs)
+        print("Common",common_jobs)
+
         # common jobs are assigned here
         for inp in common_jobs:
+            if len(inp) > 2:
+                inp = [inp[0:2], inp[2]]
+
+            print("Input:", inp)
+
             distance_a = job_feeder.common_job_assigner(elevator_a, inp, tic)
             print("Distance: ", distance_a)
             print("---!!--")
@@ -184,15 +195,7 @@ def main_function():
 
         if len(elevator_b.spec_list[tic:]) == 1:
             elevator_b.spec_list.extend([10])
-            try:
-                remaining_common_jobs.remove(inp)
-            except ValueError:
-                continue
         if len(elevator_a.spec_list[tic:]) == 1:
             elevator_a.spec_list.extend([10])
-            try:
-                remaining_common_jobs.remove(inp)
-            except ValueError:
-                continue
 
         tic += 1
