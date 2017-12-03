@@ -27,7 +27,11 @@ def better_floors(a_list):
     new_list = []
     for entry in a_list:
         """the conversion from e.g. Kh to -1h"""
-        if (entry[0] == "K"):
+        if (entry[0] == "K" and entry[1] == "r"):
+            continue
+        elif (entry[0] == "4" and entry[1] == "h"):
+            continue
+        elif (entry[0] == "K"):
             a = "-1" + entry[1]
             new_list.append(a)
         elif (entry[0] == "E"):
@@ -143,8 +147,6 @@ def spec_job_assigner(elevator, tic, jobs):
 
                 for spec_lev in elevator.spec_list[
                                 tic + tic_plus_x:]:  # [tic:] bedeutet schaue dir alle levels nach dem aktuellen tic an
-
-
 
                     if job[-1] == spec_lev:
                         try:

@@ -13,6 +13,13 @@ Testing:
 4h should not work
 
 To do:
-Wenn der Aufzug in einer Art Fahrt-Schleife ist, würde er Anforderungen von den Stockwerken, die außerhalb dieser Schleife liegen nie abarbeiten. Deshalb wäre eine Implementierung von
-von einer Logik, die Anforderungen von außen in der Selben Fahrtrichtung auch immer Abarbeitet ebenfalls sinnvoll.
+Wenn der Aufzug in einer Art Fahrt-Schleife ist, wuerde er Anforderungen von den Stockwerken, die ausserhalb dieser Schleife liegen nie abarbeiten. Deshalb waere eine Implementierung von
+von einer Logik, die Anforderungen von aussen in der Selben Fahrtrichtung auch immer Abarbeitet ebenfalls sinnvoll.
 Dazu wäre die close taste zu implementieren.
+
+
+Improvements:
+Elevator Superposition, A on level K and B on level 3.
+Algorithm according to time of the day, morning prio E level
+Fast door closing no more dice rolling, but "internally dedicated door closing buttons"
+That thing niels said, but wasnt understandable
