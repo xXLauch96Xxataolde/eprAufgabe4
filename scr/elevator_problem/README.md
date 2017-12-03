@@ -22,4 +22,7 @@ Improvements:
 Elevator Superposition, A on level K and B on level 3.
 Algorithm according to time of the day, morning prio E level
 Fast door closing no more dice rolling, but "internally dedicated door closing buttons"
+Maybe the Elevator closest to a floor job can work on this job, not just A before B
+And this being said, we can count the calls from a special floor, and if this special floor
+generates a lot of calls, the elevators can use them as idle position??? 
 That thing niels said, but wasnt understandable
