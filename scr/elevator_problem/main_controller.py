@@ -49,7 +49,7 @@ def input_reader():
 
     valid_inputs = job_feeder.better_floors(valid_inputs)
 
-    valid_inputs = list(set(valid_inputs))
+    valid_inputs = delete_doubles(valid_inputs)
 
     return valid_inputs
 
@@ -112,6 +112,15 @@ def gui_interface(elevator_a, elevator_b,  tic):
 
     file.close()
 
+
+def delete_doubles(list):
+    new_list = []
+    for job in list:
+        if job in new_list:
+            continue
+        else:
+            new_list.append(job)
+    return new_list
 
 def main_function():
     """ Main Function()
