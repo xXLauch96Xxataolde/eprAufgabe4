@@ -195,8 +195,6 @@ def main_function():
 
         tui_interface(elevator_a, elevator_b, tic)
 
-        # mongo function
-
         inp = input_reader()
 
         common_jobs, special_jobs = job_list_builder(inp)
