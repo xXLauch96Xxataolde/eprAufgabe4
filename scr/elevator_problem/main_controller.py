@@ -8,7 +8,6 @@ import re
 from elevator import Elevator
 import job_feeder
 import main
-from gui_levitation import Controller
 
 __author__ = "6785468: Robert am Wege, 6770541: Niels Heissel"
 __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
