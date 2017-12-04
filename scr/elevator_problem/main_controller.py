@@ -107,16 +107,7 @@ def main_function():
     remaining_jobs = []
 
     while True:
-        """
-        Maybe you can here check the input. 
-        inp = input()
-        if (inp = "exit"):
-            break;
-        else:
-            continue with your main function
-        
-        Thx
-        """
+
         inp = input_reader()
 
         # sets the new attributes for our elevators
