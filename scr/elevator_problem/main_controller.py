@@ -25,15 +25,15 @@ def non_valid_inp(requests, valid_inputs):
     for entry in requests:
         if (entry not in valid_inputs):
             non_valid_str += entry + " "
-
-    if (len(non_valid_str) == 0):
+            
+    if (len(non_valid_str.strip()) == 0):
         return None
     else:
         list_a = non_valid_str.split()
         if (len(list_a) == 1):
-            print("Unfortunately", non_valid_str.strip(), "is a faulty input.")
+            print("Unfortunately [", non_valid_str.strip(), "] is a faulty input.")
         else:
-            print("Unfortunately", non_valid_str.strip(), "are faulty inputs.")
+            print("Unfortunately [", non_valid_str.strip(), "] are faulty inputs.")
 
         print("Do you want to see our help file?")
         print("Type exit to go back to Menue")
