@@ -24,17 +24,22 @@ def non_valid_inp(requests, valid_inputs):
     non_valid_str = ""
     for entry in requests:
         if (entry not in valid_inputs):
-            non_valid_str += entry
+            non_valid_str += entry + " "
     
     if (len(non_valid_str) == 0):
         return None
-    else:    
-        print("Unfortunately", non_valid_str, "and such are faulty inputs.")
+    else:
+        list_a = non_valid_str.split()
+        if (len(list_a) == 1):    
+            print("Unfortunately", non_valid_str.strip(), "is a faulty input.")
+        else:
+            print("Unfortunately", non_valid_str.strip(), "are faulty inputs.")
+
         print("Do you want to see our help file?")
         print("Type exit to go back to Menue")
         print("Then press 3")
 
-
+            
 def input_reader():
     """Input Reader
     
