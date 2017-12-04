@@ -25,7 +25,7 @@ def non_valid_inp(requests, valid_inputs):
     for entry in requests:
         if (entry not in valid_inputs):
             non_valid_str += entry + " "
-
+            
     if (len(non_valid_str) == 0):
         return None
     else:
