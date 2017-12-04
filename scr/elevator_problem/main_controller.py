@@ -5,7 +5,7 @@ This module is meant for coordination purposes of the program, which is responsi
 
 import time
 import re
-from elevator import Elevator
+import elevator
 import job_feeder
 import main
 
@@ -50,7 +50,7 @@ def input_reader():
     for entry in requests:
         if (entry not in valid_inputs):
             non_valid_inputs.append(entry)
-    print(non_valid_inputs)        
+    print(non_valid_inputs)
     return valid_inputs
 
 
@@ -102,35 +102,35 @@ def tui_interface(elevator_a, elevator_b, tic):
     list_b = ["-1", "0", "1", "2", "3", "4", ]
     list_res_a = []
     list_res_b = []
-    
+
     for i in range(5, -1, -1):
         if (str(elevator_a.get_level()) == list_b[i]):
             list_res_a.append(str(list_a[i] + " [ x ]"))
         else:
             list_res_a.append(str(list_a[i] + " [   ]"))
-            
+
         if (str(elevator_b.get_level()) == list_b[i]):
             list_res_b.append(str(list_a[i] + " [ x ]"))
         else:
             list_res_b.append(str(list_a[i] + " [   ]"))
-    
+
     print("\n", "   A       B")
-    
+
     i = 0
     for entry in list_res_a:
         print(list_res_a[i], list_res_b[i])
         i += 1
-    print("\n")   
-                                 
+    print("\n")
+
     status_a = elevator_a.elevator_fileprinter(tic)
     status_b = elevator_b.elevator_fileprinter(tic)
-    
+
     file = open("elevator_stages.txt", "w")
     file_excel = open("elevator_behaviour.txt", "a")
 
     file.writelines(status_a + "\n")
     file.writelines(status_b + "\n")
-    
+
     file_excel.writelines(status_a + "\n")
     file_excel.writelines(status_b + "\n")
 
@@ -156,14 +156,19 @@ def main_function():
     tic = 0
 
     remaining_common_jobs = []
+    remaining_spec_jobs = []
 
-    elevator_a = Elevator("A", 0, "none", [10])
-    elevator_b = Elevator("B", 0, "none", [10])
+    elevator_a = elevator.Elevator("A", 0, "none", [10])
+    elevator_b = elevator.Elevator("B", 0, "none", [10])
 
     remaining_jobs = []
 
     while True:
         print("Tic is:", tic)
+
+        # sets the new attributes for our elevators
+        elevator_setter(elevator_a, tic)
+        elevator_setter(elevator_b, tic)
 
         tui_interface(elevator_a, elevator_b, tic)
 
@@ -171,11 +176,11 @@ def main_function():
 
         inp = input_reader()
 
-        # sets the new attributes for our elevators
-        elevator_setter(elevator_a, tic)
-        elevator_setter(elevator_b, tic)
-
         common_jobs, special_jobs = job_list_builder(inp)
+
+        remaining_spec_jobs = delete_doubles(remaining_spec_jobs)
+        for job in remaining_spec_jobs:
+            special_jobs.extend(job)
 
         remaining_common_jobs = delete_doubles(remaining_common_jobs)
         common_jobs.extend(remaining_common_jobs)
@@ -188,8 +193,8 @@ def main_function():
 
         # special jobs are assigned here
         print(special_jobs)
-        job_feeder.spec_job_assigner(elevator_a, tic, special_jobs)
-        job_feeder.spec_job_assigner(elevator_b, tic, special_jobs)
+        remaining_spec_jobs.append(job_feeder.spec_job_assigner(elevator_a, tic, special_jobs))
+        remaining_spec_jobs.append(job_feeder.spec_job_assigner(elevator_b, tic, special_jobs))
 
         print("REMAINING COMMON JOBS", remaining_common_jobs)
         print("Common", common_jobs)

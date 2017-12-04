@@ -13,8 +13,6 @@ __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
 __credits__ = "" 
 __email__ = "uni.goethe.horde@gmail.com" 
 
-remaining_spec_jobs = []
-
 
 def better_floors(a_list):
     """Better Floors
@@ -57,6 +55,7 @@ def job_builder(elevator, jobs):
     builded_jobs = []
 
     for job in jobs:
+        print("JOB INFO, Len()", job, len(job), elevator.get_name())
         if len(job) != 0:
             if elevator.get_name() == job[0]:
 
@@ -83,7 +82,7 @@ def job_builder(elevator, jobs):
 
                 # jobs.remove(job)  # removes the converted jobs
 
-    # print(builded_jobs)
+    print("Built", builded_jobs)
 
     return builded_jobs
 
@@ -94,15 +93,13 @@ def spec_job_assigner(elevator, tic, jobs):
     assigns the converted jobs to specific job list
     """
 
-    jobs.extend(list(set(remaining_spec_jobs)))
+    remaining_spec_jobs = []
 
-    jobs = list(set(jobs))
+    jobs = main_controller.delete_doubles(jobs)
 
     converted_jobs = job_builder(elevator, jobs)
 
     for job in converted_jobs:
-
-        print(job)
 
         main_controller.elevator_setter(elevator, tic)
         elevator.elevator_printer(tic)
@@ -123,34 +120,24 @@ def spec_job_assigner(elevator, tic, jobs):
 
             if elevator.spec_list[tic] == 10 and len(elevator.spec_list[tic:]) == 1:
                 elevator.spec_list.extend(job[1:])
-                try:
-                    remaining_spec_jobs.remove(elevator.name + str(job[-1]))
-                except ValueError:
-                    print("NOT A REMAINING JOB 1")
                 continue
 
-            for lev in job:
+            for lev in job[1:]:
                 counter += 1
 
                 if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
                     elevator.spec_list.extend(job[counter:])
-                    try:
-                        remaining_spec_jobs.remove(elevator.name + str(job[-1]))
-                    except ValueError:
-                        print("NOT A REMAINING JOB 2")
                     break
 
                 if treffer is True and elevator.spec_list[tic + tic_plus_x] != lev:
                     for level in job[counter:]:
                         elevator.spec_list.insert(tic + tic_plus_x - 1, level)
-                    try:
-                        remaining_spec_jobs.remove(elevator.name + str(job[-1]))
-                    except ValueError:
-                        print("NOT A REMAINING JOB 3")
                     break
 
                 for spec_lev in elevator.spec_list[
                                 tic + tic_plus_x:]:
+
+                    print("Tic Level", spec_lev)
                     """[tic:] look at all levels after the current tic"""
                     if job[-1] == spec_lev:
                         try:
@@ -158,15 +145,11 @@ def spec_job_assigner(elevator, tic, jobs):
                                 print("Job is already assigned.")
                                 break
                         except IndexError:
-                            break
+                            print("Not in List")
 
                     if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
                         print("!!!", job[counter:])
                         elevator.spec_list.extend(job[counter:])
-                        try:
-                            remaining_spec_jobs.remove(job)
-                        except ValueError:
-                            print("NOT A REMAINING JOB 4")
                         break
 
                     if lev == spec_lev:
@@ -205,7 +188,7 @@ def spec_job_assigner(elevator, tic, jobs):
                 print("NOT A REMAINING JOB TO DELETE")
             remaining_spec_jobs.append(rema_job)  # save the remaining jobs
 
-            print("Remaining after adding:", remaining_spec_jobs)
+    return remaining_spec_jobs
 
 
 def common_job_assigner(elevator, job, tic):
