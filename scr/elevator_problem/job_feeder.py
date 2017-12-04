@@ -233,11 +233,10 @@ def common_job_assigner(elevator, job, tic):
             match = True
 
         if match is True:
-            # print("Liste von Außen", elevator.spec_list, "Tic:", tic, "New_tic:", new_tic)
-            if elevator.spec_list[tic + new_tic - 1] > elevator.spec_list[tic + new_tic]:
+            if elevator.get_level() > elevator.spec_list[tic + new_tic]:
                 print("goes down")
                 direction = "r"
-            elif elevator.spec_list[tic + new_tic] < elevator.spec_list[tic + new_tic + 1]:
+            elif elevator.get_level() < elevator.spec_list[tic + new_tic + 1]:
                 print("goes up")
                 direction = "h"
 

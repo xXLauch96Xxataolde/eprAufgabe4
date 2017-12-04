@@ -1,6 +1,6 @@
 import tkinter as tk
 import tkinter.ttk as ttk
-from elevator_problem import elevator
+import elevator
 import main
 import time
 
