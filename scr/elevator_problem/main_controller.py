@@ -102,9 +102,13 @@ def gui_interface(elevator_a, elevator_b,  tic):
     status_b = elevator_b.elevator_fileprinter(tic)
     
     file = open("elevator_stages.txt", "w")
+    file_excel = open("elevator_behaviour.txt", "a")
 
     file.writelines(status_a + "\n")
     file.writelines(status_b + "\n")
+    
+    file_excel.writelines(status_a + "\n")
+    file_excel.writelines(status_b + "\n")
 
 
     file.close()
