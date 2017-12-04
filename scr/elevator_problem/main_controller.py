@@ -96,10 +96,13 @@ def gui_interface(elevator_a, elevator_b,  tic):
 
     This procedure writes an elevator object into a text-file.
     """
+    status_a = elevator_a.elevator_fileprinter(tic)
+    status_b = elevator_b.elevator_fileprinter(tic)
+    
     file = open("elevator_stages.txt", "w")
 
-    file.writelines(elevator_a.name + str(elevator_a.get_level()) + "\n")
-    file.write(elevator_b.name + str(elevator_b.get_level()))
+    file.writelines(status_a + "\n")
+    file.writelines(status_b + "\n")
 
 
     file.close()

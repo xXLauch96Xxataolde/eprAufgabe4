@@ -65,6 +65,10 @@ class Elevator (object):
     def elevator_printer(self, tic):
         print("Elevator:", self.name, "at level:", self.level, "is going:", self.direction, "current Jobs:", self.spec_list[tic:])
 
+    def elevator_fileprinter(self, tic):
+        outpur_str = ""
+        outpur_str ="Elevator:"+ self.name + "at level:" + str(self.level) + "is going:" + self.direction + "current Jobs:" +str( self.spec_list[tic:])
+        return(outpur_str)
     name = property(get_name, set_name, del_name, "name's docstring")
     level = property(get_level, set_level, del_level, "level's docstring")
     direction = property(get_direction, set_direction, del_direction, "direction's docstring")

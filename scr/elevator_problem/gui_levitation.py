@@ -35,3 +35,7 @@ class Controller():
     def run(self):        
         self.root.title("Elevator Problem")
         self.root.mainloop()
+
+if __name__ == '__main__':
+    c = Controller()
+    c.run()
