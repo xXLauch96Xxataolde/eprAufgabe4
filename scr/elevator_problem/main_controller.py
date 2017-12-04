@@ -14,8 +14,6 @@ __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
 __credits__ = ""
 __email__ = "uni.goethe.horde@gmail.com"
 
-remaining_common_jobs = []
-
 
 def input_reader():
     """This should interpret, check and parse an input.
@@ -156,6 +154,8 @@ def main_function():
     """
     tic = 0
 
+    remaining_common_jobs = []
+
     elevator_a = Elevator("A", 0, "none", [10])
     elevator_b = Elevator("B", 0, "none", [10])
 
@@ -176,13 +176,11 @@ def main_function():
 
         common_jobs, special_jobs = job_list_builder(inp)
 
-        common_jobs.extend(list(set(remaining_common_jobs)))
-
-        for job in remaining_common_jobs:
-            remaining_common_jobs.remove(job)
+        remaining_common_jobs = delete_doubles(remaining_common_jobs)
+        common_jobs.extend(remaining_common_jobs)
 
         print("Common Jobs", common_jobs)
-        common_jobs = list(set(common_jobs))
+        common_jobs = delete_doubles(common_jobs)
 
         elevator_a.elevator_printer(tic)
         elevator_b.elevator_printer(tic)
@@ -259,5 +257,7 @@ def main_function():
             elevator_b.spec_list.extend([10])
         if len(elevator_a.spec_list[tic:]) == 1:
             elevator_a.spec_list.extend([10])
+
+
 
         tic += 1
