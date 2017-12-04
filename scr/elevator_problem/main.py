@@ -1,15 +1,15 @@
 """The Main Function
 
-This function initializes the start of the program
+This module is called after the initial main handles over to main_controller
 """
 
 import time
 import main_controller
 
-__author__ = "123456: Ada Lovelace, 654321: Alan Turing"
-__copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
-__credits__ = ""
-__email__ = "uni.goethe.horde@gmail.com"
+__author__ = "6770541: Niels Heissel, 6785468: Robert am Wege"
+__copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni" 
+__credits__ = "" 
+__email__ = "uni.goethe.horde@gmail.com" 
 
 def menue():
     
