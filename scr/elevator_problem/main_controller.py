@@ -15,19 +15,45 @@ __credits__ = ""
 __email__ = "uni.goethe.horde@gmail.com"
 
 
+def non_valid_inp(requests, valid_inputs):
+    """Non Valid Input
+
+    We thought we wouldnt organise enough lists, so we added some more. The
+    procedure prints all faulty inputs
+    """
+    non_valid_str = ""
+    for entry in requests:
+        if (entry not in valid_inputs):
+            non_valid_str += entry + " "
+
+    if (len(non_valid_str) == 0):
+        return None
+    else:
+        list_a = non_valid_str.split()
+        if (len(list_a) == 1):
+            print("Unfortunately", non_valid_str.strip(), "is a faulty input.")
+        else:
+            print("Unfortunately", non_valid_str.strip(), "are faulty inputs.")
+
+        print("Do you want to see our help file?")
+        print("Type exit to go back to Menue")
+        print("Then press 3")
+
+
 def input_reader():
-    """This should interpret, check and parse an input.
+    """Input Reader
     
+    This should interpret, check and parse an input.
     requests is an empty list for storing the split parts of the input string
     pattern_elevator and pattern_floor are the pattern for the regex. The 
     regex searches for matching patterns in a given string. if such a matching 
     string is found, a valid result object (search: matching object) is 
     constructed and the valid input is stored in a valid_inputs list
-
     """
     inp = input("Where do you want to travel?")
 
     if inp == "exit":
+        print("\n"*2)
         main.main()
 
     requests = []
@@ -36,7 +62,6 @@ def input_reader():
     pattern_elevator = "[AB][KE1-4]"
     pattern_floor = "[KE1234][hr]"
 
-    print(requests, "my penis hurts")
     for entry in requests:
         result_elevator = re.match(pattern_elevator, entry)
         result_floor = re.match(pattern_floor, entry)
@@ -46,11 +71,9 @@ def input_reader():
     valid_inputs = job_feeder.better_floors(valid_inputs)
 
     valid_inputs = delete_doubles(valid_inputs)
-    non_valid_inputs = []
-    for entry in requests:
-        if (entry not in valid_inputs):
-            non_valid_inputs.append(entry)
-    print(non_valid_inputs)
+
+    non_valid_inp(requests, valid_inputs)
+
     return valid_inputs
 
 
