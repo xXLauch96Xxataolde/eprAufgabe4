@@ -3,6 +3,7 @@ import tkinter.ttk as ttk
 import time
 
 class Gui:
+    """AWDAD"""
     def fun(self, a):
         for i in range(500):
             time.sleep(1)
