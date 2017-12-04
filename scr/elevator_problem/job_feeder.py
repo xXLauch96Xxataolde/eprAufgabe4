@@ -224,7 +224,7 @@ def common_job_assigner(elevator, job, tic):
             if elevator.get_level() > elevator.spec_list[tic + new_tic]:
                 print("goes down")
                 direction = "r"
-            elif elevator.get_level() < elevator.spec_list[tic + new_tic + 1]:
+            elif elevator.get_level() < elevator.spec_list[tic + new_tic]:
                 print("goes up")
                 direction = "h"
 

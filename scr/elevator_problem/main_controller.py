@@ -169,6 +169,16 @@ def delete_doubles(list):
             new_list.append(job)
     return new_list
 
+def testcase_writer(elevator_a, elevator_b, tic):
+    levels_a = open("elevator_a_levels.txt", "a")
+    levels_b = open("elevator_b_levels.txt", "a")
+
+    levels_a.write(str(elevator_a.get_level()) + "\n")
+    levels_b.write(str(elevator_b.get_level()) + "\n")
+
+    levels_a.close()
+    levels_b.close()
+
 
 def main_function():
     """ Main Function()
@@ -188,6 +198,8 @@ def main_function():
 
     while True:
         print("Tic is:", tic)
+
+        testcase_writer(elevator_a, elevator_b, tic)
 
         # sets the new attributes for our elevators
         elevator_setter(elevator_a, tic)
