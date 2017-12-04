@@ -1,6 +1,6 @@
 """The Controler Function...
 
-This module is meant for coordination purposes of the whole program. 
+This module is meant for coordination purposes of the program, which is responsible for the normal elevator.
 """
 
 import time
@@ -10,8 +10,7 @@ import job_feeder
 import main
 from gui_levitation import Controller
 
-
-__author__ = "123456: Ada Lovelace, 654321: Alan Turing"
+__author__ = "6785468: Robert am Wege, 6770541: Niels Heissel"
 __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
 __credits__ = ""
 __email__ = "uni.goethe.horde@gmail.com"
@@ -55,7 +54,6 @@ def input_reader():
 
 
 def elevator_setter(elevator, tic):
-
     if elevator.spec_list[tic] != 10:
         elevator.set_level(elevator.spec_list[tic])
         try:
@@ -93,9 +91,23 @@ def job_list_builder(inp):
     return common_list, special_list
 
 
+def gui_interface(elevator_a, elevator_b,  tic):
+    """GUI Interface
+
+    This procedure writes an elevator object into a text-file.
+    """
+    file = open("elevator_stages.txt", "w")
+
+    file.writelines(elevator_a.name + str(elevator_a.get_level()) + "\n")
+    file.write(elevator_b.name + str(elevator_b.get_level()))
+
+
+    file.close()
+
+
 def main_function():
     """ Main Function()
-    
+
     Dear Niels please insert a exit possiblity which leads the user to the
     main menue built in main.main()
     """
@@ -107,6 +119,11 @@ def main_function():
     remaining_jobs = []
 
     while True:
+        print("Tic is:", tic)
+
+        gui_interface(elevator_a, elevator_b, tic)
+
+        # mongo function
 
         inp = input_reader()
 
