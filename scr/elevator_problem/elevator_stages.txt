@@ -1,2 +1,2 @@
-Elevator:Aat level:3is going:upcurrent Jobs:[3, 3, 3, 4, 4, 4, 4]
+Elevator:Aat level:3is going:nonecurrent Jobs:[3]
 Elevator:Bat level:0is going:nonecurrent Jobs:[10]
