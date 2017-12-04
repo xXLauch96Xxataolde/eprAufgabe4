@@ -1,7 +1,6 @@
-"""
-Created on 27.11.2017
+"""Job Feeder
 
-@author: Niels Heissel
+Nomnomnom jobs
 """
 
 import time
@@ -9,16 +8,15 @@ import random
 import elevator
 import main_controller
 
-__author__ = "123456: Ada Lovelace, 654321: Alan Turing"
-__copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
-__credits__ = ""
-__email__ = "uni.goethe.horde@gmail.com"
+__author__ = "6770541: Niels Heissel, 6785468: Robert am Wege"
+__copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni" 
+__credits__ = "" 
+__email__ = "uni.goethe.horde@gmail.com" 
 
 remaining_spec_jobs = []
 
 
 def better_floors(a_list):
-    # print("Teh list", a_list)
     """Better Floors
 
     This function translates the K and E floors to -1 and 0 because it is
@@ -46,12 +44,15 @@ def better_floors(a_list):
         else:
             new_list.append(entry)
 
-    # print("here", new_list)
     return (new_list)
 
 
 def job_builder(elevator, jobs):
-    # '''Builds the List for commands inside the elevator if job is assigned to current list'''
+    """Job Builder
+    
+    Builds the List for commands inside the elevator if job is assigned to 
+    current list
+    """
 
     builded_jobs = []
 
@@ -88,7 +89,10 @@ def job_builder(elevator, jobs):
 
 
 def spec_job_assigner(elevator, tic, jobs):
-    """assigns the converted jobs to specific job list"""
+    """ Special Job Assigner
+    
+    assigns the converted jobs to specific job list
+    """
 
     jobs.extend(list(set(remaining_spec_jobs)))
 
@@ -146,8 +150,8 @@ def spec_job_assigner(elevator, tic, jobs):
                     break
 
                 for spec_lev in elevator.spec_list[
-                                tic + tic_plus_x:]:  # [tic:] bedeutet schaue dir alle levels nach dem aktuellen tic an
-
+                                tic + tic_plus_x:]:
+                    """[tic:] look at all levels after the current tic"""
                     if job[-1] == spec_lev:
                         try:
                             if job[-1] == elevator.spec_list[tic + tic_plus_x + 1]:
@@ -204,10 +208,11 @@ def spec_job_assigner(elevator, tic, jobs):
             print("Remaining after adding:", remaining_spec_jobs)
 
 
-
-
 def common_job_assigner(elevator, job, tic):
-    '''commands from outside the elevator will be passed to the elevator here'''
+    """Common Job Assigner
+    
+    Commands from outside the elevator will be passed to the elevator here
+    """
     print("Common Job Assigner", job)
     new_tic = -1
     match_number = 0
@@ -215,7 +220,7 @@ def common_job_assigner(elevator, job, tic):
     match = False
 
     elevator.elevator_printer(tic)
-    # for both elevators ...
+    """print both elevators"""
 
     infos = ""
 
@@ -255,6 +260,10 @@ def common_job_assigner(elevator, job, tic):
 
 
 def assign_common_stop(destination, elevator, match_tic, tic):
+    """Assign a common stop
+    
+    I have no idea what niels printed here
+    """
     list = []
     print("DESINATION:", destination)
     destination = int(destination)
@@ -279,17 +288,17 @@ def assign_common_stop(destination, elevator, match_tic, tic):
         elevator.spec_list.extend(list[2:])
     else:
         for level in level_stop(destination):
-            #print(elevator.spec_list[tic:].index(destination), tic)
+            # print(elevator.spec_list[tic:].index(destination), tic)
             elevator.spec_list.insert(elevator.spec_list[tic:].index(destination) + tic , level)
-            #print(elevator.spec_list)
+            # print(elevator.spec_list)
 
 
 def level_stop(job):
-    '''Random Tic Generator
+    """Random Tic Generator
 
     Takes a destination and repeats it times the result of the tics the
     elevator should wait aka the random generator
-    '''
+    """
 
     waiting_tic = random.randint(1, 3)
     waiting_job_list = []
