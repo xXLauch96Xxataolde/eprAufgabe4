@@ -1,6 +1,6 @@
 """The Main Function
 
-This module is called after the initial main handles over to main_controller
+This module is the start of our elevator programm. 
 """
 
 import time
@@ -12,6 +12,7 @@ __credits__ = ""
 __email__ = "uni.goethe.horde@gmail.com" 
 
 def menue():
+    """a procedure for printing a menue we assume"""
     
     print("...Welcome to the Menue................")
     print(".......................................")
@@ -22,12 +23,16 @@ def menue():
     print(".......................................")
 
 def main():
+    """Main Procedure
+    
+    Holds everything in a for loop
+    """
     
     while (True):
         menue()
         inp = input()
         if (inp == "1"):
-            main_controller.main_function()  # maybe rename these modules
+            main_controller.main_function()
         elif (inp == "2"):
             print("Same procedure but improved")
         elif (inp == "3"):
