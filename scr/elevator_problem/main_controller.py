@@ -92,11 +92,38 @@ def job_list_builder(inp):
     return common_list, special_list
 
 
-def gui_interface(elevator_a, elevator_b,  tic):
-    """GUI Interface
+def tui_interface(elevator_a, elevator_b, tic):
+    """TUI Interface
 
     This procedure writes an elevator object into a text-file.
     """
+
+    list_a = ["K", "E", "1", "2", "3", "4"]
+    list_b = ["-1", "0", "1", "2", "3", "4", ]
+    list_res_a = []
+    list_res_b = []
+    
+    for i in range(5, -1, -1):
+        if (str(elevator_a.get_level()) == list_b[i]):
+            list_res_a.append(str(list_a[i] + " [ x ]"))
+        else:
+            list_res_a.append(str(list_a[i] + " [   ]"))
+            
+        if (str(elevator_b.get_level()) == list_b[i]):
+            list_res_b.append(str(list_a[i] + " [ x ]"))
+        else:
+            list_res_b.append(str(list_a[i] + " [   ]"))
+            
+    
+    
+    print("\n", "   A       B")
+    
+    i = 0
+    for entry in list_res_a:
+        print(list_res_a[i],list_res_b[i])
+        i += 1
+    print("\n")   
+                                 
     status_a = elevator_a.elevator_fileprinter(tic)
     status_b = elevator_b.elevator_fileprinter(tic)
     
@@ -108,7 +135,6 @@ def gui_interface(elevator_a, elevator_b,  tic):
     
     file_excel.writelines(status_a + "\n")
     file_excel.writelines(status_b + "\n")
-
 
     file.close()
 
@@ -129,7 +155,7 @@ def main_function():
     while True:
         print("Tic is:", tic)
 
-        gui_interface(elevator_a, elevator_b, tic)
+        tui_interface(elevator_a, elevator_b, tic)
 
         # mongo function
 
@@ -217,8 +243,8 @@ def main_function():
                 except ValueError:
                     continue
 
-        #elevator_a.elevator_printer(tic)
-        #elevator_b.elevator_printer(tic)
+        # elevator_a.elevator_printer(tic)
+        # elevator_b.elevator_printer(tic)
 
         if len(elevator_b.spec_list[tic:]) == 1:
             elevator_b.spec_list.extend([10])
