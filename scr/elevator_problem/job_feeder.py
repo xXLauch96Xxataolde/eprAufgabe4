@@ -259,8 +259,6 @@ def assign_common_stop(destination, elevator, match_tic, tic):
     print("DESINATION:", destination)
     destination = int(destination)
 
-    print(elevator.get_level())
-
     if elevator.get_level() > destination:
         list.append("r")
         for lev in range(elevator.get_level(), destination - 1, -1):
@@ -268,7 +266,6 @@ def assign_common_stop(destination, elevator, match_tic, tic):
     elif elevator.get_level() < destination:
         list.append("h")
         for lev in range(elevator.get_level(), destination + 1):
-            print(lev)
             list.append(lev)
     elif elevator.get_level() == destination:
         list.append("same floor")
@@ -277,21 +274,14 @@ def assign_common_stop(destination, elevator, match_tic, tic):
     for level in level_stop(destination):
         list.insert(-1, level)
 
-    print(list)
-
     if elevator.spec_list[tic] == 10 and len(elevator.spec_list[tic:]) == 1:
         print("Starts from start position.")
         elevator.spec_list.extend(list[2:])
     else:
         for level in level_stop(destination):
-            print(elevator.spec_list[tic:].index(destination), tic)
+            #print(elevator.spec_list[tic:].index(destination), tic)
             elevator.spec_list.insert(elevator.spec_list[tic:].index(destination) + tic , level)
-            print(elevator.spec_list)
-        # for level in list[2:]:
-        #     print("----- ", level)
-        #     print(match_tic)
-        #     print(elevator.spec_list)
-        #     elevator.spec_list.insert(tic + match_tic, level)
+            #print(elevator.spec_list)
 
 
 def level_stop(job):

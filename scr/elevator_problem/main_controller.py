@@ -26,7 +26,7 @@ def input_reader():
     string is found, a valid result object (search: matching object) is 
     constructed and the valid input is stored in a valid_inputs list
 
-    To do: Wrong-input message. 
+    To do: Wrong-input message.
     """
     inp = input("Where do you want to travel?")
 
@@ -141,9 +141,12 @@ def main_function():
 
         common_jobs, special_jobs = job_list_builder(inp)
 
-        common_jobs.extend(remaining_common_jobs)
+        common_jobs.extend(list(set(remaining_common_jobs)))
 
-        print(common_jobs)
+        for job in remaining_common_jobs:
+            remaining_common_jobs.remove(job)
+
+        print("Common Jobs", common_jobs)
         common_jobs = list(set(common_jobs))
 
         elevator_a.elevator_printer(tic)
@@ -171,7 +174,10 @@ def main_function():
             print("Distance: ", distance_b)
 
             if distance_b == "no match" and distance_a == "no match":
-                remaining_common_jobs.append(inp)
+                if inp[0] == "-1":
+                    remaining_common_jobs.append("-1h")
+                else:
+                    remaining_common_jobs.append(inp)
                 continue
 
             if distance_a == "no match":
@@ -211,8 +217,8 @@ def main_function():
                 except ValueError:
                     continue
 
-        elevator_a.elevator_printer(tic)
-        elevator_b.elevator_printer(tic)
+        #elevator_a.elevator_printer(tic)
+        #elevator_b.elevator_printer(tic)
 
         if len(elevator_b.spec_list[tic:]) == 1:
             elevator_b.spec_list.extend([10])
