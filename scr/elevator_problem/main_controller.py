@@ -24,7 +24,6 @@ def input_reader():
     string is found, a valid result object (search: matching object) is 
     constructed and the valid input is stored in a valid_inputs list
 
-    To do: Wrong-input message.
     """
     inp = input("Where do you want to travel?")
 
@@ -37,8 +36,7 @@ def input_reader():
     pattern_elevator = "[AB][KE1-4]"
     pattern_floor = "[KE1234][hr]"
 
-    #  A3 AK AZ A78 A778 V5 B4 b2 A5 A4 Ae AK BE Be bE K1 kh 3R Kh 4h 6H k6 h$ for convenience
-
+    print(requests, "my penis hurts")
     for entry in requests:
         result_elevator = re.match(pattern_elevator, entry)
         result_floor = re.match(pattern_floor, entry)
@@ -48,7 +46,11 @@ def input_reader():
     valid_inputs = job_feeder.better_floors(valid_inputs)
 
     valid_inputs = delete_doubles(valid_inputs)
-
+    non_valid_inputs = []
+    for entry in requests:
+        if (entry not in valid_inputs):
+            non_valid_inputs.append(entry)
+    print(non_valid_inputs)        
     return valid_inputs
 
 
@@ -111,14 +113,12 @@ def tui_interface(elevator_a, elevator_b, tic):
             list_res_b.append(str(list_a[i] + " [ x ]"))
         else:
             list_res_b.append(str(list_a[i] + " [   ]"))
-            
-    
     
     print("\n", "   A       B")
     
     i = 0
     for entry in list_res_a:
-        print(list_res_a[i],list_res_b[i])
+        print(list_res_a[i], list_res_b[i])
         i += 1
     print("\n")   
                                  
@@ -145,6 +145,7 @@ def delete_doubles(list):
         else:
             new_list.append(job)
     return new_list
+
 
 def main_function():
     """ Main Function()
@@ -257,7 +258,5 @@ def main_function():
             elevator_b.spec_list.extend([10])
         if len(elevator_a.spec_list[tic:]) == 1:
             elevator_a.spec_list.extend([10])
-
-
 
         tic += 1

@@ -48,7 +48,7 @@ class Elevator (object):
         """returns the spec_list, as mentioned in the constructor docstring"""
         return self.__spec_list
 
-    def _set_name(self, value):
+    def set_name(self, value):
         """allows to set a name for an instance. But is protected"""
         self.__name = value
 
@@ -67,15 +67,15 @@ class Elevator (object):
     def del_name(self):
         del self.__name
 
-    def _del_level(self):
+    def del_level(self):
         """destructs the name"""
         del self.__level
 
-    def _del_direction(self):
+    def del_direction(self):
         """deletes the direction"""
         del self.__direction
 
-    def _del_spec_list(self):
+    def del_spec_list(self):
         """deletes the special list"""
         del self.__spec_list
         
@@ -96,14 +96,15 @@ class Elevator (object):
         to a file
         """
         outpur_str = ""
-        outpur_str = "Elevator:" + self.name + "at level:" + str(self.level) 
-        + "is going:" + self.direction + "current Jobs:" 
-        + str(self.spec_list[tic:])
+        outpur_str = "Elevator:" + self.name + "at level:" 
+        outpur_str += str(self.level) + "is going:" + self.direction 
+        outpur_str += "current Jobs:" + str(self.spec_list[tic:])
         return(outpur_str)
 
-    """the fuck is this no idea
+    """the fuck is this no idea"""
     name = property(get_name, set_name, del_name, "name's docstring")
     level = property(get_level, set_level, del_level, "level's docstring")
-    direction = property(get_direction, set_direction, del_direction, "direction's docstring")
-    spec_list = property(get_spec_list, set_spec_list, del_spec_list, "spec_list's docstring")
-    """
+    direction = property(get_direction, set_direction, del_direction,
+                         "direction's docstring")
+    spec_list = property(get_spec_list, set_spec_list, del_spec_list,
+                         "spec_list's docstring")
