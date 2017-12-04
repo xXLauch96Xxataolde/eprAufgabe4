@@ -104,7 +104,7 @@ def spec_job_assigner(elevator, tic, jobs):
         elevator.elevator_printer(tic)
 
         counter = -1
-        tic_plus_x = 0;
+        tic_plus_x = 0
         treffer = False
 
         job_direction = "none"
@@ -214,6 +214,7 @@ def common_job_assigner(elevator, job, tic):
     direction = ""
     match = False
 
+    elevator.elevator_printer(tic)
     # for both elevators ...
 
     infos = ""
@@ -232,7 +233,7 @@ def common_job_assigner(elevator, job, tic):
             match = True
 
         if match is True:
-            print("Liste von Außen", elevator.spec_list, "Tic:", tic, "New_tic:", new_tic)
+            # print("Liste von Außen", elevator.spec_list, "Tic:", tic, "New_tic:", new_tic)
             if elevator.spec_list[tic + new_tic - 1] > elevator.spec_list[tic + new_tic]:
                 print("goes down")
                 direction = "r"
@@ -283,10 +284,15 @@ def assign_common_stop(destination, elevator, match_tic, tic):
         print("Starts from start position.")
         elevator.spec_list.extend(list[2:])
     else:
-        for level in list[2:]:
-            print("----- ", level)
-            print(match_tic)
-            elevator.spec_list.insert(tic + match_tic, level)
+        for level in level_stop(destination):
+            print(elevator.spec_list[tic:].index(destination), tic)
+            elevator.spec_list.insert(elevator.spec_list[tic:].index(destination) + tic , level)
+            print(elevator.spec_list)
+        # for level in list[2:]:
+        #     print("----- ", level)
+        #     print(match_tic)
+        #     print(elevator.spec_list)
+        #     elevator.spec_list.insert(tic + match_tic, level)
 
 
 def level_stop(job):

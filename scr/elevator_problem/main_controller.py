@@ -7,6 +7,7 @@ import time
 import re
 from elevator import Elevator
 import job_feeder
+import main
 
 __author__ = "123456: Ada Lovelace, 654321: Alan Turing"
 __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
@@ -26,6 +27,9 @@ def input_reader():
     constructed and the valid input is stored in a valid_inputs list
     """
     inp = input("Where do you want to travel?")
+
+    if inp == "exit":
+        main.main()
 
     requests = []
     valid_inputs = []
@@ -120,6 +124,9 @@ def main_function():
         common_jobs, special_jobs = job_list_builder(inp)
 
         common_jobs.extend(remaining_common_jobs)
+
+        print(common_jobs)
+        common_jobs = list(set(common_jobs))
 
         elevator_a.elevator_printer(tic)
         elevator_b.elevator_printer(tic)
