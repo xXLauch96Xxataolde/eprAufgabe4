@@ -32,6 +32,7 @@ def main():
             print("Same procedure but improved")
         elif (inp == "3"):
             print("Help File")
+            print(help(main_controller))
         elif (inp == "4"):
             break
         else:

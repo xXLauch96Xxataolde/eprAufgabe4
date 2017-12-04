@@ -26,6 +26,8 @@ def input_reader():
     regex searches for matching patterns in a given string. if such a matching 
     string is found, a valid result object (search: matching object) is 
     constructed and the valid input is stored in a valid_inputs list
+
+    To do: Wrong-input message. 
     """
     inp = input("Where do you want to travel?")
 
