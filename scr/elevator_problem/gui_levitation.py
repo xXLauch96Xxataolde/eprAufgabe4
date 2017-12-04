@@ -1,17 +1,37 @@
-from testing import TestingGui 
-from tkinter import *
-from tkinter.ttk import *
+import tkinter as tk
+import tkinter.ttk as ttk
 from elevator_problem import elevator
+import main
+import time
 
-root = Tk()
-my_gui = TestingGui(root)
-root.mainloop()
 
-def main():
-    print("here")
-    view = TestingGui(root)
-    view.test("tralala")
+class Model():
+
+    def __init__(self):
+        print("")
         
-    
-if __name__ == '__main__':
-    main()
+    def get_pos(self):
+        self.elevator
+        
+
+class View():
+
+    def __init__(self, master):
+        self.frame = tk.Frame(master)
+        self.frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
+        self.progress_bar = ttk.Progressbar(orient=tk.VERTICAL,
+                                                mode='indeterminate',
+                                                takefocus=True)
+        self.progress_bar.pack()
+
+
+class Controller():
+
+    def __init__(self):        
+        self.root = tk.Tk()
+        self.model = Model()
+        self.view = View(self.root)
+        
+    def run(self):        
+        self.root.title("Elevator Problem")
+        self.root.mainloop()

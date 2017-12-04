@@ -8,6 +8,8 @@ import re
 from elevator import Elevator
 import job_feeder
 import main
+from gui_levitation import Controller
+
 
 __author__ = "123456: Ada Lovelace, 654321: Alan Turing"
 __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
