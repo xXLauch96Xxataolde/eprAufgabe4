@@ -61,12 +61,13 @@ def input_reader():
     requests = inp.split(" ")
     pattern_elevator = "[AB][KE1-4]"
     pattern_floor = "[KE1234][hr]"
-
+    
     for entry in requests:
-        result_elevator = re.match(pattern_elevator, entry)
-        result_floor = re.match(pattern_floor, entry)
-        if result_elevator or result_floor:
-            valid_inputs.append(entry)
+        if (len(entry) == 2):
+            result_elevator = re.match(pattern_elevator, entry)
+            result_floor = re.match(pattern_floor, entry)
+            if result_elevator or result_floor:
+                valid_inputs.append(entry)
 
     valid_inputs = job_feeder.better_floors(valid_inputs)
 
@@ -78,6 +79,10 @@ def input_reader():
 
 
 def elevator_setter(elevator, tic):
+    """Elevator Setter
+    
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    """
     if elevator.spec_list[tic] != 10:
         elevator.set_level(elevator.spec_list[tic])
         try:
@@ -101,6 +106,10 @@ def elevator_setter(elevator, tic):
 
 
 def job_list_builder(inp):
+    """Job List Builder
+    
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    """
     common_list = []
     special_list = []
     for job in inp:
@@ -161,6 +170,10 @@ def tui_interface(elevator_a, elevator_b, tic):
 
 
 def delete_doubles(list):
+    """Delete Doubles
+    
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    """
     new_list = []
     for job in list:
         if job in new_list:
@@ -170,6 +183,10 @@ def delete_doubles(list):
     return new_list
 
 def testcase_writer(elevator_a, elevator_b, tic):
+    """Testcase Writer
+    
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    """
     levels_a = open("elevator_a_levels.txt", "a")
     levels_b = open("elevator_b_levels.txt", "a")
 
