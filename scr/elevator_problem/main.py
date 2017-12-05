@@ -35,7 +35,7 @@ def main():
         menue()
         inp = input()
         if (inp == "1"):
-            main_controller.main_function()
+            main_controller.controller()
         elif (inp == "2"):
             print("Same procedure but improved")
         elif (inp == "3"):
