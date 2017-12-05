@@ -121,9 +121,9 @@ def spec_job_assigner(elevator, tic, jobs):
 
         if job == elevator.name + "c":
             print("Doors closing --- Caution!")
-            if len(elevator.spec_list[tic:]) > 3:
+            if len(elevator.spec_list[tic:]) >= 2:
                 if elevator.spec_list[tic] == elevator.spec_list[tic + 1]:
-                    elevator.spec_list[tic:].remove(elevator.spec_list[tic])
+                    elevator.spec_list.remove(elevator.spec_list[tic + 1])
             continue
 
         counter = -1
