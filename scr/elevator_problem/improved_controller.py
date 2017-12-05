@@ -201,6 +201,20 @@ def testcase_writer(elevator_a, elevator_b, tic):
     levels_a.close()
     levels_b.close()
 
+def maximum_occurence_counter(list):
+    correct_list = []
+    max_floor = "E"
+    for level in list:
+        correct_list.append(level[0])
+
+    for level in correct_list:
+        level = level[0]
+        x = list.count(level)
+        if x > list.count(max_floor):
+            max_floor = level
+
+
+
 
 def controller():
     """ Main Function()
@@ -219,7 +233,7 @@ def controller():
 
     print(tic)
 
-
+    common_jobs_saved = []
 
     remaining_common_jobs = []
     remaining_spec_jobs = []
@@ -256,11 +270,14 @@ def controller():
         print("Common Jobs", common_jobs)
         common_jobs = delete_doubles(common_jobs)
 
+        common_jobs_saved.extend(common_jobs)
+
         elevator_a.elevator_printer(tic)
         elevator_b.elevator_printer(tic)
 
         # here we assign the specific jobs and saves the remaining_jobs in a list
-        remaining_spec_jobs = improved_job_feeder.spec_job_assigner(elevator_a, tic, special_jobs) + improved_job_feeder.spec_job_assigner(elevator_b, tic, special_jobs)
+        remaining_spec_jobs = improved_job_feeder.spec_job_assigner(elevator_a, tic, special_jobs) + \
+                              improved_job_feeder.spec_job_assigner(elevator_b, tic, special_jobs)
 
         print("REMAINING COMMON JOBS", remaining_common_jobs)
         print("Common", common_jobs)
