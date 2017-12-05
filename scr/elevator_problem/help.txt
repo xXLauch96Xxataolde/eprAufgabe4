@@ -26,7 +26,8 @@ which most jobs come, so the median waiting time should be reduced. Good for
 participant. Further, in the std. elevator, the elevator closes the door after
 a random amount of tics, but in this improved version, we installed a button
 that gives the user inside the elevator the ability to close the doors
-immediately.
+immediately. A user can type (A or B) and c for closing the doors in A or B
+instantly and resume his elevator journey. 
 
 The Functionality 
 

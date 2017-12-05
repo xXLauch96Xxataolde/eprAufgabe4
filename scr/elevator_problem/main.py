@@ -14,6 +14,7 @@ __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
 __credits__ = "" 
 __email__ = "uni.goethe.horde@gmail.com" 
 
+
 def menue():
     """a procedure for printing a menue we assume"""
     
@@ -25,6 +26,7 @@ def menue():
     print("...Press 4 to open Documenation........")
     print("...Press 5 to Exit.....................")
     print(".......................................")
+
 
 def main():
     """Main Procedure
@@ -48,6 +50,7 @@ def main():
             break
         else:
             print("Invalid Input. Please repeat")
+
 
 if __name__ == '__main__':
     main()

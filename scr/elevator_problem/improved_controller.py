@@ -1,6 +1,7 @@
 """The Controller Function
 
-This module is meant for coordination purposes of the program, which is responsible for the improved elevator.
+This module is meant for coordination purposes of the program, which is 
+responsible for the improved elevator. 
 """
 
 import time
@@ -61,7 +62,7 @@ def input_reader():
     requests = inp.split(" ")
     pattern_elevator = "[AB][KE1-4]"
     pattern_floor = "[KE1234][hr]"
-    pattern_door_close ="[AB][c]"
+    pattern_door_close = "[AB][c]"
 
     for entry in requests:
         if (len(entry) == 2):
