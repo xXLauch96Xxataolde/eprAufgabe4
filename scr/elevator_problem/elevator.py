@@ -96,9 +96,9 @@ class Elevator (object):
         to a file
         """
         outpur_str = ""
-        outpur_str = "Elevator:" + self.name + "at level:" 
-        outpur_str += str(self.level) + "is going:" + self.direction 
-        outpur_str += "current Jobs:" + str(self.spec_list[tic:])
+        outpur_str = "Elevator: " + self.name + " at level: " 
+        outpur_str += str(self.level) + " is going: " + self.direction 
+        outpur_str += " current Jobs: " + str(self.spec_list[tic:])
         return(outpur_str)
 
     """the fuck is this no idea"""
