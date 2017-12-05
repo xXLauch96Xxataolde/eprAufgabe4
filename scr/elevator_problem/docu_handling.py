@@ -3,7 +3,6 @@
 If the constructor of this class is called, an elevator object is constructed.
 We gave them quite a few attributes and functions as well a pocedures. That
 helped us in the development. 
-
 """
 import os
 if (os.name == "nt"):
@@ -15,12 +14,10 @@ import job_feeder
 import improved_controller
 import improved_job_feeder
 
-
 __author__ = "6770541: Niels Heissel, 6785468: Robert am Wege"
 __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni" 
 __credits__ = "" 
 __email__ = "uni.goethe.horde@gmail.com" 
-
 
 
 def run():
@@ -34,7 +31,7 @@ def run():
     chose to work this problem this way. 
     """
     
-    if (os.name =="nt"):
+    if (os.name == "nt"):
         print(help(elevator_problem))
     print(help(main))
     print(help(main_controller))
