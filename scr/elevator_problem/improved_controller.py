@@ -222,10 +222,6 @@ def maximum_occurence_determinator(list):
     return int(max_floor)
 
 
-def close_doors(elevator):
-    elevator.s
-
-
 def controller():
     """ Main Function()
 
