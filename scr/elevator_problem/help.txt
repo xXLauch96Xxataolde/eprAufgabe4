@@ -1,9 +1,9 @@
 Good Day Elevator User,
 
-thank you for choosing our elevataor. 
+thank you for choosing our elevator. 
 
-We constructed here two classic 2 way elevators who serve in way we want to
-explain here.
+Here we constructed two classic 2 way elevators who serve in way we want to
+explain in this document.
  
 The standard Elevator
 
