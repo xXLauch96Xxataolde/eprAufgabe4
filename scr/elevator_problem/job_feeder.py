@@ -20,6 +20,7 @@ def better_floors(a_list):
     This function translates the K and E floors to -1 and 0 because it is
     more sensible to have them named that way
     """
+
     new_list = []
     for entry in a_list:
         """the conversion from e.g. Kh to -1h"""
@@ -201,6 +202,7 @@ def common_job_comparer(elevator, job, tic):
     and checks if it is possible to assign it to an elevator. It return values which are then
     compared by the main controller.
     """
+
     print("Common Job Assigner for", job)
     new_tic = -1
     match_number = 0
@@ -247,6 +249,7 @@ def assign_common_stop(destination, elevator, match_tic, tic):
     level to destination. This list is then appended to the list of levels which the elevator
     passes.
     """
+
     list = []
     destination = int(destination)
 

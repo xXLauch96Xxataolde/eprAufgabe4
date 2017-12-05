@@ -21,6 +21,7 @@ def non_valid_inp(requests, valid_inputs):
     We thought we wouldn't organize enough lists, so we added some more. The
     procedure prints all faulty inputs
     """
+
     non_valid_str = ""
     for entry in requests:
         if (entry not in valid_inputs):
@@ -50,6 +51,7 @@ def input_reader():
     string is found, a valid result object (search: matching object) is 
     constructed and the valid input is stored in a valid_inputs list
     """
+
     inp = input("Where do you want to travel?")
 
     if inp == "exit":
@@ -85,6 +87,7 @@ def elevator_setter(elevator, tic):
     This is a procedure, which functions as a setter for all attributes of the elevator.
     When called the level and direction of the elevator are updated.
     """
+
     if elevator.spec_list[tic] != 10:
         elevator.set_level(elevator.spec_list[tic])
         try:
@@ -114,6 +117,7 @@ def job_list_builder(inp):
     who are then sorted into common (from outside the elevator) and specific (specific for each
     elevator). Both lists are then returned.
     """
+
     common_list = []
     special_list = []
     for job in inp:
@@ -177,6 +181,7 @@ def delete_doubles(list):
     This is a handy helper (-function), which takes an input as a list an removes all elements
     that occur more than once.
     """
+
     new_list = []
     for job in list:
         if job in new_list:
@@ -191,6 +196,7 @@ def testcase_writer(elevator_a, elevator_b, tic):
     This is a procedure for testing and protocolling purposes only. It writes a txt-file
     and adds the level of the elevator in a new line every tic.
     """
+
     levels_a = open("elevator_a_levels.txt", "a")
     levels_b = open("elevator_b_levels.txt", "a")
 
@@ -214,6 +220,7 @@ def controller():
     the state of idle stays.
     At the end of every loop the tic is increased by one.
     """
+
     tic = 0
 
     remaining_common_jobs = []
