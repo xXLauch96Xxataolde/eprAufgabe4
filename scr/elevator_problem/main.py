@@ -47,7 +47,7 @@ def main():
         elif (inp == "5"):
             break
         else:
-            print("Invalid Input. Please reoeat")
+            print("Invalid Input. Please repeat")
 
 if __name__ == '__main__':
     main()
