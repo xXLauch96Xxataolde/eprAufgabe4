@@ -357,10 +357,11 @@ def controller():
             print("IDLE")
             idle_position = []
             if elevator_a.get_level() > default_position:
-                for level in range(elevator_a.get_level() - 1, 0 - 1, -1):
+                for level in range(elevator_a.get_level() - 1, default_position - 1, -1):
                     idle_position.append(level)
-            elif elevator_a.get_level() < 0:
-                idle_position = [1]
+            elif elevator_a.get_level() < default_position:
+                for level in range(elevator_a.get_level() + 1, default_position + 1, 1):
+                    idle_position.append(level)
             else:
                 print("Append 10")
                 idle_position.append(10)
