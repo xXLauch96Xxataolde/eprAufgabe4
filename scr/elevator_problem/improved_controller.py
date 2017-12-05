@@ -202,19 +202,18 @@ def testcase_writer(elevator_a, elevator_b, tic):
 
 
 def maximum_occurence_determinator(list):
-    correct_list = []
+    """This function determines the element with the max occurrences in a list"""
+    # the list has three elements 'E', just to set default to 'E'
+    correct_list = ['E', 'E', 'E']
     max_floor = "E"
     for level in list:
         correct_list.append(level[0])
-    print(correct_list)
 
     for level in correct_list:
-        print(level)
         x = correct_list.count(str(level))
-        print(x)
         if x > correct_list.count(max_floor):
             max_floor = level
-    print(max_floor)
+
     if max_floor == "E":
         max_floor = 0
     elif max_floor == "K":
