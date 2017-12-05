@@ -5,8 +5,9 @@ We gave them quite a few attributes and functions as well a pocedures. That
 helped us in the development. 
 
 """
-
-#import elevator_problem
+import os
+if (os.name == "nt"):
+    import elevator_problem
 import main
 import main_controller
 import elevator
