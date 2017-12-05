@@ -290,42 +290,10 @@ def controller():
             if distance_b == "no match":
                 distance_b = 1000
 
-            if len(elevator_b.spec_list[tic:]) > 1 and len(elevator_a.spec_list[tic:]) > 1:
-                if distance_a > distance_b:
-                    improved_job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
-                    print("assigned to b", distance_b)
-                    try:
-                        if inp[0] == "-1":
-                            remaining_common_jobs.remove("-1h")
-                        else:
-                            remaining_common_jobs.remove(inp)
-                    except ValueError:
-                        continue
-                else:
-                    improved_job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
-                    print("assigned to a", distance_a)
-                    try:
-                        if inp[0] == "-1":
-                            remaining_common_jobs.remove("-1h")
-                        else:
-                            remaining_common_jobs.remove(inp)
-                    except ValueError:
-                        continue
-
-            elif elevator_a.spec_list[tic] == 10 and len(elevator_a.spec_list[tic:]) == 1:
-                print("assssssssssssss to a ")
-                improved_job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
-                try:
-                    if inp[0] == "-1":
-                        remaining_common_jobs.remove("-1h")
-                    else:
-                        remaining_common_jobs.remove(inp)
-                except ValueError:
-                    continue
-
-            elif elevator_b.spec_list[tic] == 10 and len(elevator_b.spec_list[tic:]) == 1:
-                print("assssssss to b")
+            # improved common job assigner, common jobs are assigned to the nearest free elevator
+            if distance_a > distance_b:
                 improved_job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
+                print("assigned to b", distance_b)
                 try:
                     if inp[0] == "-1":
                         remaining_common_jobs.remove("-1h")
@@ -333,6 +301,17 @@ def controller():
                         remaining_common_jobs.remove(inp)
                 except ValueError:
                     continue
+            else:
+                improved_job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
+                print("assigned to a", distance_a)
+                try:
+                    if inp[0] == "-1":
+                        remaining_common_jobs.remove("-1h")
+                    else:
+                        remaining_common_jobs.remove(inp)
+                except ValueError:
+                    continue
+
 
         # this improvement sets the position of the elevator to a default level
         if len(elevator_b.spec_list[tic:]) == 1:
@@ -363,3 +342,4 @@ def controller():
             elevator_a.spec_list.extend(idle_position)
 
         tic += 1
+
