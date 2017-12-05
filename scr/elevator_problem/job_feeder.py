@@ -9,9 +9,9 @@ import elevator
 import main_controller
 
 __author__ = "6770541: Niels Heissel, 6785468: Robert am Wege"
-__copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni" 
-__credits__ = "" 
-__email__ = "uni.goethe.horde@gmail.com" 
+__copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
+__credits__ = ""
+__email__ = "uni.goethe.horde@gmail.com"
 
 
 def better_floors(a_list):
@@ -122,7 +122,7 @@ def spec_job_assigner(elevator, tic, jobs):
                 elevator.spec_list.extend(job[1:])
                 continue
 
-            for lev in job[1:]:
+            for lev in job:
                 counter += 1
 
                 if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
@@ -137,8 +137,13 @@ def spec_job_assigner(elevator, tic, jobs):
                 for spec_lev in elevator.spec_list[
                                 tic + tic_plus_x:]:
 
-                    print("Tic Level", spec_lev)
+                    print("Tic Level", spec_lev, tic_plus_x, len(elevator.spec_list[tic:]), treffer)
                     """[tic:] look at all levels after the current tic"""
+
+                    if tic_plus_x - 1 == len(elevator.spec_list[tic:]) and treffer is True:
+                        print("!!!", job[counter:])
+                        break
+
                     if job[-1] == spec_lev:
                         try:
                             if job[-1] == elevator.spec_list[tic + tic_plus_x + 1]:
@@ -146,11 +151,6 @@ def spec_job_assigner(elevator, tic, jobs):
                                 break
                         except IndexError:
                             print("Not in List")
-
-                    if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
-                        print("!!!", job[counter:])
-                        elevator.spec_list.extend(job[counter:])
-                        break
 
                     if lev == spec_lev:
                         print("match")
@@ -163,14 +163,16 @@ def spec_job_assigner(elevator, tic, jobs):
                         break
 
                     tic_plus_x += 1
-            try:
-                if job[-1] == spec_lev and job[-1] == elevator.spec_list[tic + tic_plus_x + 1]:
-                    break
-            except IndexError:
-                break
 
-            if tic_plus_x == len(elevator.spec_list[tic:]) and treffer is True:
-                break
+                if tic_plus_x - 1 == len(elevator.spec_list[tic:]) and treffer is True:
+                    elevator.spec_list.extend(job[counter:])
+                    break
+
+                try:
+                    if job[-1] == spec_lev and job[-1] == elevator.spec_list[tic + tic_plus_x + 1]:
+                        break
+                except IndexError:
+                    break
 
         else:
             print("Remaining")
@@ -188,6 +190,7 @@ def spec_job_assigner(elevator, tic, jobs):
                 print("NOT A REMAINING JOB TO DELETE")
             remaining_spec_jobs.append(rema_job)  # save the remaining jobs
 
+    print("REMIAING SPEC:", remaining_spec_jobs)
     return remaining_spec_jobs
 
 
@@ -272,7 +275,7 @@ def assign_common_stop(destination, elevator, match_tic, tic):
     else:
         for level in level_stop(destination):
             # print(elevator.spec_list[tic:].index(destination), tic)
-            elevator.spec_list.insert(elevator.spec_list[tic:].index(destination) + tic , level)
+            elevator.spec_list.insert(elevator.spec_list[tic:].index(destination) + tic, level)
             # print(elevator.spec_list)
 
 

@@ -229,8 +229,8 @@ def main_function():
         common_jobs, special_jobs = job_list_builder(inp)
 
         remaining_spec_jobs = delete_doubles(remaining_spec_jobs)
-        for job in remaining_spec_jobs:
-            special_jobs.extend(job)
+
+        special_jobs.extend(remaining_spec_jobs)
 
         remaining_common_jobs = delete_doubles(remaining_common_jobs)
         common_jobs.extend(remaining_common_jobs)
@@ -243,8 +243,7 @@ def main_function():
 
         # special jobs are assigned here
         print(special_jobs)
-        remaining_spec_jobs.append(job_feeder.spec_job_assigner(elevator_a, tic, special_jobs))
-        remaining_spec_jobs.append(job_feeder.spec_job_assigner(elevator_b, tic, special_jobs))
+        remaining_spec_jobs = job_feeder.spec_job_assigner(elevator_a, tic, special_jobs) + job_feeder.spec_job_assigner(elevator_b, tic, special_jobs)
 
         print("REMAINING COMMON JOBS", remaining_common_jobs)
         print("Common", common_jobs)
@@ -279,14 +278,20 @@ def main_function():
                     job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
                     print("assigned to b", distance_b)
                     try:
-                        remaining_common_jobs.remove(inp)
+                        if inp[0] == "-1":
+                            remaining_common_jobs.remove("-1h")
+                        else:
+                            remaining_common_jobs.remove(inp)
                     except ValueError:
                         continue
                 else:
                     job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
                     print("assigned to a", distance_a)
                     try:
-                        remaining_common_jobs.remove(inp)
+                        if inp[0] == "-1":
+                            remaining_common_jobs.remove("-1h")
+                        else:
+                            remaining_common_jobs.remove(inp)
                     except ValueError:
                         continue
 
@@ -294,7 +299,10 @@ def main_function():
                 print("assssssssssssss to a ")
                 job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
                 try:
-                    remaining_common_jobs.remove(inp)
+                    if inp[0] == "-1":
+                        remaining_common_jobs.remove("-1h")
+                    else:
+                        remaining_common_jobs.remove(inp)
                 except ValueError:
                     continue
 
@@ -302,7 +310,10 @@ def main_function():
                 print("assssssss to b")
                 job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
                 try:
-                    remaining_common_jobs.remove(inp)
+                    if inp[0] == "-1":
+                        remaining_common_jobs.remove("-1h")
+                    else:
+                        remaining_common_jobs.remove(inp)
                 except ValueError:
                     continue
 
