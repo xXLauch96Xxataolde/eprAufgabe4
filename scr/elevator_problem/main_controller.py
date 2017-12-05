@@ -74,7 +74,9 @@ def input_reader():
     valid_inputs = delete_doubles(valid_inputs)
 
     non_valid_inp(requests, valid_inputs)
+    
     valid_inputs = job_feeder.better_floors(valid_inputs)
+    # dasd
     return valid_inputs
 
 
