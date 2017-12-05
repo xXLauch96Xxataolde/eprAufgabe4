@@ -202,7 +202,7 @@ def testcase_writer(elevator_a, elevator_b, tic):
     levels_b.close()
 
 
-def main_function():
+def controller():
     """ Main Function()
 
     This function is the beginning of the simulation. The elevator instances are created and
