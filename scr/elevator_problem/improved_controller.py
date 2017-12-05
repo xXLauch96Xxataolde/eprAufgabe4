@@ -41,7 +41,7 @@ def non_valid_inp(requests, valid_inputs):
 
 
 def input_reader():
-    """Input Reader
+    """Input Reader but improved
 
     This should interpret, check and parse an input.
     requests is an empty list for storing the split parts of the input string
@@ -61,12 +61,14 @@ def input_reader():
     requests = inp.split(" ")
     pattern_elevator = "[AB][KE1-4]"
     pattern_floor = "[KE1234][hr]"
+    pattern_door_close ="[AB][c]"
 
     for entry in requests:
         if (len(entry) == 2):
             result_elevator = re.match(pattern_elevator, entry)
             result_floor = re.match(pattern_floor, entry)
-            if result_elevator or result_floor:
+            result_door_close = re.match(pattern_door_close, entry)
+            if result_elevator or result_floor or result_door_close:
                 valid_inputs.append(entry)
 
     valid_inputs = delete_doubles(valid_inputs)
