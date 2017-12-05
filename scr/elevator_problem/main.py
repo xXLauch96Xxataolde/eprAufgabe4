@@ -21,8 +21,8 @@ def menue():
     print(".......................................")
     print("...Press 1 to open standard Elevator...")
     print("...Press 2 to open improved Elevator...")
-    print("...Press 3 for Help File...............")
-    print("...Press 4 for Documenation............")
+    print("...Press 3 to open Help File...........")
+    print("...Press 4 to open Documenation........")
     print("...Press 5 to Exit.....................")
     print(".......................................")
 
