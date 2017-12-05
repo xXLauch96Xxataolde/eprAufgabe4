@@ -18,7 +18,7 @@ __email__ = "uni.goethe.horde@gmail.com"
 def non_valid_inp(requests, valid_inputs):
     """Non Valid Input
 
-    We thought we wouldnt organise enough lists, so we added some more. The
+    We thought we wouldn't organise enough lists, so we added some more. The
     procedure prints all faulty inputs
     """
     non_valid_str = ""
@@ -81,7 +81,8 @@ def input_reader():
 def elevator_setter(elevator, tic):
     """Elevator Setter
     
-    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    This is a procedure, which functions as a setter for all attributes of the elevator.
+    When called the level and direction of the elevator are updated.
     """
     if elevator.spec_list[tic] != 10:
         elevator.set_level(elevator.spec_list[tic])
@@ -108,7 +109,9 @@ def elevator_setter(elevator, tic):
 def job_list_builder(inp):
     """Job List Builder
     
-    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    This function takes a list as an input. The input are the parsed jobs,
+    who are then sorted into common (from outside the elevator) and specific (specific for each
+    elevator). Both lists are then returned.
     """
     common_list = []
     special_list = []
@@ -172,7 +175,8 @@ def tui_interface(elevator_a, elevator_b, tic):
 def delete_doubles(list):
     """Delete Doubles
     
-    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    This is a handy helper (-function), which takes an input as a list an removes all elements
+    that occur more than once.
     """
     new_list = []
     for job in list:
@@ -185,7 +189,8 @@ def delete_doubles(list):
 def testcase_writer(elevator_a, elevator_b, tic):
     """Testcase Writer
     
-    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    This is a procedure for testing and protocolling purposes only. It writes a txt-file
+    and adds the level of the elevator in a new line every tic.
     """
     levels_a = open("elevator_a_levels.txt", "a")
     levels_b = open("elevator_b_levels.txt", "a")
@@ -200,8 +205,15 @@ def testcase_writer(elevator_a, elevator_b, tic):
 def main_function():
     """ Main Function()
 
-    Dear Niels please insert a exit possiblity which leads the user to the
-    main menue built in main.main()
+    This function is the beginning of the simulation. The elevator instances are created and
+    the tic is set to zero. In a while-loop, our program fulfills all its jobs and calls all
+    functions that are further needed. The loop starts with updating the elevator, then takes
+    an input (input-reader()). The input is then assigned to a special- and a common-list.
+    Those lists are then run through their own job assigner and remaining jobs are saved for
+    later assignment.
+    If at the end of the loop an elevator is in idle (10), another 10 is added to the list and
+    the state of idle stays.
+    At the end of every loop the tic is increased by one.
     """
     tic = 0
 
@@ -241,8 +253,7 @@ def main_function():
         elevator_a.elevator_printer(tic)
         elevator_b.elevator_printer(tic)
 
-        # special jobs are assigned here
-        print(special_jobs)
+        # here we assign the specific jobs and saves the remaining_jobs in a list
         remaining_spec_jobs = job_feeder.spec_job_assigner(elevator_a, tic, special_jobs) + job_feeder.spec_job_assigner(elevator_b, tic, special_jobs)
 
         print("REMAINING COMMON JOBS", remaining_common_jobs)
@@ -316,9 +327,6 @@ def main_function():
                         remaining_common_jobs.remove(inp)
                 except ValueError:
                     continue
-
-        # elevator_a.elevator_printer(tic)
-        # elevator_b.elevator_printer(tic)
 
         if len(elevator_b.spec_list[tic:]) == 1:
             elevator_b.spec_list.extend([10])
