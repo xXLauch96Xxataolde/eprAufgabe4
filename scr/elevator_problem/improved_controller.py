@@ -56,10 +56,6 @@ def input_reader():
         print("\n" * 2)
         main.main()
 
-    if inp == "Ac":
-        print("Closing Doors -- Caution")
-
-
     requests = []
     valid_inputs = []
     requests = inp.split(" ")
@@ -225,8 +221,10 @@ def maximum_occurence_determinator(list):
 
     return int(max_floor)
 
+
 def close_doors(elevator):
     elevator.s
+
 
 def controller():
     """ Main Function()
@@ -348,7 +346,7 @@ def controller():
             print("IDLE")
             idle_position = []
             if elevator_b.get_level() > default_position:
-                for level in range(elevator_b.get_level() - 1,  default_position - 1, -1):
+                for level in range(elevator_b.get_level() - 1, default_position - 1, -1):
                     idle_position.append(level)
             elif elevator_b.get_level() < default_position:
                 for level in range(elevator_b.get_level() + 1, default_position + 1, 1):

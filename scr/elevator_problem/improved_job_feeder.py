@@ -116,6 +116,10 @@ def spec_job_assigner(elevator, tic, jobs):
         improved_controller.elevator_setter(elevator, tic)
         elevator.elevator_printer(tic)
 
+        if job == elevator.name + "c":
+            print("Doors closing --- Caution!")
+            continue
+
         counter = -1
         tic_plus_x = 0
         treffer = False
