@@ -6,7 +6,7 @@ helped us in the development.
 
 """
 
-import elevator_problem
+#import elevator_problem
 import main
 import main_controller
 import elevator
