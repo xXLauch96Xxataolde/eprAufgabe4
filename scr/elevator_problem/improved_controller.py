@@ -69,12 +69,12 @@ def input_reader():
             if result_elevator or result_floor:
                 valid_inputs.append(entry)
 
-    valid_inputs = improved_job_feeder.better_floors(valid_inputs)
+    
 
     valid_inputs = delete_doubles(valid_inputs)
 
     non_valid_inp(requests, valid_inputs)
-
+    valid_inputs = improved_job_feeder.better_floors(valid_inputs)
     return valid_inputs
 
 
