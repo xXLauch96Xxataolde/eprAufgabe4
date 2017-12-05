@@ -334,6 +334,7 @@ def controller():
                 except ValueError:
                     continue
 
+        # this improvement sets the position of the elevator to a default level
         if len(elevator_b.spec_list[tic:]) == 1:
             print("IDLE")
             idle_position = []
