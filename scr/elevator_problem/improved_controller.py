@@ -1,4 +1,4 @@
-"""The Controller Function
+"""The Improved Controller
 
 This module is meant for coordination purposes of the program, which is 
 responsible for the improved elevator. 
