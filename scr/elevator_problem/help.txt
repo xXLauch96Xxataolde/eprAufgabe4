@@ -37,3 +37,17 @@ press via keyboard button a menue item.
 3 opens an overview of the files and the concerning documentations
 4 here you arfe right now, in the help file
 5 exits the program and leaves you in a void
+
+In the whole program every normal user input is allowed, without crashing the
+program, but one may receive an information about the sensibility. If you are
+in an elevator function, (after you pressed 1 or 2 in the menue), you 
+can input A or B (depends on the elevator you are in) and a floorlevel like 
+K for Kbasement, E for egroundfloor and 1,2,3 or 4 to elevate to it. If you
+happen to be on a floor, you can enter E,1,2 or 3 combined with h for up
+and r for down, and Kh for a upwards job in the kbasement und 4r for a job
+on level 4 downwards. Certainly, you can enter a whole set of jobs, like
+A3 B2 Kr 4r asd 3t 3h 2i 2h and the program validates, handles and assigns
+the jobs to lists which are either individual for an elevator or added to a
+list for later handling, if the situation is appropriate. Here in this example
+asd 3t and 2i are nonsense inputs, these are printed to the user and a hint
+to this helpfile is given. 
