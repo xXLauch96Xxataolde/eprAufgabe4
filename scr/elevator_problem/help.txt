@@ -1,8 +1,39 @@
-8=====>8=====>8=====>8=====>
-8=====>8=====>8=====>8=====>
-8=====>8=====>8=====>8=====>
-8=====> 1337 H43k00r 8=====>
-8=====>8=====>8=====>8=====>
-8=====>8=====>8=====>8=====>
-8=====>8=====>8=====>8=====>
-8=====>8=====>8=====>8=====>
+Good Day Elevator User,
+
+thank you for choosing our elevataor. 
+
+We constructed here two classic 2 way elevators who serve in way we want to
+explain here.
+ 
+The standard Elevator
+
+Every Elevator on its own works for the jobs he got assigned from inside. This
+jobs are stored in a specific job list. Nevertheless, jobs coming from floors
+are served in a special manner. Because of a priority list, it is replicable 
+which elevator serves which job. These jobs are saved in a common job list. 
+Because of our algorithm the common jobs separated and assigned when it fits
+to an elevator and its mode, idle or busy, and its direction.
+
+The improved Elevator
+
+As the standard Elevator, the improved Elevator operators with the same basics
+but the algorithm with job assignment and for example a parking position is
+fit dynamically. We thought our double elevator might operate in a large 
+building with many people to move to certain floors. In a scenario, in which
+most people arrive in the morning, go to lunch around noon and go home around 
+6 to 7 o'clock, the elevators dynamically focus themselves on the floors from 
+which most jobs come, so the median waiting time should be reduced. Good for
+participant. Further, in the std. elevator, the elevator closes the door after
+a random amount of tics, but in this improved version, we installed a button
+that gives the user inside the elevator the ability to close the doors
+immediately.
+
+The Functionality 
+
+First in the program you are greeted by a menue. Here you are allowed to
+press via keyboard button a menue item. 
+1 opens the standard elevator algorithm, explained above
+2 opens a improved version of 1
+3 opens an overview of the files and the concerning documentations
+4 here you arfe right now, in the help file
+5 exits the program and leaves you in a void
