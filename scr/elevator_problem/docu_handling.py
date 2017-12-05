@@ -25,7 +25,8 @@ __email__ = "uni.goethe.horde@gmail.com"
 
 def run():
     """print all help file for documentation purposes"""
-    print(help(elevator_problem))
+    if (os.name =="nt"):
+        print(help(elevator_problem))
     print(help(main))
     print(help(main_controller))
     print(help(improved_controller))
