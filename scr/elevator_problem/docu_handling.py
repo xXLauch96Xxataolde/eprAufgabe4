@@ -24,7 +24,16 @@ __email__ = "uni.goethe.horde@gmail.com"
 
 
 def run():
-    """print all help file for documentation purposes"""
+    """Run
+    
+    print all help file for documentation purposes. One may notice,
+    that there is a if statement in line 34. This is due to different
+    os versions we are developing on. Windows and eclipse allows to import 
+    the package for printing information but unix/macOS seems to have problems
+    So we figuered, we want to run our program smoothly on most platforms we
+    chose to work this problem this way. 
+    """
+    
     if (os.name =="nt"):
         print(help(elevator_problem))
     print(help(main))
