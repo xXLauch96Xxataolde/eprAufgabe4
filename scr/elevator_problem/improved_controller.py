@@ -56,6 +56,10 @@ def input_reader():
         print("\n" * 2)
         main.main()
 
+    if inp == "Ac":
+        print("Closing Doors -- Caution")
+
+
     requests = []
     valid_inputs = []
     requests = inp.split(" ")
@@ -221,6 +225,8 @@ def maximum_occurence_determinator(list):
 
     return int(max_floor)
 
+def close_doors(elevator):
+    elevator.s
 
 def controller():
     """ Main Function()
