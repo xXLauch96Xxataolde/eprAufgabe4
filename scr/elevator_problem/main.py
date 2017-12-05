@@ -6,6 +6,7 @@ This module is the start of our elevator programm.
 import time
 import main_controller
 import docu_handling
+import help
 
 __author__ = "6770541: Niels Heissel, 6785468: Robert am Wege"
 __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni" 
@@ -38,8 +39,7 @@ def main():
         elif (inp == "2"):
             print("Same procedure but improved")
         elif (inp == "3"):
-            print("Help File")
-            print(help(main_controller))
+            help.helpings()
         elif (inp == "4"):
             docu_handling.run()
         elif (inp == "5"):
