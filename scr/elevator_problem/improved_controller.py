@@ -118,10 +118,8 @@ def job_list_builder(inp):
     special_list = []
     for job in inp:
         if job[0].isdigit():
-            print("Found a common job.")
             common_list.append(job)
         elif job[0] == "-":
-            print("Found a common job.")
             common_list.append(job)
         else:
             special_list.append(job)
@@ -240,8 +238,6 @@ def controller():
     """
     tic = 0
 
-    print(tic)
-
     common_jobs_saved = []
 
     remaining_common_jobs = []
@@ -251,6 +247,7 @@ def controller():
     elevator_b = elevator.Elevator("B", 0, "none", [10])
 
     elevator_a.elevator_printer(tic)
+    elevator_b.elevator_printer(tic)
 
     remaining_jobs = []
 
@@ -281,28 +278,20 @@ def controller():
 
         common_jobs_saved.extend(common_jobs)
 
-        elevator_a.elevator_printer(tic)
-        elevator_b.elevator_printer(tic)
 
         # here we assign the specific jobs and saves the remaining_jobs in a list
         remaining_spec_jobs = improved_job_feeder.spec_job_assigner(elevator_a, tic, special_jobs) + \
                               improved_job_feeder.spec_job_assigner(elevator_b, tic, special_jobs)
 
-        print("REMAINING COMMON JOBS", remaining_common_jobs)
-        print("Common", common_jobs)
+        print("Common jobs:", common_jobs)
 
         # common jobs are assigned here
         for inp in common_jobs:
             if len(inp) > 2:
                 inp = [inp[0:2], inp[2]]
 
-            print("Input:", inp)
-
             distance_a = improved_job_feeder.common_job_comparer(elevator_a, inp, tic)
-            print("Distance: ", distance_a)
-            print("---!!--")
             distance_b = improved_job_feeder.common_job_comparer(elevator_b, inp, tic)
-            print("Distance: ", distance_b)
 
             if distance_b == "no match" and distance_a == "no match":
                 if inp[0] == "-1":
@@ -319,7 +308,7 @@ def controller():
             # improved common job assigner, common jobs are assigned to the nearest free elevator
             if distance_a > distance_b:
                 improved_job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
-                print("assigned to b", distance_b)
+                print("Job was assigned to B. Distance to Job is:", distance_b)
                 try:
                     if inp[0] == "-1":
                         remaining_common_jobs.remove("-1h")
@@ -329,7 +318,7 @@ def controller():
                     continue
             else:
                 improved_job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
-                print("assigned to a", distance_a)
+                print("Job was assigned to A. Distance to Job is:", distance_a)
                 try:
                     if inp[0] == "-1":
                         remaining_common_jobs.remove("-1h")
@@ -342,7 +331,7 @@ def controller():
 
         # this improvement sets the position of the elevator to a default level
         if len(elevator_b.spec_list[tic:]) == 1:
-            print("IDLE")
+            print("Elevator B is in IDLE")
             idle_position = []
             if elevator_b.get_level() > default_position:
                 for level in range(elevator_b.get_level() - 1, default_position - 1, -1):
@@ -351,12 +340,11 @@ def controller():
                 for level in range(elevator_b.get_level() + 1, default_position + 1, 1):
                     idle_position.append(level)
             else:
-                print("Append 10")
                 idle_position.append(10)
             elevator_b.spec_list.extend(idle_position)
 
         if len(elevator_a.spec_list[tic:]) == 1:
-            print("IDLE")
+            print("Elevator A is in IDLE")
             idle_position = []
             if elevator_a.get_level() > default_position:
                 for level in range(elevator_a.get_level() - 1, default_position - 1, -1):
@@ -365,8 +353,10 @@ def controller():
                 for level in range(elevator_a.get_level() + 1, default_position + 1, 1):
                     idle_position.append(level)
             else:
-                print("Append 10")
                 idle_position.append(10)
             elevator_a.spec_list.extend(idle_position)
+
+        elevator_a.elevator_printer(tic)
+        elevator_b.elevator_printer(tic)
 
         tic += 1
