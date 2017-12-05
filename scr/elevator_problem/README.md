@@ -12,11 +12,6 @@ It is important to show the job which the elevator executes!!
 Testing:
 4h should not work
 
-To do:
-Wenn der Aufzug in einer Art Fahrt-Schleife ist, wuerde er Anforderungen von den Stockwerken, die ausserhalb dieser Schleife liegen nie abarbeiten. Deshalb waere eine Implementierung von
-von einer Logik, die Anforderungen von aussen in der Selben Fahrtrichtung auch immer Abarbeitet ebenfalls sinnvoll.
-Dazu wäre die close taste zu implementieren.
-
 
 Improvements:
 Elevator Superposition, A on level K and B on level 3. CHECK
