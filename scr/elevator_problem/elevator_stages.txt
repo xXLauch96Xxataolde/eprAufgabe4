@@ -1,2 +1,2 @@
-Elevator:Aat level:0is going:nonecurrent Jobs:[10]
-Elevator:Bat level:0is going:nonecurrent Jobs:[10]
+Elevator: A at level: 3 is going: none current Jobs: [10]
+Elevator: B at level: 0 is going: none current Jobs: [10]
