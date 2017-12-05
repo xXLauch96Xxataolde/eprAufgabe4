@@ -234,7 +234,6 @@ def common_job_comparer(elevator, job, tic):
                 direction = "r"
             elif elevator.get_level() < elevator.spec_list[tic + new_tic]:
                 direction = "h"
-
             if direction == job[1] and match is True:
                 match_number += 1
                 return new_tic + 1
