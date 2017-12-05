@@ -1,4 +1,4 @@
-"""The Controler Function...
+"""The Controller Function
 
 This module is meant for coordination purposes of the program, which is responsible for the normal elevator.
 """
