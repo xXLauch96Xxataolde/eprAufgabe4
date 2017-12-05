@@ -8,6 +8,7 @@ __email__ = "uni.goethe.horde@gmail.com"
 
 def helpings():
     """Procedure for opening a file and printing it to the console."""
+    
     print("\n")
     fobj = open("help.txt")
     for line in fobj:
