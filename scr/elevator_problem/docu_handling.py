@@ -17,10 +17,12 @@ __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
 __credits__ = "" 
 __email__ = "uni.goethe.horde@gmail.com" 
 
-"""print all help file for documentation purposes"""
 
-print(help(elevator_problem))
-print(help(main))
-print(help(main_controller))
-print(help(elevator))
-print(help(job_feeder))
+
+def run():
+    """print all help file for documentation purposes"""
+    print(help(elevator_problem))
+    print(help(main))
+    print(help(main_controller))
+    print(help(elevator))
+    print(help(job_feeder))
