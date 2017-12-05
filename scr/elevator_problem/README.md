@@ -25,6 +25,5 @@ Fast door closing no more dice rolling, but "internally dedicated door closing b
 Maybe the Elevator closest to a floor job can work on this job, not just A before B CHECK
 And this being said, we can count the calls from a special floor, and if this special floor CHECK
 generates a lot of calls, the elevators can use them as idle position??? 
-That thing niels said, but wasnt understandable
-
-Andorderungen von außen sollen vom nächsten Aufzug abgeholt werden. CHECK
+That thing niels said, but wasnt understandable CHECK
+Floor jobs should be handled by the next elevator CHECK
