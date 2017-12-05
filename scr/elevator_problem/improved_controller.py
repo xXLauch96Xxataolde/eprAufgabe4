@@ -6,7 +6,7 @@ This module is meant for coordination purposes of the program, which is responsi
 import time
 import re
 import elevator
-import job_feeder
+import improved_job_feeder
 import main
 
 __author__ = "6785468: Robert am Wege, 6770541: Niels Heissel"
@@ -69,7 +69,7 @@ def input_reader():
             if result_elevator or result_floor:
                 valid_inputs.append(entry)
 
-    valid_inputs = job_feeder.better_floors(valid_inputs)
+    valid_inputs = improved_job_feeder.better_floors(valid_inputs)
 
     valid_inputs = delete_doubles(valid_inputs)
 
@@ -217,11 +217,17 @@ def controller():
     """
     tic = 0
 
+    print(tic)
+
+
+
     remaining_common_jobs = []
     remaining_spec_jobs = []
 
     elevator_a = elevator.Elevator("A", 0, "none", [10])
     elevator_b = elevator.Elevator("B", 0, "none", [10])
+
+    elevator_a.elevator_printer(tic)
 
     remaining_jobs = []
 
@@ -254,7 +260,7 @@ def controller():
         elevator_b.elevator_printer(tic)
 
         # here we assign the specific jobs and saves the remaining_jobs in a list
-        remaining_spec_jobs = job_feeder.spec_job_assigner(elevator_a, tic, special_jobs) + job_feeder.spec_job_assigner(elevator_b, tic, special_jobs)
+        remaining_spec_jobs = improved_job_feeder.spec_job_assigner(elevator_a, tic, special_jobs) + improved_job_feeder.spec_job_assigner(elevator_b, tic, special_jobs)
 
         print("REMAINING COMMON JOBS", remaining_common_jobs)
         print("Common", common_jobs)
@@ -266,10 +272,10 @@ def controller():
 
             print("Input:", inp)
 
-            distance_a = job_feeder.common_job_comparer(elevator_a, inp, tic)
+            distance_a = improved_job_feeder.common_job_comparer(elevator_a, inp, tic)
             print("Distance: ", distance_a)
             print("---!!--")
-            distance_b = job_feeder.common_job_comparer(elevator_b, inp, tic)
+            distance_b = improved_job_feeder.common_job_comparer(elevator_b, inp, tic)
             print("Distance: ", distance_b)
 
             if distance_b == "no match" and distance_a == "no match":
@@ -286,7 +292,7 @@ def controller():
 
             if len(elevator_b.spec_list[tic:]) > 1 and len(elevator_a.spec_list[tic:]) > 1:
                 if distance_a > distance_b:
-                    job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
+                    improved_job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
                     print("assigned to b", distance_b)
                     try:
                         if inp[0] == "-1":
@@ -296,7 +302,7 @@ def controller():
                     except ValueError:
                         continue
                 else:
-                    job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
+                    improved_job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
                     print("assigned to a", distance_a)
                     try:
                         if inp[0] == "-1":
@@ -308,7 +314,7 @@ def controller():
 
             elif elevator_a.spec_list[tic] == 10 and len(elevator_a.spec_list[tic:]) == 1:
                 print("assssssssssssss to a ")
-                job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
+                improved_job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
                 try:
                     if inp[0] == "-1":
                         remaining_common_jobs.remove("-1h")
@@ -319,7 +325,7 @@ def controller():
 
             elif elevator_b.spec_list[tic] == 10 and len(elevator_b.spec_list[tic:]) == 1:
                 print("assssssss to b")
-                job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
+                improved_job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
                 try:
                     if inp[0] == "-1":
                         remaining_common_jobs.remove("-1h")
@@ -329,8 +335,30 @@ def controller():
                     continue
 
         if len(elevator_b.spec_list[tic:]) == 1:
-            elevator_b.spec_list.extend([10])
+            print("IDLE")
+            idle_position = []
+            if elevator_b.get_level() > 2:
+                for level in range(elevator_b.get_level() - 1, 2 - 1, -1):
+                    idle_position.append(level)
+            elif elevator_b.get_level() < 2:
+                for level in range(elevator_b.get_level() + 1, 2 + 1, 1):
+                    idle_position.append(level)
+            else:
+                print("Append 10")
+                idle_position.append(10)
+            elevator_b.spec_list.extend(idle_position)
+
         if len(elevator_a.spec_list[tic:]) == 1:
-            elevator_a.spec_list.extend([10])
+            print("IDLE")
+            idle_position = []
+            if elevator_a.get_level() > 0:
+                for level in range(elevator_a.get_level() - 1, 0 - 1, -1):
+                    idle_position.append(level)
+            elif elevator_a.get_level() < 0:
+                idle_position = [1]
+            else:
+                print("Append 10")
+                idle_position.append(10)
+            elevator_a.spec_list.extend(idle_position)
 
         tic += 1

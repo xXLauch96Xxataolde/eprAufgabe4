@@ -6,7 +6,7 @@ Nomnomnom jobs
 import time
 import random
 import elevator
-import main_controller
+import improved_controller
 
 __author__ = "6770541: Niels Heissel, 6785468: Robert am Wege"
 __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni"
@@ -107,13 +107,13 @@ def spec_job_assigner(elevator, tic, jobs):
 
     remaining_spec_jobs = []
 
-    jobs = main_controller.delete_doubles(jobs)
+    jobs = improved_controller.delete_doubles(jobs)
 
     converted_jobs = job_builder(elevator, jobs)
 
     for job in converted_jobs:
 
-        main_controller.elevator_setter(elevator, tic)
+        improved_controller.elevator_setter(elevator, tic)
         elevator.elevator_printer(tic)
 
         counter = -1

@@ -7,6 +7,7 @@ import time
 import main_controller
 import docu_handling
 import help
+import improved_controller
 
 __author__ = "6770541: Niels Heissel, 6785468: Robert am Wege"
 __copyright__ = "Copyright 2017/2018 - EPR-Goethe-Uni" 
@@ -38,6 +39,7 @@ def main():
             main_controller.controller()
         elif (inp == "2"):
             print("Same procedure but improved")
+            improved_controller.controller()
         elif (inp == "3"):
             help.helpings()
         elif (inp == "4"):
