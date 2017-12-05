@@ -200,7 +200,7 @@ def spec_job_assigner(elevator, tic, jobs):
     return remaining_spec_jobs
 
 
-def common_job_assigner(elevator, job, tic):
+def common_job_comparer(elevator, job, tic):
     """Common Job Assigner
     
     The common jobs from outside the elevator are passed to this function. It takes the job

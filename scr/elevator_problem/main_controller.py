@@ -266,10 +266,10 @@ def controller():
 
             print("Input:", inp)
 
-            distance_a = job_feeder.common_job_assigner(elevator_a, inp, tic)
+            distance_a = job_feeder.common_job_comparer(elevator_a, inp, tic)
             print("Distance: ", distance_a)
             print("---!!--")
-            distance_b = job_feeder.common_job_assigner(elevator_b, inp, tic)
+            distance_b = job_feeder.common_job_comparer(elevator_b, inp, tic)
             print("Distance: ", distance_b)
 
             if distance_b == "no match" and distance_a == "no match":
