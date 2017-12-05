@@ -53,7 +53,7 @@ def input_reader():
     inp = input("Where do you want to travel?")
 
     if inp == "exit":
-        print("\n"*2)
+        print("\n" * 2)
         main.main()
 
     requests = []
@@ -68,8 +68,6 @@ def input_reader():
             result_floor = re.match(pattern_floor, entry)
             if result_elevator or result_floor:
                 valid_inputs.append(entry)
-
-    
 
     valid_inputs = delete_doubles(valid_inputs)
 
@@ -186,6 +184,7 @@ def delete_doubles(list):
             new_list.append(job)
     return new_list
 
+
 def testcase_writer(elevator_a, elevator_b, tic):
     """Testcase Writer
 
@@ -201,19 +200,27 @@ def testcase_writer(elevator_a, elevator_b, tic):
     levels_a.close()
     levels_b.close()
 
-def maximum_occurence_counter(list):
+
+def maximum_occurence_determinator(list):
     correct_list = []
     max_floor = "E"
     for level in list:
         correct_list.append(level[0])
+    print(correct_list)
 
     for level in correct_list:
-        level = level[0]
-        x = list.count(level)
-        if x > list.count(max_floor):
+        print(level)
+        x = correct_list.count(str(level))
+        print(x)
+        if x > correct_list.count(max_floor):
             max_floor = level
+    print(max_floor)
+    if max_floor == "E":
+        max_floor = 0
+    elif max_floor == "K":
+        max_floor = -1
 
-
+    return int(max_floor)
 
 
 def controller():
@@ -329,16 +336,17 @@ def controller():
                 except ValueError:
                     continue
 
+        default_position = maximum_occurence_determinator(common_jobs_saved)
 
         # this improvement sets the position of the elevator to a default level
         if len(elevator_b.spec_list[tic:]) == 1:
             print("IDLE")
             idle_position = []
-            if elevator_b.get_level() > 2:
-                for level in range(elevator_b.get_level() - 1, 2 - 1, -1):
+            if elevator_b.get_level() > default_position:
+                for level in range(elevator_b.get_level() - 1,  default_position - 1, -1):
                     idle_position.append(level)
-            elif elevator_b.get_level() < 2:
-                for level in range(elevator_b.get_level() + 1, 2 + 1, 1):
+            elif elevator_b.get_level() < default_position:
+                for level in range(elevator_b.get_level() + 1, default_position + 1, 1):
                     idle_position.append(level)
             else:
                 print("Append 10")
@@ -348,7 +356,7 @@ def controller():
         if len(elevator_a.spec_list[tic:]) == 1:
             print("IDLE")
             idle_position = []
-            if elevator_a.get_level() > 0:
+            if elevator_a.get_level() > default_position:
                 for level in range(elevator_a.get_level() - 1, 0 - 1, -1):
                     idle_position.append(level)
             elif elevator_a.get_level() < 0:
@@ -359,4 +367,3 @@ def controller():
             elevator_a.spec_list.extend(idle_position)
 
         tic += 1
-
