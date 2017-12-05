@@ -34,56 +34,71 @@ class Elevator (object):
 
     def get_name(self):
         """returns the name of an instance"""
+        
         return self.__name
 
     def get_level(self):
         """returns the level of an instance"""
+        
         return self.__level
 
     def get_direction(self):
         """returns the direction of an instance, like up and down"""
+        
         return self.__direction
 
     def get_spec_list(self):
         """returns the spec_list, as mentioned in the constructor docstring"""
+        
         return self.__spec_list
 
     def set_name(self, value):
         """allows to set a name for an instance. But is protected"""
+        
         self.__name = value
 
     def set_level(self, value):
         """allows to set a level"""
+        
         self.__level = value
 
     def set_direction(self, value):
         """allows to set a direction"""
+        
         self.__direction = value
 
     def set_spec_list(self, value):
         """sets a special list"""
+        
         self.__spec_list = value
 
     def del_name(self):
+        """deletes a set name"""
+        
         del self.__name
 
     def del_level(self):
         """destructs the name"""
+        
         del self.__level
 
     def del_direction(self):
         """deletes the direction"""
+        
         del self.__direction
 
     def del_spec_list(self):
         """deletes the special list"""
+        
         del self.__spec_list
         
     def elevator_printer(self, tic):
         """Elevator Printer
+        
         a handy procedure we wrote to elegantly print all important information 
         about an elevator object
         """
+        
         print("Elevator:", self.name, "at level:", self.level, "is going:",
               self.direction, "current Jobs:", self.spec_list[tic:])
 
@@ -95,13 +110,14 @@ class Elevator (object):
         return relevant information to e.g. another function which writes them 
         to a file
         """
+        
         outpur_str = ""
         outpur_str = "Elevator: " + self.name + " at level: " 
         outpur_str += str(self.level) + " is going: " + self.direction 
         outpur_str += " current Jobs: " + str(self.spec_list[tic:])
         return(outpur_str)
 
-    """the fuck is this no idea"""
+    
     name = property(get_name, set_name, del_name, "name's docstring")
     level = property(get_level, set_level, del_level, "level's docstring")
     direction = property(get_direction, set_direction, del_direction,
