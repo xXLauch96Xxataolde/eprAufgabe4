@@ -88,9 +88,10 @@ def job_builder(elevator, jobs):
 
 
 def spec_job_assigner(elevator, tic, jobs):
-    """ Special Job Assigner
+    """ Specific Job Assigner
     
-    assigns the converted jobs to specific job list
+    This function takes the specific jobs and assigns them to their elevator. If a job is not
+    in the direction of the elevator it remains and is later on reassigned to the specific-jobs.
     """
 
     remaining_spec_jobs = []

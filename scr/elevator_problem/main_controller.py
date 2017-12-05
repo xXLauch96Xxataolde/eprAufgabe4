@@ -18,7 +18,7 @@ __email__ = "uni.goethe.horde@gmail.com"
 def non_valid_inp(requests, valid_inputs):
     """Non Valid Input
 
-    We thought we wouldn't organise enough lists, so we added some more. The
+    We thought we wouldn't organize enough lists, so we added some more. The
     procedure prints all faulty inputs
     """
     non_valid_str = ""
