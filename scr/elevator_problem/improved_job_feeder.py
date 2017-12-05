@@ -56,6 +56,9 @@ def job_builder(elevator, jobs):
     builded_jobs = []
 
     for job in jobs:
+        if job == elevator.name + "c":
+            builded_jobs.append(elevator.name + 'c')
+            continue
         print("JOB INFO, Len()", job, len(job), elevator.get_name())
         if len(job) != 0:
             if elevator.get_name() == job[0]:
@@ -118,6 +121,9 @@ def spec_job_assigner(elevator, tic, jobs):
 
         if job == elevator.name + "c":
             print("Doors closing --- Caution!")
+            if len(elevator.spec_list[tic:]) > 3:
+                if elevator.spec_list[tic] == elevator.spec_list[tic + 1]:
+                    elevator.spec_list[tic:].remove(elevator.spec_list[tic])
             continue
 
         counter = -1
