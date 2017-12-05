@@ -20,6 +20,7 @@ def better_floors(a_list):
     This function translates the K and E floors to -1 and 0 because it is
     more sensible to have them named that way
     """
+
     new_list = []
     for entry in a_list:
         """the conversion from e.g. Kh to -1h"""
@@ -56,7 +57,6 @@ def job_builder(elevator, jobs):
     builded_jobs = []
 
     for job in jobs:
-        print("JOB INFO, Len()", job, len(job), elevator.get_name())
         if len(job) != 0:
             if elevator.get_name() == job[0]:
 
@@ -114,7 +114,6 @@ def spec_job_assigner(elevator, tic, jobs):
     for job in converted_jobs:
 
         main_controller.elevator_setter(elevator, tic)
-        elevator.elevator_printer(tic)
 
         counter = -1
         tic_plus_x = 0
@@ -151,25 +150,21 @@ def spec_job_assigner(elevator, tic, jobs):
                     # [tic:] means look at all levels after the current tic
 
                     if tic_plus_x - 1 == len(elevator.spec_list[tic:]) and treffer is True:  # 2.
-                        print("!!!", job[counter:])
                         break
 
                     if job[-1] == spec_lev:  # 3.
                         try:
                             if job[-1] == elevator.spec_list[tic + tic_plus_x + 1]:
-                                print("Job is already assigned.")
                                 break
                         except IndexError:
                             print("Not in List")
 
                     if lev == spec_lev:
-                        print("match")
                         treffer = True
                         tic_plus_x += 1
                         continue
 
                     elif treffer is True:
-                        print("no match anymore check new element")
                         break
 
                     tic_plus_x += 1
@@ -207,7 +202,8 @@ def common_job_comparer(elevator, job, tic):
     and checks if it is possible to assign it to an elevator. It return values which are then
     compared by the main controller.
     """
-    print("Common Job Assigner", job)
+
+    print("Common Job Assigner for", job)
     new_tic = -1
     match_number = 0
     direction = ""
@@ -253,6 +249,7 @@ def assign_common_stop(destination, elevator, match_tic, tic):
     level to destination. This list is then appended to the list of levels which the elevator
     passes.
     """
+
     list = []
     destination = int(destination)
 
@@ -272,7 +269,7 @@ def assign_common_stop(destination, elevator, match_tic, tic):
         list.insert(-1, level)
 
     if elevator.spec_list[tic] == 10 and len(elevator.spec_list[tic:]) == 1:
-        print("Starts from start position.")
+        print("Starts from idle-position.")
         elevator.spec_list.extend(list[2:])
     else:
         for level in level_stop(destination):

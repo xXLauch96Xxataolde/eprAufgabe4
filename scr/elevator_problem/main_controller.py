@@ -21,6 +21,7 @@ def non_valid_inp(requests, valid_inputs):
     We thought we wouldn't organize enough lists, so we added some more. The
     procedure prints all faulty inputs
     """
+
     non_valid_str = ""
     for entry in requests:
         if (entry not in valid_inputs):
@@ -50,6 +51,7 @@ def input_reader():
     string is found, a valid result object (search: matching object) is 
     constructed and the valid input is stored in a valid_inputs list
     """
+
     inp = input("Where do you want to travel?")
 
     if inp == "exit":
@@ -85,6 +87,7 @@ def elevator_setter(elevator, tic):
     This is a procedure, which functions as a setter for all attributes of the elevator.
     When called the level and direction of the elevator are updated.
     """
+
     if elevator.spec_list[tic] != 10:
         elevator.set_level(elevator.spec_list[tic])
         try:
@@ -114,14 +117,13 @@ def job_list_builder(inp):
     who are then sorted into common (from outside the elevator) and specific (specific for each
     elevator). Both lists are then returned.
     """
+
     common_list = []
     special_list = []
     for job in inp:
         if job[0].isdigit():
-            print("Found a common job.")
             common_list.append(job)
         elif job[0] == "-":
-            print("Found a common job.")
             common_list.append(job)
         else:
             special_list.append(job)
@@ -179,6 +181,7 @@ def delete_doubles(list):
     This is a handy helper (-function), which takes an input as a list an removes all elements
     that occur more than once.
     """
+
     new_list = []
     for job in list:
         if job in new_list:
@@ -193,6 +196,7 @@ def testcase_writer(elevator_a, elevator_b, tic):
     This is a procedure for testing and protocolling purposes only. It writes a txt-file
     and adds the level of the elevator in a new line every tic.
     """
+
     levels_a = open("elevator_a_levels.txt", "a")
     levels_b = open("elevator_b_levels.txt", "a")
 
@@ -216,6 +220,7 @@ def controller():
     the state of idle stays.
     At the end of every loop the tic is increased by one.
     """
+
     tic = 0
 
     remaining_common_jobs = []
@@ -248,7 +253,6 @@ def controller():
         remaining_common_jobs = delete_doubles(remaining_common_jobs)
         common_jobs.extend(remaining_common_jobs)
 
-        print("Common Jobs", common_jobs)
         common_jobs = delete_doubles(common_jobs)
 
         elevator_a.elevator_printer(tic)
@@ -257,21 +261,15 @@ def controller():
         # here we assign the specific jobs and saves the remaining_jobs in a list
         remaining_spec_jobs = job_feeder.spec_job_assigner(elevator_a, tic, special_jobs) + job_feeder.spec_job_assigner(elevator_b, tic, special_jobs)
 
-        print("REMAINING COMMON JOBS", remaining_common_jobs)
-        print("Common", common_jobs)
+        print("Common Jobs are:", common_jobs)
 
         # common jobs are assigned here
         for inp in common_jobs:
             if len(inp) > 2:
                 inp = [inp[0:2], inp[2]]
 
-            print("Input:", inp)
-
             distance_a = job_feeder.common_job_comparer(elevator_a, inp, tic)
-            print("Distance: ", distance_a)
-            print("---!!--")
             distance_b = job_feeder.common_job_comparer(elevator_b, inp, tic)
-            print("Distance: ", distance_b)
 
             if distance_b == "no match" and distance_a == "no match":
                 if inp[0] == "-1":
@@ -288,7 +286,7 @@ def controller():
             if len(elevator_b.spec_list[tic:]) > 1 and len(elevator_a.spec_list[tic:]) > 1:
                 if distance_a > distance_b:
                     job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
-                    print("assigned to b", distance_b)
+                    print("Job assigned to B. Distance to job is:", distance_b)
                     try:
                         if inp[0] == "-1":
                             remaining_common_jobs.remove("-1h")
@@ -298,7 +296,7 @@ def controller():
                         continue
                 else:
                     job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
-                    print("assigned to a", distance_a)
+                    print("Job assigned to A. Distance to job is:", distance_a)
                     try:
                         if inp[0] == "-1":
                             remaining_common_jobs.remove("-1h")
@@ -308,7 +306,7 @@ def controller():
                         continue
 
             elif elevator_a.spec_list[tic] == 10 and len(elevator_a.spec_list[tic:]) == 1:
-                print("assssssssssssss to a ")
+                print("Job was assigned to A.")
                 job_feeder.assign_common_stop(inp[0], elevator_a, distance_a, tic)
                 try:
                     if inp[0] == "-1":
@@ -319,7 +317,7 @@ def controller():
                     continue
 
             elif elevator_b.spec_list[tic] == 10 and len(elevator_b.spec_list[tic:]) == 1:
-                print("assssssss to b")
+                print("Job assigned to B.")
                 job_feeder.assign_common_stop(inp[0], elevator_b, distance_b, tic)
                 try:
                     if inp[0] == "-1":
