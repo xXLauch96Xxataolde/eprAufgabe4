@@ -5,9 +5,6 @@ We gave them quite a few attributes and functions as well a pocedures. That
 helped us in the development. 
 """
 
-import os
-if (os.name == "nt"):
-    import elevator_problem
 import main
 import main_controller
 import elevator
@@ -31,9 +28,7 @@ def run():
     So we figuered, we want to run our program smoothly on most platforms we
     chose to work this problem this way. 
     """
-    
-    if (os.name == "nt"):
-        print(help(elevator_problem))
+
     print(help(main))
     print(help(main_controller))
     print(help(improved_controller))
