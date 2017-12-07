@@ -57,28 +57,28 @@ def input_reader():
     if inp == "exit":
         print("\n"*2)
         main.main()
-
-    requests = []
-    valid_inputs = []
-    requests = inp.split(" ")
-    pattern_elevator = "[AB][KE1-4]"
-    pattern_floor = "[KE1234][hr]"
+    else:
+        requests = []
+        valid_inputs = []
+        requests = inp.split(" ")
+        pattern_elevator = "[AB][KE1-4]"
+        pattern_floor = "[KE1234][hr]"
+        
+        for entry in requests:
+            if (len(entry.strip()) == 2):
+                result_elevator = re.match(pattern_elevator, entry)
+                result_floor = re.match(pattern_floor, entry)
+                if result_elevator or result_floor:
+                    valid_inputs.append(entry)
     
-    for entry in requests:
-        if (len(entry.strip()) == 2):
-            result_elevator = re.match(pattern_elevator, entry)
-            result_floor = re.match(pattern_floor, entry)
-            if result_elevator or result_floor:
-                valid_inputs.append(entry)
-
+        
     
-
-    valid_inputs = delete_doubles(valid_inputs)
-
-    non_valid_inp(requests, valid_inputs)
+        valid_inputs = delete_doubles(valid_inputs)
     
-    valid_inputs = job_feeder.better_floors(valid_inputs)
-    return valid_inputs
+        non_valid_inp(requests, valid_inputs)
+        
+        valid_inputs = job_feeder.better_floors(valid_inputs)
+        return valid_inputs
 
 
 def elevator_setter(elevator, tic):

@@ -245,3 +245,19 @@
 0
 0
 0
+<<<<<<< HEAD
+=======
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+>>>>>>> branch 'master' of https://github.com/xXLauch96Xxataolde/eprAufgabe4.git
