@@ -36,6 +36,7 @@ def main():
     
     while (True):
         menue()
+        inp = ""
         inp = input()
         if (inp == "1"):
             main_controller.controller()
@@ -47,7 +48,8 @@ def main():
         elif (inp == "4"):
             docu_handling.run()
         elif (inp == "5"):
-            break
+            import sys
+            sys.exit()
         else:
             print("Invalid Input. Please repeat")
 
